@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: javax.ws.rs:javax.ws.rs-api:2.0-m10">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.ws.rs/javax.ws.rs-api/2.0-m10/74705b1b0c448f88cff1a46f431b70b23588e8f4/javax.ws.rs-api-2.0-m10.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.ws.rs/javax.ws.rs-api/2.0-m10/63116d0a7e86b9c8c8aade325d98ce23cac16015/javax.ws.rs-api-2.0-m10-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

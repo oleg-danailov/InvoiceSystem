@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.xbean:xbean-asm4-shaded:3.14">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.xbean/xbean-asm4-shaded/3.14/9f478142644f36c4d1572cf5746274b488b2491a/xbean-asm4-shaded-3.14.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.xbean/xbean-asm4-shaded/3.14/7edd43bc52a8616b948a8802db81cab0b950f94d/xbean-asm4-shaded-3.14-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

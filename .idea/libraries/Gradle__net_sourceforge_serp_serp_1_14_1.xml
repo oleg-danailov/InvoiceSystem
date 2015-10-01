@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: net.sourceforge.serp:serp:1.14.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sourceforge.serp/serp/1.14.1/14c35515365c5b40a2ae4c1442fe8ea866e051da/serp-1.14.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sourceforge.serp/serp/1.14.1/f3c6003fb2d164232bc502644e28bbe28033dd61/serp-1.14.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

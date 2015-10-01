@@ -1,0 +1,49 @@
+plugins {
+    id 'osgi'
+    id 'application'
+}
+
+repositories {
+    mavenLocal();
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.apache.openjpa:openjpa:2.3.0'
+    compile 'org.postgresql:postgresql:9.2-1004-jdbc4'
+    compile 'javax.validation:validation-api:1.1.0.Final'
+    compile 'log4j:log4j:1.2.17'
+    compile 'org.slf4j:slf4j-simple:1.6.1'
+
+    compile group : 'org.apache.camel', name : 'camel-core', version: '2.12.0'
+    compile group : 'org.apache.camel', name : 'camel-cxf', version: '2.12.0'
+    compile group : 'org.apache.camel', name : 'camel-test', version : '2.12.0'
+    compile group : 'org.apache.camel', name : 'camel-jetty', version : '2.12.0'
+    compile group : 'org.apache.camel', name : 'camel-jackson', version : '2.12.0'
+
+    compile 'org.apache.camel:camel-jpa:2.15.0'
+    compile 'org.apache.activemq:activemq-camel:5.9.0'
+    compile 'org.apache.activemq:activemq-broker:5.9.0'
+    compile 'org.apache.activemq:activemq-kahadb-store:5.9.0'
+    compile 'org.eclipse.persistence:javax.persistence:2.1.0'
+
+
+    testCompile group: 'org.apache.camel', name: 'camel-test', version: '2.12.0'
+    testRuntime 'org.postgresql:postgresql:9.2-1004-jdbc4'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+jar {
+    manifest {
+        name = 'Persistence Module'
+
+        instruction 'Bundle-Vendor', 'Estafet'
+        instruction 'Bundle-Description', 'PoC for Invoice system'
+        instruction 'Bundle-DocURL', 'http://www.estafet.com'
+    }
+}
+
+/*task deployLocallyInFuse(type: Copy, dependsOn: jar) {
+    from(jar)
+    into project.file("${jboss_fuse_location_local}")
+}*/

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.cxf:cxf-rt-features-clustering:2.7.6">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.cxf/cxf-rt-features-clustering/2.7.6/13ac149b9dda8e3528ce2cc2b5e6ea0f0e316c7b/cxf-rt-features-clustering-2.7.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.cxf/cxf-rt-features-clustering/2.7.6/48030db6be2ff6be357769a9453b9a0d339472dd/cxf-rt-features-clustering-2.7.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

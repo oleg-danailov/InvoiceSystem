@@ -4,7 +4,7 @@ include 'TaxServiceModule'
 
 include 'FraudDetectionModule'
 
-include 'PestistanceModule'
+include 'PersistenceModule'
 
 include 'InvoiceServiceModule'
 
