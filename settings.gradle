@@ -1,2 +1,10 @@
 rootProject.name = 'InvoiceSystem'
 
+include 'TaxServiceModule'
+
+include 'FraudDetectionModule'
+
+include 'PestistanceModule'
+
+include 'InvoiceServiceModule'
+

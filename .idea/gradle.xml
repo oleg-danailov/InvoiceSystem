@@ -9,6 +9,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/FraudDetectionModule" />
+            <option value="$PROJECT_DIR$/InvoiceServiceModule" />
+            <option value="$PROJECT_DIR$/PestistanceModule" />
+            <option value="$PROJECT_DIR$/TaxServiceModule" />
           </set>
         </option>
         <option name="useAutoImport" value="true" />

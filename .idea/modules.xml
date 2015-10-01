@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/FraudDetectionModule/FraudDetectionModule.iml" filepath="$PROJECT_DIR$/FraudDetectionModule/FraudDetectionModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/InvoiceServiceModule/InvoiceServiceModule.iml" filepath="$PROJECT_DIR$/InvoiceServiceModule/InvoiceServiceModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/InvoiceSystem.iml" filepath="$PROJECT_DIR$/InvoiceSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PestistanceModule/PestistanceModule.iml" filepath="$PROJECT_DIR$/PestistanceModule/PestistanceModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TaxServiceModule/TaxServiceModule.iml" filepath="$PROJECT_DIR$/TaxServiceModule/TaxServiceModule.iml" />
     </modules>
   </component>
 </project>
