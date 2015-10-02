@@ -1,12 +1,39 @@
-apply plugin: 'java'
-
-sourceCompatibility = 1.5
-version = '1.0'
+plugins {
+    id 'osgi'
+    id 'application'
+}
 
 repositories {
+    mavenLocal()
     mavenCentral()
+}
+
+version = '1.11'
+
+jar {
+    manifest {
+        name = 'Fraud Detection'
+        instruction 'Bundle-Vendor', 'Estafet'
+        instruction 'Bundle-Description', 'POC for CamelRouting Service'
+        instruction 'Bundle-DocURL', 'http://www.estafet.com'
+    }
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+//    compile 'org.apache.activemq:activemq-camel:5.9.0.redhat-610379'
+    compile group : 'org.apache.camel', name : 'camel-core', version: '2.15.0'
+    compile group : 'org.apache.camel', name : 'camel-cxf', version: '2.15.0'
+    compile group : 'org.apache.camel', name : 'camel-test', version : '2.15.0'
+    compile group : 'org.apache.camel', name : 'camel-jetty', version : '2.15.0'
+    compile group : 'org.apache.camel', name : 'camel-jackson', version : '2.15.0'
+
+    compile 'org.apache.activemq:activemq-camel:5.9.0'
+    compile 'org.apache.activemq:activemq-broker:5.9.0'
+    compile 'org.apache.activemq:activemq-kahadb-store:5.9.0'
+}
+
+task deployInFuse(type: Copy, dependsOn: jar) {
+    from project.file("build/libs")
+    into project.file('/u01/app/jboss-fuse-6.1.0.redhat-379/deploy/')
 }
