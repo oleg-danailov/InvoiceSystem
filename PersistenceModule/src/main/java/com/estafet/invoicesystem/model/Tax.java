@@ -1,25 +1,26 @@
 package com.estafet.invoicesystem.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.persistence.*;
 
 /**
  * Created by Yordan Stankov on 01/10/15.
  */
-@XmlRootElement
-@XmlType
-@Entity(name = "Tax")
+@Entity
+@Table(name = "TAX")
 public class Tax {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "TAX_ID")
     private Integer taxId;
+
+    @Column(name = "TAX_NAME")
     private String taxName;
+
+    @Column(name = "INVOICE_TYPE")
     private String invoiceType;
+
+    @Column(name = "TAX_PERCENT")
     private Double taxPercent;
 
     public Integer getTaxId() {
@@ -53,8 +54,5 @@ public class Tax {
     public void setTaxPercent(Double taxPercent) {
         this.taxPercent = taxPercent;
     }
-
-
-
 
 }

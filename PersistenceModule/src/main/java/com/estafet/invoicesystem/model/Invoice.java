@@ -1,31 +1,41 @@
 package com.estafet.invoicesystem.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
 
 /**
  * Created by Yordan Stankov on 01/10/15.
  */
-@XmlRootElement
-@XmlType
-@Entity(name = "Invoice")
+
+@Entity
+@Table(name = "INVOICE")
 public class Invoice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "INVOICE_ID")
     private Integer invoiceId;
+
+    @Column(name = "INVOICE_NUMBER")
     private String invoiceNumber;
+
+    @Column(name = "INVOICE_TYPE")
     private String invoiceType; //TODO Enum
+
+    @Column(name = "INVOICE_AMOUNT")
     private BigDecimal invoiceAmount;
+
+    @Column(name = "INVOICE_CREATION_DATE")
     private Date invoiceCreationDate;
+
+    @Column(name = "TAXES_AMOUNT")
     private BigDecimal taxesAmount;
+
+    @Column(name = "PROVIDER_COMPANY")
     private String providerCompany;
+
+    @Column(name = "RECEIVER_COMPANY")
     private String receiverCompany;
 
     public String getInvoiceNumber() {

@@ -1,19 +1,24 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-             version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
-    <persistence-unit name="persistenceUnit"
-                      transaction-type="RESOURCE_LOCAL">
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+           xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.1.0"
+           xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+           xsi:schemaLocation="
+             http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+             http://aries.apache.org/xmlns/transactions/v1.0.0
+             http://aries.apache.org/xmlns/jpa/v1.1.0 ">
 
-        <properties>
+    <!-- Requests DAO -->
+    <bean id="invoiceDAO" class="com.estafet.invoicesystem.impl.InvoiceDAOImpl">
+        <jpa:context unitname="invoice-unit" property="entityManager"/>
+        <tx:transaction method="*" value="Required"/>
+    </bean>
+    <service id="invoiceDAOService" interface="com.estafet.invoicesystem.api.InvoiceDAO" ref="invoiceDAO"/>
 
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/invoice_system" />
-            <property name="javax.persistence.jdbc.user" value="postgres" />
-            <property name="javax.persistence.jdbc.password" value="welcome1" />
-            <property name="hbm2ddl.auto" value="create" />
-
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect" />
-        </properties>
-    </persistence-unit>
-</persistence>
+    <!-- Requests Diagnostic DAO -->
+    <bean id="taxDAO" class="com.estafet.invoicesystem.impl.TaxDAOImpl">
+        <jpa:context unitname="invoice-unit" property="entityManager"/>
+        <tx:transaction method="*" value="Required"/>
+    </bean>
+    <service id="taxDAOService" interface="com.estafet.invoicesystem.api.TaxDAO" ref="taxDAO"/>
+</blueprint>

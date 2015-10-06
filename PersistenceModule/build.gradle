@@ -8,6 +8,8 @@ repositories {
     mavenCentral()
 }
 
+version = '1.0'
+
 dependencies {
     compile 'org.apache.openjpa:openjpa:2.3.0'
     compile 'org.postgresql:postgresql:9.2-1004-jdbc4'
@@ -15,17 +17,17 @@ dependencies {
     compile 'log4j:log4j:1.2.17'
     compile 'org.slf4j:slf4j-simple:1.6.1'
 
-    compile group : 'org.apache.camel', name : 'camel-core', version: '2.15.0'
-    compile group : 'org.apache.camel', name : 'camel-cxf', version: '2.15.0'
-    compile group : 'org.apache.camel', name : 'camel-test', version : '2.15.0'
-    compile group : 'org.apache.camel', name : 'camel-jetty', version : '2.15.0'
-    compile group : 'org.apache.camel', name : 'camel-jackson', version : '2.15.0'
+    compile group : 'org.apache.camel', name : 'camel-core', version: '2.12.0'
+    compile group : 'org.apache.camel', name : 'camel-cxf', version: '2.12.0'
+    compile group : 'org.apache.camel', name : 'camel-test', version : '2.12.0'
+    compile group : 'org.apache.camel', name : 'camel-jetty', version : '2.12.0'
+    compile group : 'org.apache.camel', name : 'camel-jackson', version : '2.12.0'
 
-    compile 'org.apache.camel:camel-jpa:2.15.0'
+    compile 'org.apache.camel:camel-jpa:2.12.0'
     compile 'org.apache.activemq:activemq-camel:5.9.0'
     compile 'org.apache.activemq:activemq-broker:5.9.0'
     compile 'org.apache.activemq:activemq-kahadb-store:5.9.0'
-    compile 'org.eclipse.persistence:javax.persistence:2.1.0'
+    //compile 'org.eclipse.persistence:javax.persistence:2.1.0'
 
 
     testCompile group: 'org.apache.camel', name: 'camel-test', version: '2.12.0'
@@ -39,11 +41,12 @@ jar {
         instruction 'Bundle-Vendor', 'Estafet'
         instruction 'Bundle-Description', 'PoC for Invoice system'
         instruction 'Bundle-DocURL', 'http://www.estafet.com'
-        instruction 'Export-Package', "!com.estafet.invoicesystem.model.*"
+        instruction 'Export-Package', '!com.estafet.invoicesystem.model.*'
+        instruction 'Import-Package', '*, javax.sql'
     }
 }
 
 task deployLocallyInFuse(type: Copy, dependsOn: jar) {
     from project.file("build/libs")
-    into project.file('/u01/app/jboss-fuse-6.2.0.redhat-133/deploy/')
+    into project.file('/u01/app/jboss-fuse-6.1.0.redhat-379/deploy/')
 }
