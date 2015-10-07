@@ -10,23 +10,23 @@
              http://cxf.apache.org/blueprint/jaxws http://cxf.apache.org/schemas/blueprint/jaxws.xsd
              http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd
              ">
-<!-- wsdlURL="META-INF/wsdl/tax_service.wsdl" -->
-    <camelcxf:cxfEndpoint id="taxRequest"
-                          address="http://localhost:10354/tax_service"
-                          endpointName="s:TaxServiceEndpoint"
-                          serviceName="s:TaxServiceEndpointService"
-                          serviceClass="com.estafet.taxservice.api.TaxService"
-                          xmlns:s="http://taxservice.estafet.com/">
+    <!-- wsdlURL="META-INF/wsdl/tax_service.wsdl" -->
+    <camelcxf:cxfEndpoint id="invoiceRequest"
+                          address="http://localhost:10354/invoice_service"
+                          endpointName="s:InvoiceServiceEndpoint"
+                          serviceName="s:InvoiceServiceEndpointService"
+                          serviceClass="com.estafet.invoiceservice.api.InvoiceService"
+                          xmlns:s="http://invoiceservice.estafet.com/">
         <camelcxf:properties>
             <entry key="dataFormat" value="PAYLOAD"/>
         </camelcxf:properties>
     </camelcxf:cxfEndpoint>
 
 
-    <bean id="taxServiceRoutes" class="com.estafet.taxservice.route.TaxServiceRoute"/>
+    <bean id="invoiceServiceRoutes" class="com.estafet.invoiceservice.route.InvoiceServiceRoute"/>
 
     <camelContext id="camel" xmlns="http://camel.apache.org/schema/blueprint">
-        <routeBuilder ref="taxServiceRoutes"/>
+        <routeBuilder ref="invoiceServiceRoutes"/>
     </camelContext>
 
 </blueprint>
