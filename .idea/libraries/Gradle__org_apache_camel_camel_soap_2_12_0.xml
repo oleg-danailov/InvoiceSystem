@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.camel:camel-soap:2.12.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.camel/camel-soap/2.12.0/45cdfb1c21f164bbbedbc6df6ff8c3ca19f7b2f1/camel-soap-2.12.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.camel/camel-soap/2.12.0/8e5439d02c3702ab869978dd5e573b9c5a227717/camel-soap-2.12.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

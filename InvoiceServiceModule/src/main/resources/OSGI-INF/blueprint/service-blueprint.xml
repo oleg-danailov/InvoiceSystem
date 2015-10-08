@@ -25,8 +25,17 @@
 
     <bean id="invoiceServiceRoutes" class="com.estafet.invoiceservice.route.InvoiceServiceRoute"/>
 
-    <camelContext id="camel" xmlns="http://camel.apache.org/schema/blueprint">
+    <camelContext id="camelInvoiceService" xmlns="http://camel.apache.org/schema/blueprint">
         <routeBuilder ref="invoiceServiceRoutes"/>
+        <routeBuilder ref="jettyRestToJPARoute" />
     </camelContext>
+    <bean id="jettyRestToJPARoute" class="com.estafet.invoicesystem.routebuilders.JettyRestToJPARoute"/>
+
+    <reference id="invoiceDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.InvoiceDAO" />
+
+    <bean id="invoiceJpaProcessor" class="com.estafet.invoicesystem.processor.InvoiceJpaProcessor">
+        <property name="invoiceDao" ref="invoiceDAOService"></property>
+    </bean>
+
 
 </blueprint>

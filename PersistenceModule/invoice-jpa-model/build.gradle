@@ -1,0 +1,50 @@
+plugins {
+    id 'osgi'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+
+version = '1.0'
+
+dependencies {
+    compile 'org.apache.openjpa:openjpa:2.3.0'
+    compile 'org.postgresql:postgresql:9.2-1004-jdbc4'
+    compile 'javax.validation:validation-api:1.1.0.Final'
+    compile 'log4j:log4j:1.2.17'
+    compile 'org.slf4j:slf4j-simple:1.6.1'
+
+    testCompile group: 'org.apache.camel', name: 'camel-test', version: '2.12.0'
+    testCompile "org.apache.openjpa:openjpa:2.3.0"
+    testCompile 'org.dbunit:dbunit:2.4.9'
+
+
+    testRuntime 'org.postgresql:postgresql:9.2-1004-jdbc4'
+}
+
+jar {
+    manifest {
+        name = 'Invoice-jpa-model'
+        instruction 'Bundle-Description', 'module with entity classes and DataSource definition'
+        instruction 'Meta-Persistence', 'META-INF/persistence.xml'
+        instruction 'Import-Package', '*, org.postgresql.ds, javax.sql'
+        instruction 'Export-Package', 'com.estafet.invoicesystem.jpa.model'
+    }
+}
+
+task deployLocallyInFuse(dependsOn: jar) {
+    doLast {
+        copy {
+            from(jar)
+            into project.file("/u01/app/jboss-fuse-6.1.0.redhat-379/deploy")
+        }
+        copy {
+            from('src/main/config')
+            into project.file("/u01/app/jboss-fuse-6.1.0.redhat-379/etc")
+        }
+    }
+}

@@ -1,10 +1,10 @@
 rootProject.name = 'InvoiceSystem'
 
 include 'TaxServiceModule'
-
 include 'FraudDetectionModule'
-
-include 'PersistenceModule'
-
 include 'InvoiceServiceModule'
+include 'PersistenceModule:invoice-jpa-model'
+include 'PersistenceModule:invoice-jpa-dao'
+
+
 
