@@ -4,9 +4,9 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
-@XmlRootElement
+@XmlRootElement(name = "invoiceRequest", namespace = "http://invoiceservice.estafet.com/")
 @XmlType
 @Entity
 @Table(name = "INVOICE")
@@ -26,9 +26,9 @@ public class Invoice {
     @Column(name = "INVOICE_AMOUNT")
     private BigDecimal invoiceAmount;
 
-//    @Column(name = "INVOICE_CREATION_DATE")
-//    @Temporal()
-//    private Date invoiceCreationDate;
+    @Column(name = "INVOICE_CREATION_DATE", insertable = false, updatable = false)
+    @Temporal(TemporalType.DATE)
+    private Date invoiceCreationDate;
 
     @Column(name = "TAXES_AMOUNT")
     private BigDecimal taxesAmount;
@@ -71,13 +71,13 @@ public class Invoice {
         this.invoiceAmount = invoiceAmount;
     }
 
-//    public Date getInvoiceCreationDate() {
-//        return invoiceCreationDate;
-//    }
-//
-//    public void setInvoiceCreationDate(Date invoiceCreationDate) {
-//        this.invoiceCreationDate = invoiceCreationDate;
-//    }
+    public Date getInvoiceCreationDate() {
+        return invoiceCreationDate;
+    }
+
+    public void setInvoiceCreationDate(Date invoiceCreationDate) {
+        this.invoiceCreationDate = invoiceCreationDate;
+    }
 
     public BigDecimal getTaxesAmount() {
         return taxesAmount;

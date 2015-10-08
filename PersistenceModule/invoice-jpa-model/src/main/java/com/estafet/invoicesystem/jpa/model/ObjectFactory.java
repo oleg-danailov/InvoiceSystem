@@ -7,7 +7,11 @@ import javax.xml.bind.annotation.XmlRegistry;
  */
 @XmlRegistry
 public class ObjectFactory {
+
     public Invoice createRequest() {
         return new Invoice();
     }
+
+    public Tax createTax() { return new Tax(); }
+
 }

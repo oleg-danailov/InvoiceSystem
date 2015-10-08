@@ -10,12 +10,13 @@
              http://cxf.apache.org/blueprint/jaxws http://cxf.apache.org/schemas/blueprint/jaxws.xsd
              http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd
              ">
-    <!-- wsdlURL="META-INF/wsdl/tax_service.wsdl" -->
+    <!-- " -->
     <camelcxf:cxfEndpoint id="invoiceRequest"
                           address="http://localhost:10354/invoice_service"
                           endpointName="s:InvoiceServiceEndpoint"
                           serviceName="s:InvoiceServiceEndpointService"
                           serviceClass="com.estafet.invoiceservice.api.InvoiceService"
+                          wsdlURL="META-INF/wsdl/invoice_service.wsdl"
                           xmlns:s="http://invoiceservice.estafet.com/">
         <camelcxf:properties>
             <entry key="dataFormat" value="PAYLOAD"/>
@@ -27,13 +28,11 @@
 
     <camelContext id="camelInvoiceService" xmlns="http://camel.apache.org/schema/blueprint">
         <routeBuilder ref="invoiceServiceRoutes"/>
-        <routeBuilder ref="jettyRestToJPARoute" />
     </camelContext>
-    <bean id="jettyRestToJPARoute" class="com.estafet.invoicesystem.routebuilders.JettyRestToJPARoute"/>
 
     <reference id="invoiceDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.InvoiceDAO" />
 
-    <bean id="invoiceJpaProcessor" class="com.estafet.invoicesystem.processor.InvoiceJpaProcessor">
+    <bean id="invoiceProcessor" class="com.estafet.invoiceservice.processor.InvoiceProcessor">
         <property name="invoiceDao" ref="invoiceDAOService"></property>
     </bean>
 

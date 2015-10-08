@@ -1,4 +1,4 @@
-package com.estafet.invoicesystem.processor;
+package com.estafet.invoiceservice.processor;
 
 import com.estafet.invoicesystem.jpa.dao.api.InvoiceDAO;
 import com.estafet.invoicesystem.jpa.model.Invoice;
@@ -7,7 +7,7 @@ import org.apache.camel.Exchange;
 /**
  * Created by estafet on 08/10/15.
  */
-public class InvoiceJpaProcessor {
+public class InvoiceProcessor {
 
     private InvoiceDAO invoiceDao;
 

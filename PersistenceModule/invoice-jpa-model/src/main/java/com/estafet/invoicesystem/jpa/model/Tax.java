@@ -1,16 +1,20 @@
-package com.estafet.invoicesystem.model;
+package com.estafet.invoicesystem.jpa.model;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Created by Yordan Stankov on 01/10/15.
  */
+@XmlRootElement(name = "taxRequest", namespace = "http://taxservice.estafet.com/")
+@XmlType
 @Entity
 @Table(name = "TAX")
 public class Tax {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TAX_ID")
     private Integer taxId;
 

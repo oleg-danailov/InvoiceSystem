@@ -2,6 +2,7 @@
   <library name="Gradle: net.oauth.core:oauth-provider:20100527">
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/net/oauth/core/oauth-provider/20100527/oauth-provider-20100527.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.oauth.core/oauth-provider/20100527/165bfc97e63e5af8e052a47f4dee832ce06bf7d7/oauth-provider-20100527.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
