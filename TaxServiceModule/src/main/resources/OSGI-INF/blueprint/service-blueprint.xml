@@ -29,4 +29,6 @@
         <routeBuilder ref="taxServiceRoutes"/>
     </camelContext>
 
+    <reference id="taxDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.TaxDAO" />
+
 </blueprint>

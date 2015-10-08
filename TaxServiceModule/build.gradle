@@ -42,7 +42,7 @@ jar {
         instruction 'Bundle-Description', 'PoC for Invoice system'
         instruction 'Bundle-DocURL', 'http://www.estafet.com'
         instruction 'Export-Package', '!com.estafet.invoicesystem.model.*'
-        instruction 'Import-Package', '*, javax.sql'
+        instruction 'Import-Package', '*, javax.sql, com.estafet.invoicesystem.jpa.*'
     }
 }
 

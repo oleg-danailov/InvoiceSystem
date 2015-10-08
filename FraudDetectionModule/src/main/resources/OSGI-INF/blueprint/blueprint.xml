@@ -20,4 +20,6 @@
         <camel:routeBuilder ref="fraudDetectionRouteBuilder"/>
     </camel:camelContext>
 
+    <reference id="invoiceDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.InvoiceDAO" />
+
 </blueprint>
