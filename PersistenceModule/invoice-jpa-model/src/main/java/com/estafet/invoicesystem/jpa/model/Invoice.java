@@ -10,6 +10,8 @@ import java.util.Date;
 @XmlType
 @Entity
 @Table(name = "INVOICE")
+@NamedQueries({@NamedQuery(name= "invoice.findByNumberAndProvider", query = "SELECT inv FROM Invoice inv " +
+        " WHERE inv.invoiceNumber = :invoiceNumber AND inv.providerCompany = :providerCompany")})
 public class Invoice {
 
     @Id

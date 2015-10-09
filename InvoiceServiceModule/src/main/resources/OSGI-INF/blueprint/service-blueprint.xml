@@ -23,18 +23,27 @@
         </camelcxf:properties>
     </camelcxf:cxfEndpoint>
 
+    <!--<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+        <property name="brokerURL" value="tcp://localhost:61616" />
+        <property name="userName" value="admin" />
+        <property name="password" value="admin" />
+    </bean>-->
 
     <bean id="invoiceServiceRoutes" class="com.estafet.invoiceservice.route.InvoiceServiceRoute"/>
 
     <camelContext id="camelInvoiceService" xmlns="http://camel.apache.org/schema/blueprint">
         <routeBuilder ref="invoiceServiceRoutes"/>
     </camelContext>
-
+    <!--<route id="file-to-jms-route">
+            <from uri="file:/u01/xml/?noop=true" />
+            <log message="Receiving order ${file:name}" />
+            <to uri="activemq:incomingOrders" />
+            <to uri="mock:result"/>
+        </route>-->
     <reference id="invoiceDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.InvoiceDAO" />
 
     <bean id="invoiceProcessor" class="com.estafet.invoiceservice.processor.InvoiceProcessor">
         <property name="invoiceDao" ref="invoiceDAOService"></property>
     </bean>
-
 
 </blueprint>

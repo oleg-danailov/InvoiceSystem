@@ -14,14 +14,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="Gradle: org.apache.camel:camel-core:2.12.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.apache.camel:camel-cxf:2.12.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.apache.camel:camel-test:2.12.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.apache.camel:camel-jetty:2.12.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.apache.camel:camel-jackson:2.12.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.slf4j:slf4j-api:1.6.6" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.sun.xml.bind:jaxb-impl:2.2.6" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.apache.camel:camel-spring:2.12.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.apache.camel:camel-cxf-transport:2.12.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.apache.cxf:cxf-rt-frontend-jaxrs:2.7.6" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.apache.cxf:cxf-rt-frontend-jaxws:2.7.6" level="project" />
@@ -77,5 +74,26 @@
     <orderEntry type="library" name="Gradle: org.apache.camel:camel-jaxb:2.12.0" level="project" />
     <orderEntry type="module" module-name="invoice-jpa-model" exported="" />
     <orderEntry type="module" module-name="invoice-jpa-dao" exported="" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.activemq:activemq-camel:5.9.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.activemq:activemq-broker:5.9.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.activemq:activemq-kahadb-store:5.9.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.camel:camel-jms:2.12.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.activemq:activemq-spring:5.9.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.activemq:activemq-pool:5.9.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.activemq:activemq-client:5.9.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.activemq:activemq-openwire-legacy:5.9.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.activemq.protobuf:activemq-protobuf:1.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.geronimo.specs:geronimo-j2ee-management_1.1_spec:1.0.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: commons-net:commons-net:3.3" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-jms:3.2.4.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.xbean:xbean-spring:3.14" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.geronimo.specs:geronimo-jta_1.0.1B_spec:1.0.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.activemq:activemq-jms-pool:5.9.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.fusesource.hawtbuf:hawtbuf:1.9" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.slf4j:slf4j-api:1.7.5" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.camel:camel-core:2.12.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.apache.camel:camel-spring:2.12.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: commons-pool:commons-pool:1.6" level="project" />
   </component>
 </module>

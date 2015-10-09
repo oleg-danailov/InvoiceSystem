@@ -49,9 +49,21 @@ public class InvoiceDAOImpl implements InvoiceDAO {
             return list;
         }
 
-        public Invoice getInvoice(long id)
+    @Override
+    public Invoice findByNumberAndProvider(String number, String provider) {
+
+        Query query = entityManager
+                .createNamedQuery("invoice.findByNumberAndProvider");
+        query.setParameter("invoiceNumber",number);
+        query.setParameter("providerCompany", provider) ;
+        Invoice invoice = (Invoice) query.getSingleResult();
+
+        return invoice;
+    }
+
+    public Invoice getInvoice(long id)
         {
-            return (Invoice)this.entityManager.find(Invoice.class, Long.valueOf(id));
+            return (Invoice) entityManager.find(Invoice.class, Long.valueOf(id));
         }
 
         public void removeInvoice(long id)
@@ -62,7 +74,6 @@ public class InvoiceDAOImpl implements InvoiceDAO {
 
         @Override
         public void saveInvoice(Invoice invoice) {
-            System.out.println("Invoice  with number :" + invoice.getInvoiceNumber());
             entityManager.persist(invoice);
         }
 

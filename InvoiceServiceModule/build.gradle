@@ -28,13 +28,9 @@ dependencies {
 
     compile group : 'org.apache.camel', name : 'camel-jaxb', version : '2.12.0'
 
-
-    /*compile 'org.apache.camel:camel-jpa:2.12.0'
     compile 'org.apache.activemq:activemq-camel:5.9.0'
     compile 'org.apache.activemq:activemq-broker:5.9.0'
     compile 'org.apache.activemq:activemq-kahadb-store:5.9.0'
-    //compile 'org.eclipse.persistence:javax.persistence:2.1.0'*/
-
 
     testCompile group: 'org.apache.camel', name: 'camel-test', version: '2.12.0'
     testRuntime 'org.postgresql:postgresql:9.2-1004-jdbc4'
@@ -47,8 +43,8 @@ jar {
         instruction 'Bundle-Vendor', 'Estafet'
         instruction 'Bundle-Description', 'PoC for Invoice system'
         instruction 'Bundle-DocURL', 'http://www.estafet.com'
-        instruction 'Export-Package', '!com.estafet.invoicesystem.model.*' //com.estafet.invoicesystem.jpa.dao.api
-        instruction 'Import-Package', '*, javax.sql, com.estafet.invoicesystem.jpa.*'
+        instruction 'Export-Package', '!com.estafet.invoicesystem.model.*'
+        instruction 'Import-Package', '*, org.apache.activemq.camel.component'
     }
 }
 

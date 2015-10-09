@@ -16,10 +16,15 @@
 
     <bean id="fraudDetectionRouteBuilder" class="com.estafet.invoicesystem.frauddetection.FraudDetectionRouteBuilder"/>
 
-    <camel:camelContext>
+    <camel:camelContext id="camelFrauDetectionService">
         <camel:routeBuilder ref="fraudDetectionRouteBuilder"/>
     </camel:camelContext>
 
     <reference id="invoiceDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.InvoiceDAO" />
+
+    <bean id="fraudDetectionProcessor" class="com.estafet.invoicesystem.processor.FraudDetectionProcessor">
+        <property name="invoiceDAO" ref="invoiceDAOService"/>
+
+    </bean>
 
 </blueprint>

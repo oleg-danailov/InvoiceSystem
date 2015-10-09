@@ -1,0 +1,7 @@
+<ns2:invoiceRequest xmlns:ns2="http://invoiceservice.estafet.com/">
+    <invoiceAmount>200</invoiceAmount>
+    <invoiceNumber>12345</invoiceNumber>
+    <invoiceType>DDS</invoiceType>
+    <providerCompany>Estafet</providerCompany>
+    <receiverCompany>Mtel</receiverCompany>
+</ns2:invoiceRequest>

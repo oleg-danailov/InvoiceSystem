@@ -2,6 +2,7 @@ package com.estafet.invoicesystem.frauddetection;
 
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.converter.jaxb.JaxbDataFormat;
 import org.apache.camel.model.dataformat.JsonLibrary;
 
 import java.util.Map;
@@ -12,12 +13,14 @@ import java.util.Map;
 public class FraudDetectionRouteBuilder extends RouteBuilder {
     @Override
     public void configure() throws Exception {
-        from("activemq:review_queue")
+
+        JaxbDataFormat jxb = new  JaxbDataFormat("com.estafet.invoicesystem.jpa.model");
+
+        from("activemq:incomingInvoices")
                 .routeId("fraud_detection_route")
                 .streamCaching()
                 .log(LoggingLevel.INFO, "Received message with body: ${body}")
-                .unmarshal().json(JsonLibrary.Jackson, Map.class)
-                .end()
-                .to("mock:result");
+                .beanRef("fraudDetectionProcessor", "checkInvoice");
+                //.to("mock:result");
     }
 }

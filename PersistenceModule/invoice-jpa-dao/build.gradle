@@ -3,6 +3,8 @@ plugins {
     id 'application'
 }
 
+version = '1.0'
+
 repositories {
     mavenLocal();
     mavenCentral()
@@ -42,7 +44,7 @@ task deployLocallyInFuse(dependsOn: jar) {//[jar, ":PersistenceModule:invoice-jp
 
 jar {
     manifest {
-        name = 'Invoice DAO'
+        name = 'Invoice-jpa-dao'
         instruction 'Bundle-Description', 'Arqiva CHM DAO Implementation (OSGI)'
         instruction 'Export-Package', "!com.estafet.invoicesystem.jpa.dao.impl, com.estafet.invoicesystem.jpa.dao.api" //com.estafet.invoicesystem.jpa.dao.api.InvoiceDAO
         instruction 'Import-Package', '*'
