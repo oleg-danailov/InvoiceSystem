@@ -45,7 +45,7 @@ jar {
         instruction 'Bundle-Description', 'PoC for Invoice system'
         instruction 'Bundle-DocURL', 'http://www.estafet.com'
         instruction 'Export-Package', '!com.estafet.invoicesystem.model.*'
-        instruction 'Import-Package', '*, org.apache.activemq.camel.component, com.estafet.taxservice.api'
+        instruction 'Import-Package', '*, org.apache.activemq.camel.component'
     }
 }
 

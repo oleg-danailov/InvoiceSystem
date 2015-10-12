@@ -18,7 +18,7 @@ public class InvoiceServiceRoute extends RouteBuilder {
         from("cxf:bean:invoiceRequest").multicast().to("direct:persist", "direct:incomingInvoices");
 
         from("direct:persist").id("invoice_service_route_jpa")
-                .log("${body}").unmarshal(jxb)
+                .log("${body}").unmarshal(jxb).beanRef("invoiceProcessor", "applyTax")
                 .beanRef("invoiceProcessor", "persistInvoice");
 
         from("direct:incomingInvoices").id("invoice_service_route_activemq")
