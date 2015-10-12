@@ -17,6 +17,6 @@ CREATE TABLE tax
   tax_id serial NOT NULL,
   tax_name character varying(100),
   invoice_type character varying(10),
-  tax_percent money,
+  tax_percent numeric,
   CONSTRAINT tax_pk PRIMARY KEY (tax_id)
-);
+)
