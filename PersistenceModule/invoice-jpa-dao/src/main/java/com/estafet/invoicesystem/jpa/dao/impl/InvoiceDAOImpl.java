@@ -4,7 +4,6 @@ import com.estafet.invoicesystem.jpa.dao.api.InvoiceDAO;
 import com.estafet.invoicesystem.jpa.model.Invoice;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class InvoiceDAOImpl implements InvoiceDAO {
 
         private EntityManager entityManager;
 
-        private static final String findInvoiceByReference = "select inv from Invoice as inv where inv.invoice_id = :inv_id";
+        private static final String findInvoiceByReference = "select inv from Invoice as inv where inv.invoiceId = :inv_id";
         private static final String findInvoice = "select inv from Invoice as inv";
 
 
@@ -43,7 +42,7 @@ public class InvoiceDAOImpl implements InvoiceDAO {
         public List<Invoice> findInvoice(String key)
         {
             Query q = this.entityManager.createQuery(findInvoiceByReference);
-            q.setParameter("inv_id", key);
+            q.setParameter("inv_id", new Integer(key));
             List list = q.getResultList();
 
             return list;
@@ -76,5 +75,10 @@ public class InvoiceDAOImpl implements InvoiceDAO {
         public void saveInvoice(Invoice invoice) {
             entityManager.persist(invoice);
         }
+
+    @Override
+    public void refreshInvoice(Invoice invoice) {
+        entityManager.refresh(invoice);
+    }
 
 }

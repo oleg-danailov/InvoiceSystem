@@ -20,4 +20,6 @@ public interface InvoiceDAO {
     public void removeInvoice(long id);
 
     public void saveInvoice(Invoice invoice);
+
+    public void refreshInvoice(Invoice invoice);
 }
