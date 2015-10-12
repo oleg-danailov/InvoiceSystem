@@ -9,7 +9,8 @@ import java.util.Date;
 @XmlRootElement(name = "invoiceRequest", namespace = "http://invoiceservice.estafet.com/")
 @XmlType
 @Entity
-@Table(name = "INVOICE")
+@Table(name = "INVOICE", uniqueConstraints = @UniqueConstraint(name="provider_company_invoice_number_unique",columnNames = {"invoice_number","provider_company"}))
+
 @NamedQueries({@NamedQuery(name= "invoice.findByNumberAndProvider", query = "SELECT inv FROM Invoice inv " +
         " WHERE inv.invoiceNumber = :invoiceNumber AND inv.providerCompany = :providerCompany")})
 public class Invoice {
@@ -40,6 +41,13 @@ public class Invoice {
 
     @Column(name = "RECEIVER_COMPANY")
     private String receiverCompany;
+
+    @Column(name = "TOTAL_AMOUNT")
+    private BigDecimal totalAmount;
+
+    @Column(name = "INVOICE_STATUS")
+    private String invoiceStatus = "unchecked"; //TODO Enum
+
 
     public String getInvoiceNumber() {
         return invoiceNumber;
@@ -105,4 +113,19 @@ public class Invoice {
         this.receiverCompany = receiverCompany;
     }
 
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public String getInvoiceStatus() {
+        return invoiceStatus;
+    }
+
+    public void setInvoiceStatus(String invoiceStatus) {
+        this.invoiceStatus = invoiceStatus;
+    }
 }
