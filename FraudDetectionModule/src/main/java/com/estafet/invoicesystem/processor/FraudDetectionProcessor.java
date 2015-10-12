@@ -2,6 +2,7 @@ package com.estafet.invoicesystem.processor;
 
 import com.estafet.invoicesystem.jpa.dao.api.InvoiceDAO;
 import com.estafet.invoicesystem.jpa.model.Invoice;
+import com.estafet.taxservice.api.TaxOSGIService;
 import org.apache.camel.Exchange;
 
 /**
@@ -10,9 +11,14 @@ import org.apache.camel.Exchange;
 public class FraudDetectionProcessor {
 
     private InvoiceDAO invoiceDAO;
+    private TaxOSGIService taxOSGIService;
 
     public void setInvoiceDAO(InvoiceDAO invoiceDAO) {
         this.invoiceDAO = invoiceDAO;
+    }
+
+    public void setTaxOSGIService(TaxOSGIService taxOSGIService) {
+        this.taxOSGIService = taxOSGIService;
     }
 
     public void checkInvoice(Exchange exchange){

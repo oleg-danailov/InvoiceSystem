@@ -21,10 +21,14 @@
     </camel:camelContext>
 
     <reference id="invoiceDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.InvoiceDAO" />
+    <reference id="taxOSGIService" interface="com.estafet.taxservice.api.TaxOSGIService" />
 
     <bean id="fraudDetectionProcessor" class="com.estafet.invoicesystem.processor.FraudDetectionProcessor">
         <property name="invoiceDAO" ref="invoiceDAOService"/>
+        <property name="taxOSGIService" ref="taxOSGIService"/>
 
     </bean>
+
+
 
 </blueprint>

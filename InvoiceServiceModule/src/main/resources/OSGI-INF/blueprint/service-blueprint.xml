@@ -44,6 +44,9 @@
 
     <bean id="invoiceProcessor" class="com.estafet.invoiceservice.processor.InvoiceProcessor">
         <property name="invoiceDao" ref="invoiceDAOService"></property>
+        <property name="taxOSGIService" ref="taxOSGIService"></property>
     </bean>
+
+    <reference id="taxOSGIService" interface="com.estafet.taxservice.api.TaxOSGIService" />
 
 </blueprint>
