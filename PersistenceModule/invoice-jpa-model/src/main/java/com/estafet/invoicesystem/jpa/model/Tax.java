@@ -3,6 +3,7 @@ package com.estafet.invoicesystem.jpa.model;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 /**
  * Created by Yordan Stankov on 01/10/15.
@@ -25,7 +26,7 @@ public class Tax {
     private String invoiceType;
 
     @Column(name = "TAX_PERCENT")
-    private Double taxPercent;
+    private BigDecimal taxPercent;
 
     public Integer getTaxId() {
         return taxId;
@@ -51,11 +52,11 @@ public class Tax {
         this.invoiceType = invoiceType;
     }
 
-    public Double getTaxPercent() {
+    public BigDecimal getTaxPercent() {
         return taxPercent;
     }
 
-    public void setTaxPercent(Double taxPercent) {
+    public void setTaxPercent(BigDecimal taxPercent) {
         this.taxPercent = taxPercent;
     }
 
