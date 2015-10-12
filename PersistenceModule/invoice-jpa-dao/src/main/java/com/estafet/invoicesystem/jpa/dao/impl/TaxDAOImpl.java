@@ -1,7 +1,6 @@
 package com.estafet.invoicesystem.jpa.dao.impl;
 
 import com.estafet.invoicesystem.jpa.dao.api.TaxDAO;
-import com.estafet.invoicesystem.jpa.model.Invoice;
 import com.estafet.invoicesystem.jpa.model.Tax;
 
 import javax.persistence.EntityManager;
@@ -13,7 +12,7 @@ import java.util.List;
 /**
  * Created by Yordan Stankov on 05/10/15.
  */
-public class TaxDAOImpl implements TaxDAO{
+public class TaxDAOImpl implements TaxDAO {
 
     //private static final transient Log LOG = LogFactory.getLog(InvoiceDAOImpl.class);
 
@@ -32,7 +31,7 @@ public class TaxDAOImpl implements TaxDAO{
         return entityManager;
     }
 
-    public List<Invoice> findTax()
+    public List<Tax> findTax()
     {
         Query q = this.entityManager.createQuery(findTax);
 
@@ -41,7 +40,7 @@ public class TaxDAOImpl implements TaxDAO{
         return list;
     }
 
-    public List<Invoice> findTaxByName(String name)
+    public List<Tax> findTaxByName(String name)
     {
         Query q = this.entityManager.createQuery(findTaxByName);
         q.setParameter("tax_name", name);
@@ -50,7 +49,7 @@ public class TaxDAOImpl implements TaxDAO{
         return list;
     }
 
-    public List<Invoice> findTaxByReference(String id)
+    public List<Tax> findTaxByReference(String id)
     {
         Query q = this.entityManager.createQuery(findTaxByReference);
         q.setParameter("tax_id", id);

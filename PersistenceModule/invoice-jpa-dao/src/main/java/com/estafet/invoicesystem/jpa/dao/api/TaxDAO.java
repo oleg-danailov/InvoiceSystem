@@ -1,6 +1,5 @@
 package com.estafet.invoicesystem.jpa.dao.api;
 
-import com.estafet.invoicesystem.jpa.model.Invoice;
 import com.estafet.invoicesystem.jpa.model.Tax;
 
 import java.util.List;
@@ -10,11 +9,11 @@ import java.util.List;
  */
 public interface TaxDAO {
 
-    public List<Invoice> findTax();
+    public List<Tax> findTax();
 
-    public List<Invoice> findTaxByName(String name);
+    public List<Tax> findTaxByName(String name);
 
-    public List<Invoice> findTaxByReference(String id);
+    public List<Tax> findTaxByReference(String id);
 
     public Tax getTax(long id);
 

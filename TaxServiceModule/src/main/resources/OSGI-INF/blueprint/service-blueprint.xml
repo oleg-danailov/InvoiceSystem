@@ -22,6 +22,9 @@
         </camelcxf:properties>
     </camelcxf:cxfEndpoint>
 
+    <service id="taxOSGIService" interface="com.estafet.taxservice.api.TaxOSGIService" ref="taxOSGI" />
+
+    <bean id="taxOSGI" class="com.estafet.taxservice.impl.TaxOSGIServiceImpl" />
 
     <bean id="taxServiceRoutes" class="com.estafet.taxservice.route.TaxServiceRoute"/>
 
@@ -29,6 +32,9 @@
         <routeBuilder ref="taxServiceRoutes"/>
     </camelContext>
 
-    <reference id="taxDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.TaxDAO" />
+    <reference id="taxDAOService2" interface="com.estafet.invoicesystem.jpa.dao.api.TaxDAO" />
+    <bean id="taxProcessor" class="com.estafet.taxservice.impl.TaxOSGIServiceImpl">
+        <property name="taxDao" ref="taxDAOService2"></property>
+    </bean>
 
 </blueprint>

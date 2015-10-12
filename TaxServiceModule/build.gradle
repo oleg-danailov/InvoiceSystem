@@ -17,6 +17,9 @@ dependencies {
     compile 'log4j:log4j:1.2.17'
     compile 'org.slf4j:slf4j-simple:1.6.1'*/
 
+    compile project(":PersistenceModule:invoice-jpa-dao")
+    compile project(":PersistenceModule:invoice-jpa-model")
+
     compile group : 'org.apache.camel', name : 'camel-core', version: '2.12.0'
     compile group : 'org.apache.camel', name : 'camel-cxf', version: '2.12.0'
     compile group : 'org.apache.camel', name : 'camel-test', version : '2.12.0'
@@ -41,8 +44,8 @@ jar {
         instruction 'Bundle-Vendor', 'Estafet'
         instruction 'Bundle-Description', 'PoC for Invoice system'
         instruction 'Bundle-DocURL', 'http://www.estafet.com'
-        instruction 'Export-Package', '!com.estafet.invoicesystem.model.*'
-        instruction 'Import-Package', '*, javax.sql, com.estafet.invoicesystem.jpa.*'
+        instruction 'Import-Package', '*'
+        instruction 'Export-Package', '*, com.estafet.taxservice.api'
     }
 }
 
