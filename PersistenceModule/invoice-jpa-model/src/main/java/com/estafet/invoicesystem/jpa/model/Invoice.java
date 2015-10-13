@@ -12,7 +12,10 @@ import java.util.Date;
 @Table(name = "INVOICE", uniqueConstraints = @UniqueConstraint(name="provider_company_invoice_number_unique",columnNames = {"invoice_number","provider_company"}))
 
 @NamedQueries({@NamedQuery(name= "invoice.findByNumberAndProvider", query = "SELECT inv FROM Invoice inv " +
-        " WHERE inv.invoiceNumber = :invoiceNumber AND inv.providerCompany = :providerCompany")})
+        " WHERE inv.invoiceNumber = :invoiceNumber AND inv.providerCompany = :providerCompany"),
+        @NamedQuery(name="invoice.updateStatus", query = "UPDATE Invoice SET invoiceStatus = :invoiceStatus " +
+                "WHERE invoiceId = :invoiceId")})
+
 public class Invoice {
 
     @Id

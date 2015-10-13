@@ -21,6 +21,5 @@ public class FraudDetectionRouteBuilder extends RouteBuilder {
                 .streamCaching()
                 .log(LoggingLevel.INFO, "Received message with body: ${body}")
                 .beanRef("fraudDetectionProcessor", "checkInvoice");
-                //.to("mock:result");
     }
 }
