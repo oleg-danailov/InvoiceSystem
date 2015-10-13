@@ -19,11 +19,15 @@ public class InvoiceServiceRoute extends RouteBuilder {
 
         from("direct:persist").id("invoice_service_route_jpa")
                 .log("${body}").unmarshal(jxb).beanRef("invoiceProcessor", "applyTax")
-                .beanRef("invoiceProcessor", "persistInvoice");
+                .beanRef("invoiceProcessor", "persistInvoice")
+                .beanRef("invoiceProcessor", "transform").marshal(jxb);
 
         from("direct:incomingInvoices").id("invoice_service_route_activemq")
                 .log("Before activemq : ${body}")
-                .to(ExchangePattern.InOnly, "activemq:incomingInvoices");
+                .to(ExchangePattern.InOnly, "activemq:incomingInvoices").end();
+
+        from("cxf:bean:getInvoiceRequest").unmarshal(jxb).beanRef("getInvoiceProcessor", "getInvoice")
+                .log("${body}").marshal(jxb).to("mock:result");
 
     }
 }

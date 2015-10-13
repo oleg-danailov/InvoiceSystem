@@ -21,5 +21,7 @@ public interface InvoiceDAO {
 
     public void saveInvoice(Invoice invoice);
 
+    public void refreshInvoice(Invoice invoice);
+
     public void updateInvoiceStatus(int id, String status);
 }

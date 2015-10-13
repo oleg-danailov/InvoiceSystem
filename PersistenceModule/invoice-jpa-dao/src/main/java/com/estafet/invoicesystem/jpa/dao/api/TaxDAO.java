@@ -21,4 +21,6 @@ public interface TaxDAO {
 
     public void saveTax(Tax tax);
 
+    public void refreshTax(Tax tax);
+
 }

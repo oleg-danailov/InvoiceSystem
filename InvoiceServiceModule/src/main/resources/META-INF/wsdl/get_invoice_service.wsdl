@@ -1,0 +1,66 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://getinvoiceservice.estafet.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="getInvoiceServiceEndpointService" targetNamespace="http://getinvoiceservice.estafet.com/">
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://getinvoiceservice.estafet.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://getinvoiceservice.estafet.com/">
+
+            <xsd:element name="getInvoiceRequest" type="tns:getInvoiceRequest"/>
+            <xsd:complexType name="getInvoiceRequest">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" name="invoiceId" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="getInvoiceRequestResponse" type="tns:getInvoiceRequestResponse"/>
+            <xsd:complexType name="getInvoiceRequestResponse">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" name="invoiceId" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="invoiceAmount" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="invoiceCreationDate" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="invoiceNumber" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="invoiceType" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="providerCompany" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="receiverCompany" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="taxesAmount" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="totalAmount" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="invoiceStatus" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="getInvoiceRequestResponse">
+        <wsdl:part element="tns:getInvoiceRequestResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getInvoiceRequest">
+        <wsdl:part element="tns:getInvoiceRequest" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+
+    <wsdl:portType name="GetInvoiceService">
+        <wsdl:operation name="GetInvoiceRequest">
+            <wsdl:input message="tns:getInvoiceRequest" name="getInvoiceRequest">
+            </wsdl:input>
+            <wsdl:output message="tns:getInvoiceRequestResponse" name="getInvoiceRequestResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+
+
+    <wsdl:binding name="GetInvoiceServiceEndpointServiceSoapBinding" type="tns:GetInvoiceService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetInvoiceRequest">
+            <soap:operation soapAction="http://getinvoiceservice.estafet.com/getInvoiceRequest" style="document"/>
+            <wsdl:input name="getInvoiceRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getInvoiceRequestResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="GetInvoiceServiceEndpointService">
+        <wsdl:port binding="tns:GetInvoiceServiceEndpointServiceSoapBinding" name="GetInvoiceServiceEndpoint">
+            <soap:address location="http://localhost:10354/getInvoiceService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

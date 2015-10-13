@@ -15,37 +15,38 @@ import java.util.List;
 */
 public class InvoiceDAOImpl implements InvoiceDAO {
 
-    //private static final transient Log LOG = LogFactory.getLog(InvoiceDAOImpl.class);
+        //private static final transient Log LOG = LogFactory.getLog(InvoiceDAOImpl.class);
 
-    private EntityManager entityManager;
+        private EntityManager entityManager;
 
-    private static final String findInvoiceByReference = "select inv from Invoice as inv where inv.invoice_id = :inv_id";
-    private static final String findInvoice = "select inv from Invoice as inv";
+        private static final String findInvoiceByReference = "select inv from Invoice as inv where inv.invoiceId = :inv_id";
+        private static final String findInvoice = "select inv from Invoice as inv";
 
 
-    public void setEntityManager(EntityManager entityManager) {
+        public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    public EntityManager getEntityManager() {
+        public EntityManager getEntityManager() {
         return entityManager;
     }
 
-    public List<Invoice> findInvoice(){
-        Query q = this.entityManager.createQuery(findInvoice);
+        public List<Invoice> findInvoice()
+        {
+            Query q = this.entityManager.createQuery(findInvoice);
 
-        List list = q.getResultList();
+            List list = q.getResultList();
 
-        return list;
-    }
+            return list;
+        }
 
-    public List<Invoice> findInvoice(String key){
-        Query q = this.entityManager.createQuery(findInvoiceByReference);
-        q.setParameter("inv_id", key);
-        List list = q.getResultList();
+        public List<Invoice> findInvoice(String key){
+            Query q = this.entityManager.createQuery(findInvoiceByReference);
+            q.setParameter("inv_id", new Integer(key));
+            List list = q.getResultList();
 
-        return list;
-    }
+            return list;
+        }
 
     @Override
     public Invoice findByNumberAndProvider(String number, String provider) {
@@ -59,14 +60,16 @@ public class InvoiceDAOImpl implements InvoiceDAO {
         return invoice;
     }
 
-    public Invoice getInvoice(long id){
-        return (Invoice) entityManager.find(Invoice.class, Long.valueOf(id));
-    }
+    public Invoice getInvoice(long id)
+        {
+            return (Invoice) entityManager.find(Invoice.class, Long.valueOf(id));
+        }
 
-    public void removeInvoice(long id){
-        Object record = entityManager.find(Invoice.class, Long.valueOf(id));
-        entityManager.remove(record);
-    }
+        public void removeInvoice(long id)
+        {
+            Object record = entityManager.find(Invoice.class, Long.valueOf(id));
+            entityManager.remove(record);
+        }
 
     @Override
     public void saveInvoice(Invoice invoice) {
@@ -79,6 +82,10 @@ public class InvoiceDAOImpl implements InvoiceDAO {
         Invoice invoice =  entityManager.find(Invoice.class, Long.valueOf(id));
         invoice.setInvoiceStatus(status);
         saveInvoice(invoice);
+    }
+    @Override
+    public void refreshInvoice(Invoice invoice) {
+        entityManager.refresh(invoice);
     }
 
 }

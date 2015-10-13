@@ -5,6 +5,7 @@
             <xsd:element name="invoiceRequest" type="tns:invoiceRequest"/>
             <xsd:complexType name="invoiceRequest">
                 <xsd:sequence>
+                    <xsd:element minOccurs="1" name="invoiceNumber" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="invoiceType" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="invoiceAmount" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="providerCompany" type="xsd:string"/>
@@ -15,13 +16,36 @@
             <xsd:complexType name="invoiceRequestResponse">
                 <xsd:sequence>
                     <xsd:element minOccurs="1" name="invoiceId" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="invoiceNumber" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="invoiceCreationDate" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="taxAmount" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="totalAmount" type="xsd:string"/>
                 </xsd:sequence>
             </xsd:complexType>
+            <xsd:element name="getInvoiceRequest" type="tns:getInvoiceRequest"/>
+            <xsd:complexType name="getInvoiceRequest">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" name="invoiceId" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="getInvoiceRequestResponse" type="tns:getInvoiceRequestResponse"/>
+            <xsd:complexType name="getInvoiceRequestResponse">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" name="invoiceId" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="invoiceAmount" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="invoiceCreationDate" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="invoiceNumber" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="invoiceType" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="providerCompany" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="receiverCompany" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="taxesAmount" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="totalAmount" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="invoiceStatus" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
         </xsd:schema>
     </wsdl:types>
+
     <wsdl:message name="invoiceRequestResponse">
         <wsdl:part element="tns:invoiceRequestResponse" name="parameters">
         </wsdl:part>
@@ -30,6 +54,15 @@
         <wsdl:part element="tns:invoiceRequest" name="parameters">
         </wsdl:part>
     </wsdl:message>
+    <wsdl:message name="getInvoiceRequestResponse">
+        <wsdl:part element="tns:getInvoiceRequestResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getInvoiceRequest">
+        <wsdl:part element="tns:getInvoiceRequest" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+
     <wsdl:portType name="InvoiceService">
         <wsdl:operation name="InvoiceRequest">
             <wsdl:input message="tns:invoiceRequest" name="invoiceRequest">
@@ -37,7 +70,15 @@
             <wsdl:output message="tns:invoiceRequestResponse" name="invoiceRequestResponse">
             </wsdl:output>
         </wsdl:operation>
+        <wsdl:operation name="GetInvoiceRequest">
+            <wsdl:input message="tns:getInvoiceRequest" name="getInvoiceRequest">
+            </wsdl:input>
+            <wsdl:output message="tns:getInvoiceRequestResponse" name="getInvoiceRequestResponse">
+            </wsdl:output>
+        </wsdl:operation>
     </wsdl:portType>
+
+
     <wsdl:binding name="InvoiceServiceEndpointServiceSoapBinding" type="tns:InvoiceService">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <wsdl:operation name="InvoiceRequest">
@@ -49,10 +90,21 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
+        <wsdl:operation name="GetInvoiceRequest">
+            <soap:operation soapAction="http://invoiceservice.estafet.com/getInvoiceRequest" style="document"/>
+            <wsdl:input name="getInvoiceRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getInvoiceRequestResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
     </wsdl:binding>
+
     <wsdl:service name="InvoiceServiceEndpointService">
         <wsdl:port binding="tns:InvoiceServiceEndpointServiceSoapBinding" name="InvoiceServiceEndpoint">
             <soap:address location="http://localhost:10354/invoice_service"/>
         </wsdl:port>
     </wsdl:service>
+
 </wsdl:definitions>

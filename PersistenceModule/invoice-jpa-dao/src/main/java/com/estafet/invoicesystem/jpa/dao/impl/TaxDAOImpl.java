@@ -18,8 +18,8 @@ public class TaxDAOImpl implements TaxDAO {
 
     private EntityManager entityManager;
 
-    private static final String findTaxByName = "select tax from Tax as tax where tax.tax_name = :tax_name";
-    private static final String findTaxByReference = "select tax from Tax as tax where tax.tax_id = :tax_id";
+    private static final String findTaxByName = "select tax from Tax as tax where tax.taName = :tax_name";
+    private static final String findTaxByReference = "select tax from Tax as tax where tax.taxId = :tax_id";
     private static final String findTax = "select tax from Tax as tax";
 
 
@@ -73,6 +73,11 @@ public class TaxDAOImpl implements TaxDAO {
     public void saveTax(Tax tax) {
         System.out.println("Invoice  with number :" + tax.getTaxName());
         entityManager.persist(tax);
+    }
+
+    @Override
+    public void refreshTax(Tax tax) {
+        entityManager.refresh(tax);
     }
 
 }
