@@ -13,7 +13,6 @@ repositories {
 
 dependencies {
     compile project(":PersistenceModule:invoice-jpa-model")
-    //compile project(":invoice-jpa-model")
 
 
     compile 'org.apache.openjpa:openjpa:2.3.0'
@@ -24,7 +23,7 @@ dependencies {
     testCompile group: 'org.apache.camel', name: 'camel-test', version: '2.12.0'
     testCompile "org.apache.openjpa:openjpa:2.3.0"
     testCompile 'org.dbunit:dbunit:2.4.9'
-    //testCompile libraries.junit
+    testCompile 'junit:junit:4.11'
 
     testRuntime 'org.postgresql:postgresql:9.2-1004-jdbc4'
 }
@@ -35,10 +34,6 @@ task deployLocallyInFuse(dependsOn: jar) {//[jar, ":PersistenceModule:invoice-jp
             from(jar)
             into project.file("/u01/app/jboss-fuse-6.1.0.redhat-379/deploy/")
         }
-//        copy {
-//            from('src/main/config')
-//            into project.file("${jboss_fuse_location_config_local}")
-//        }
     }
 }
 

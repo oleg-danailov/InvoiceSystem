@@ -21,11 +21,9 @@ public class GetInvoiceProcessor {
     public void getInvoice(Exchange exchange) {
         GetInvoiceRequest invoiceRequest = exchange.getIn().getBody(GetInvoiceRequest.class);
 
-        List<Invoice> invoiceList = invoiceDao.findInvoice(invoiceRequest.getInvoiceId());
+        Invoice temp = invoiceDao.getInvoice(Integer.parseInt(invoiceRequest.getInvoiceId()));
 
-        if (invoiceList != null && invoiceList.size() == 1) {
-            Invoice temp = invoiceList.get(0);
-
+        if (temp != null) {
             GetInvoiceResponse invoiceResponse = new GetInvoiceResponse();
 
             invoiceResponse.setInvoiceId(temp.getInvoiceId());

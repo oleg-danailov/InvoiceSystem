@@ -18,8 +18,7 @@ public class TaxDAOImpl implements TaxDAO {
 
     private EntityManager entityManager;
 
-    private static final String findTaxByName = "select tax from Tax as tax where tax.taName = :tax_name";
-    private static final String findTaxByReference = "select tax from Tax as tax where tax.taxId = :tax_id";
+    private static final String findTaxByName = "select tax from Tax as tax where tax.taxName = :tax_name";
     private static final String findTax = "select tax from Tax as tax";
 
 
@@ -31,8 +30,7 @@ public class TaxDAOImpl implements TaxDAO {
         return entityManager;
     }
 
-    public List<Tax> findTax()
-    {
+    public List<Tax> getAll(){
         Query q = this.entityManager.createQuery(findTax);
 
         List list = q.getResultList();
@@ -40,8 +38,7 @@ public class TaxDAOImpl implements TaxDAO {
         return list;
     }
 
-    public List<Tax> findTaxByName(String name)
-    {
+    public List<Tax> findTaxByName(String name){
         Query q = this.entityManager.createQuery(findTaxByName);
         q.setParameter("tax_name", name);
         List list = q.getResultList();
@@ -49,29 +46,17 @@ public class TaxDAOImpl implements TaxDAO {
         return list;
     }
 
-    public List<Tax> findTaxByReference(String id)
-    {
-        Query q = this.entityManager.createQuery(findTaxByReference);
-        q.setParameter("tax_id", id);
-        List list = q.getResultList();
-
-        return list;
+    public Tax getTax(Integer id){
+        return entityManager.find(Tax.class, id);
     }
 
-    public Tax getTax(long id)
-    {
-        return (Tax)this.entityManager.find(Tax.class, Long.valueOf(id));
-    }
-
-    public void removeTax(long id)
-    {
-        Object record = entityManager.find(Tax.class, Long.valueOf(id));
+    public void removeTax(Integer id){
+        Object record = entityManager.find(Tax.class, id);
         entityManager.remove(record);
     }
 
     @Override
     public void saveTax(Tax tax) {
-        System.out.println("Invoice  with number :" + tax.getTaxName());
         entityManager.persist(tax);
     }
 

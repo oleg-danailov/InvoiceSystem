@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+
+    <tax tax_id="11" tax_name="VAT" tax_percent="0.20"/>
+    <tax tax_id="12" tax_name="ProfitTax" tax_percent="0.10"/>
+	
+</dataset>
