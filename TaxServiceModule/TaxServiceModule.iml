@@ -76,5 +76,6 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.postgresql:postgresql:9.2-1004-jdbc4" level="project" />
     <orderEntry type="module" module-name="invoice-jpa-dao" exported="" />
     <orderEntry type="module" module-name="invoice-jpa-model" exported="" />
+    <orderEntry type="library" name="Gradle: org.apache.camel:camel-jaxb:2.12.0" level="project" />
   </component>
 </module>

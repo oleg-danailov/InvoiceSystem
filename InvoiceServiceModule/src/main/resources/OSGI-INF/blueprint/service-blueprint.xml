@@ -34,6 +34,17 @@
         </camelcxf:properties>
     </camelcxf:cxfEndpoint>
 
+    <camelcxf:cxfEndpoint id="taxRequest"
+                          address="http://localhost:10354/tax_service"
+                          endpointName="s:TaxServiceEndpoint"
+                          serviceName="s:TaxServiceEndpointService"
+                          wsdlURL="http://localhost:10354/tax_service?wsdl"
+                          xmlns:s="http://taxservice.estafet.com/">
+        <camelcxf:properties>
+            <entry key="dataFormat" value="PAYLOAD"/>
+        </camelcxf:properties>
+    </camelcxf:cxfEndpoint>
+
     <!--<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
         <property name="brokerURL" value="tcp://localhost:61616" />
         <property name="userName" value="admin" />

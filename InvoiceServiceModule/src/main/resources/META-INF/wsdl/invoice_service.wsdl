@@ -5,7 +5,7 @@
             <xsd:element name="invoiceRequest" type="tns:invoiceRequest"/>
             <xsd:complexType name="invoiceRequest">
                 <xsd:sequence>
-                    <xsd:element minOccurs="1" name="invoiceNumber" type="xsd:string"/>
+                    <xsd:element minOccurs="1"  name="invoiceNumber" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="invoiceType" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="invoiceAmount" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="providerCompany" type="xsd:string"/>

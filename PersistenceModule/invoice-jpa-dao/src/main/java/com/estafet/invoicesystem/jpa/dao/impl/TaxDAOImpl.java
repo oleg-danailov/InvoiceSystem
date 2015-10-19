@@ -19,6 +19,7 @@ public class TaxDAOImpl implements TaxDAO {
     private EntityManager entityManager;
 
     private static final String findTaxByName = "select tax from Tax as tax where tax.taxName = :tax_name";
+    private static final String findTaxesByInvoiceName = "select tax from Tax as tax where tax.invoiceType = :invoice_type";
     private static final String findTax = "select tax from Tax as tax";
 
 
@@ -38,12 +39,19 @@ public class TaxDAOImpl implements TaxDAO {
         return list;
     }
 
-    public List<Tax> findTaxByName(String name){
+    public List<Tax> findTaxesByInvoiceType(String invoiceType) {
+        Query q = this.entityManager.createQuery(findTaxesByInvoiceName);
+        q.setParameter("invoice_type", invoiceType);
+        List<Tax> result = q.getResultList();
+        return result;
+    }
+
+    public Tax findTaxByName(String name){
         Query q = this.entityManager.createQuery(findTaxByName);
         q.setParameter("tax_name", name);
-        List list = q.getResultList();
+        Tax result = (Tax)q.getSingleResult();
 
-        return list;
+        return result;
     }
 
     public Tax getTax(Integer id){

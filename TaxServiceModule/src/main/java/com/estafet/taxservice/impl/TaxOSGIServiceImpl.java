@@ -27,7 +27,7 @@ public class TaxOSGIServiceImpl implements TaxOSGIService {
                 type = "VAT";
             }
 
-            List<Tax> taxes = taxDao.findTaxByName(type);
+            List<Tax> taxes = taxDao.findTaxesByInvoiceType(type);
 
             if (taxes != null && taxes.size() == 1) {
                 result = taxes.get(0).getTaxPercent();

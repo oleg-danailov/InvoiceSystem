@@ -68,10 +68,10 @@ public class TaxDAOImplTest {
 
     @Test
     public void testFindTaxByName(){
-        List<Tax> list = taxDAO.findTaxByName("ProfitTax");
+        Tax result = taxDAO.findTaxByName("ProfitTax");
 
-        assertTrue("Wrong number of returned entries", list.size() == 1);
-        assertEquals("", "ProfitTax", list.get(0).getTaxName());
+        assertTrue("Wrong number of returned entries", result != null);
+        assertEquals("", "ProfitTax", result.getTaxName());
     }
 
     @Test

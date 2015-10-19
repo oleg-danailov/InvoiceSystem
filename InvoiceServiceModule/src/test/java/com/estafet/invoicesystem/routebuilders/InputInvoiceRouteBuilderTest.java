@@ -4,12 +4,12 @@
 //import com.estafet.invoicesystem.soap.model.IncrementResponse;
 //import com.estafet.invoicesystem.soap.model.InvoiceWebService;
 //import org.apache.camel.Exchange;
+//import org.apache.camel.ExchangePattern;
 //import org.apache.camel.LoggingLevel;
 //import org.apache.camel.Processor;
 //import org.apache.camel.builder.RouteBuilder;
 //import org.apache.camel.component.mock.MockEndpoint;
-//import org.apache.camel.dataformat.soap.SoapJaxbDataFormat;
-//import org.apache.camel.dataformat.soap.name.ServiceInterfaceStrategy;
+//import org.apache.camel.converter.jaxb.JaxbDataFormat;
 //import org.apache.camel.test.junit4.CamelTestSupport;
 //import org.junit.Ignore;
 //import org.junit.Test;
@@ -24,7 +24,23 @@
 ////                JaxbDataFormat jaxb = new JaxbDataFormat(true);
 ////                jaxb.setContextPath(IncrementRequest.class.getPackage().getName());
 //
-//                SoapJaxbDataFormat soap = new SoapJaxbDataFormat("com.estafet.invoicesystem.model", new ServiceInterfaceStrategy(InvoiceWebService.class, true));
+//
+//                JaxbDataFormat jxb = new  JaxbDataFormat("com.estafet.invoicesystem.jpa.model");
+//
+//                from("cxf:bean:invoiceRequest").to("direct:persist", "direct:incomingInvoices");
+//
+//                from("direct:persist").id("invoice_service_route_jpa")
+//                        .log("${body}").unmarshal(jxb).beanRef("invoiceProcessor", "applyTax")
+//                        .beanRef("invoiceProcessor", "persistInvoice")
+//                        .beanRef("invoiceProcessor", "transform").marshal(jxb);
+//
+//                from("direct:incomingInvoices").id("invoice_service_route_activemq")
+//                        .log("Before activemq : ${body}")
+//                        .to(ExchangePattern.InOnly, "activemq:incomingInvoices").end();
+//
+//                from("cxf:bean:getInvoiceRequest").unmarshal(jxb).beanRef("getInvoiceProcessor", "getInvoice")
+//                        .log("${body}").marshal(jxb).to("mock:result");
+//
 //
 //                from("jetty:http://localhost:10354/increment")//from("jetty:http://{{jetty.host}}:{{jetty.port}}{{jetty.url}}")
 //                        .log(LoggingLevel.INFO, "Message recieved: ${body}")

@@ -11,7 +11,9 @@ public interface TaxDAO {
 
     public List<Tax> getAll();
 
-    public List<Tax> findTaxByName(String name);
+    public List<Tax> findTaxesByInvoiceType(String invoiceType);
+
+    public Tax findTaxByName(String name);
 
     public Tax getTax(Integer id);
 
