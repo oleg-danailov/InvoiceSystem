@@ -1,5 +1,6 @@
 package com.estafet.invoiceservice.processor;
 
+import com.estafet.invoiceservice.exception.IncorrectRequestException;
 import com.estafet.invoicesystem.jpa.dao.api.InvoiceDAO;
 import com.estafet.invoicesystem.jpa.model.GetInvoiceRequest;
 import com.estafet.invoicesystem.jpa.model.GetInvoiceResponse;
@@ -38,6 +39,8 @@ public class GetInvoiceProcessor {
             invoiceResponse.setInvoiceStatus(temp.getInvoiceStatus());
 
             exchange.getOut().setBody(invoiceResponse);
+        } else {
+            throw new IncorrectRequestException("Invoice not found");
         }
 
     }

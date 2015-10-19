@@ -1,5 +1,6 @@
 package com.estafet.invoiceservice.route;
 
+import com.estafet.invoiceservice.exception.IncorrectRequestException;
 import com.estafet.invoicesystem.jpa.model.Invoice;
 import com.estafet.invoicesystem.jpa.model.Tax;
 import com.estafet.invoicesystem.jpa.model.TaxResponse;
@@ -23,7 +24,8 @@ public class InvoiceServiceRoute extends RouteBuilder {
 
         JaxbDataFormat jxb = new  JaxbDataFormat("com.estafet.invoicesystem.jpa.model");
 
-        onException(RuntimeException.class).log("Exception happened: ${body}").to("mock:error");
+        onException(IncorrectRequestException.class).log("Exception happened: ${body}")//.handled(true)
+                .transform().simple("Error reported: ${exception.message} - cannot process this message.");;//to("activemq:errorInvoices");
 
 
         from("cxf:bean:invoiceRequest").to("direct:persist", "direct:incomingInvoices");
@@ -61,8 +63,7 @@ public class InvoiceServiceRoute extends RouteBuilder {
                 .log("Before activemq : ${body}")
                 .to(ExchangePattern.InOnly, "activemq:incomingInvoices").end();
 
-        from("cxf:bean:getInvoiceRequest").streamCaching().unmarshal(jxb).beanRef("getInvoiceProcessor", "getInvoice")
-                .log("GetInvoice Request: ${body}").marshal(jxb).to("mock:result");
+
 
 
         from("direct:call_tax").streamCaching().process(new Processor() {
@@ -70,7 +71,9 @@ public class InvoiceServiceRoute extends RouteBuilder {
             @Override
             public void process(Exchange exchange) {
                 Invoice invoice = exchange.getIn().getBody(Invoice.class);
-
+                if(invoice == null){
+                    throw new IncorrectRequestException("Received empty invoice request");
+                }
                 Tax taxRequest = new Tax();
                 taxRequest.setInvoiceType(invoice.getInvoiceType());
 
@@ -79,6 +82,9 @@ public class InvoiceServiceRoute extends RouteBuilder {
         }).log("Before call to Tax Request: >>>>>>>>>> ${body} ").marshal(jxb).to("cxf:bean:taxRequest").end();
 
 
+        /*adas*/
+        from("cxf:bean:getInvoiceRequest").streamCaching().unmarshal(jxb).beanRef("getInvoiceProcessor", "getInvoice")
+                .log("GetInvoice Request: ${body}").marshal(jxb).to("mock:result");
 
     }
 }

@@ -3,6 +3,7 @@ package com.estafet.taxservice.route;
 import com.estafet.invoicesystem.jpa.dao.api.TaxDAO;
 import com.estafet.invoicesystem.jpa.model.Tax;
 import com.estafet.invoicesystem.jpa.model.TaxResponse;
+import com.estafet.taxservice.exception.InvalidTaxRequestException;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
@@ -21,10 +22,6 @@ public class TaxServiceRoute  extends RouteBuilder {
         this.taxDao = taxDao;
     }
 
-    private static String ECHO_RESPONSE = "<tax:taxResponse xmlns:tax=\"http://taxservice.estafet.com/\">\n" +
-            "         <percent>result</percent>\n" +
-            "      </tax:taxResponse>";
-
     JaxbDataFormat jxb = new JaxbDataFormat("com.estafet.invoicesystem.jpa.model");
 
     @Override
@@ -38,11 +35,17 @@ public class TaxServiceRoute  extends RouteBuilder {
                              @Override
                              public void process(Exchange exchange) throws Exception {
                                  Tax tax = exchange.getIn().getBody(Tax.class);
+                                 //TODO if null ->
+                                 if (tax == null) {
+                                     throw new InvalidTaxRequestException("No tax found in the request.");
+                                 }
 
                                  System.out.println("Tax Invoice type:" + tax.getInvoiceType());
 
                                  List<Tax> taxes = taxDao.findTaxesByInvoiceType(tax.getInvoiceType());
-
+                                 if (taxes == null || taxes.size() == 0) {
+                                     throw new InvalidTaxRequestException("No tax for this type: "+ tax.getInvoiceType() +" found in DB.");
+                                 }
                                  Tax temp = taxes.get(0);
 
                                  TaxResponse taxResponse = new TaxResponse();

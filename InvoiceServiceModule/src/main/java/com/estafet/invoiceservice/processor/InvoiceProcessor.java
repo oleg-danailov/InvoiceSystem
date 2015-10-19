@@ -20,6 +20,10 @@ public class InvoiceProcessor {
         this.invoiceDao = invoiceDao;
     }
 
+    public void setTaxOSGIService(TaxOSGIService taxOSGIService) {
+        this.taxOSGIService = taxOSGIService;
+    }
+
     public void applyTax(Exchange exchange) {
         Invoice invoice = exchange.getIn().getBody(Invoice.class);
         BigDecimal amount = invoice.getInvoiceAmount();
@@ -31,10 +35,6 @@ public class InvoiceProcessor {
         invoice.setTaxesAmount(taxesAmount);
         invoice.setTotalAmount(taxesAmount.add(amount));
         System.out.println(invoice.getTotalAmount());
-    }
-
-    public void setTaxOSGIService(TaxOSGIService taxOSGIService) {
-        this.taxOSGIService = taxOSGIService;
     }
 
     public void transform(Exchange exchange) {

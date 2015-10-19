@@ -96,5 +96,6 @@
     <orderEntry type="library" exported="" name="Gradle: org.apache.camel:camel-spring:2.12.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: commons-pool:commons-pool:1.6" level="project" />
     <orderEntry type="module" module-name="TaxServiceModule" exported="" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.mockito:mockito-all:1.10.19" level="project" />
   </component>
 </module>
