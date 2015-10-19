@@ -6,10 +6,6 @@ import com.estafet.invoicesystem.jpa.model.InvoiceResponse;
 import com.estafet.taxservice.api.TaxOSGIService;
 import org.apache.camel.Exchange;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
-
 /**
  * Created by estafet on 09/10/15.
  */
@@ -32,41 +28,9 @@ public class FraudDetectionProcessor {
         Invoice invoice = new Invoice();
         invoice.setInvoiceId(invoiceRequest.getInvoiceId());
         invoice.setInvoiceAmount(invoiceRequest.getInvoiceAmount());
-
-        invoice = getInvoiceFromDB(invoice);
-        boolean invoiceIsOk = checkInvoice(invoice);
-        if(invoiceIsOk){
-            invoice.setInvoiceStatus("checked");
-        } else {
-            invoice.setInvoiceStatus("error");
-        }
+        invoice.setInvoiceStatus(invoiceRequest.getInvoiceStatus());
 
         invoiceDAO.updateInvoiceStatus(invoice.getInvoiceId(), invoice.getInvoiceStatus());
     }
 
-    private boolean checkInvoice(Invoice invoice) {
-
-        BigDecimal amount = invoice.getInvoiceAmount();
-        BigDecimal taxPercent = taxOSGIService.getTaxByType("VAT"); //TODO extract from invoice
-        if(taxPercent == null){
-            taxPercent = new BigDecimal(0.18);
-        }
-        BigDecimal taxesAmount = amount.multiply(taxPercent);
-
-        MathContext mc = new MathContext(2, RoundingMode.HALF_EVEN);
-        if(taxesAmount.round(mc).equals(invoice.getTaxesAmount().round(mc))){
-            return true;
-        }
-        return false;
-    }
-
-    private Invoice getInvoiceFromDB(Invoice invoice) {
-        Integer id = invoice.getInvoiceId();
-        if(id != null && id > 0){
-            invoice = invoiceDAO.getInvoice(id);
-        } else {
-            invoice = invoiceDAO.findByNumberAndProvider(invoice.getInvoiceNumber(), invoice.getProviderCompany());
-        }
-        return  invoice;
-    }
 }

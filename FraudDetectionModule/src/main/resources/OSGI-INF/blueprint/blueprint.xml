@@ -14,6 +14,17 @@
              http://camel.apache.org/schema/blueprint/cxf http://camel.apache.org/schema/blueprint/cxf/camel-cxf.xsd
              ">
 
+    <camelcxf:cxfEndpoint id="taxRequest"
+                          address="http://localhost:10354/tax_service"
+                          endpointName="s:TaxServiceEndpoint"
+                          serviceName="s:TaxServiceEndpointService"
+                          wsdlURL="http://localhost:10354/tax_service?wsdl"
+                          xmlns:s="http://taxservice.estafet.com/">
+        <camelcxf:properties>
+            <entry key="dataFormat" value="PAYLOAD"/>
+        </camelcxf:properties>
+    </camelcxf:cxfEndpoint>
+
     <bean id="fraudDetectionRouteBuilder" class="com.estafet.invoicesystem.frauddetection.FraudDetectionRouteBuilder"/>
 
     <camel:camelContext id="camelFrauDetectionService">

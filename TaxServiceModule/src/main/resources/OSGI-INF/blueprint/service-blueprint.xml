@@ -35,9 +35,10 @@
     </camelContext>
 
     <reference id="taxDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.TaxDAO" />
+    <reference id="taxDAOService2" interface="com.estafet.invoicesystem.jpa.dao.api.TaxDAO" />
 
     <bean id="taxProcessor" class="com.estafet.taxservice.impl.TaxOSGIServiceImpl">
-        <property name="taxDao" ref="taxDAOService"></property>
+        <property name="taxDao" ref="taxDAOService2"></property>
     </bean>
 
 </blueprint>

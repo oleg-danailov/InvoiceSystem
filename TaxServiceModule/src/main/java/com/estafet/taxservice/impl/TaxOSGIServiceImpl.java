@@ -21,6 +21,7 @@ public class TaxOSGIServiceImpl implements TaxOSGIService {
     public BigDecimal getTaxByType(String type) {
         BigDecimal result = null;
 
+        System.out.println("In getTaxByType");
         if (taxDao != null) {
 
             if (type == null) {
@@ -28,6 +29,8 @@ public class TaxOSGIServiceImpl implements TaxOSGIService {
             }
 
             List<Tax> taxes = taxDao.findTaxesByInvoiceType(type);
+
+            System.out.println("Taxes Size:" + taxes.size());
 
             if (taxes != null && taxes.size() == 1) {
                 result = taxes.get(0).getTaxPercent();
