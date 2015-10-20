@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 /**
  * Created by estafet on 20/10/15.
  */
-public class InvoiceValidityCheckerStrategy implements AggregationStrategy {
+public class CalculateInvoiceTaxStrategy implements AggregationStrategy {
     @Override
     public Exchange aggregate(Exchange original, Exchange resource) {
 
@@ -22,11 +22,8 @@ public class InvoiceValidityCheckerStrategy implements AggregationStrategy {
         BigDecimal taxPercent = taxResponse.getTaxPercent();
         BigDecimal taxesAmount = amount.multiply((taxPercent == null ? new BigDecimal(0.18) : taxPercent));
 
-        if (originalBody.getTotalAmount().equals(taxesAmount.add(amount))) {
-            originalBody.setInvoiceStatus("checked");
-        } else {
-            originalBody.setInvoiceStatus("error");
-        }
+        originalBody.setTaxesAmount(taxesAmount);
+        originalBody.setTotalAmount(taxesAmount.add(amount));
 
         if (original.getPattern().isOutCapable()) {
             original.getOut().setBody(originalBody);

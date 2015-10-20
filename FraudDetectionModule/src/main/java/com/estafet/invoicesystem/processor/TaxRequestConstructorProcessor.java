@@ -1,6 +1,6 @@
 package com.estafet.invoicesystem.processor;
 
-import com.estafet.invoicesystem.jpa.model.InvoiceResponse;
+import com.estafet.invoicesystem.jpa.model.Invoice;
 import com.estafet.invoicesystem.jpa.model.Tax;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -11,7 +11,7 @@ import org.apache.camel.Processor;
 public class TaxRequestConstructorProcessor implements Processor {
     @Override
     public void process(Exchange exchange) throws Exception {
-        InvoiceResponse invoice = exchange.getIn().getBody(InvoiceResponse.class);
+        Invoice invoice = exchange.getIn().getBody(Invoice.class);
 
         Tax taxRequest = new Tax();
         taxRequest.setInvoiceType(invoice.getInvoiceType());
