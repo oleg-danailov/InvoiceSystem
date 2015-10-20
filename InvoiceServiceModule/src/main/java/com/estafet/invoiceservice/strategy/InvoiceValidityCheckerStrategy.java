@@ -1,7 +1,6 @@
-package com.estafet.invoicesystem.strategy;
+package com.estafet.invoiceservice.strategy;
 
 import com.estafet.invoicesystem.jpa.model.Invoice;
-import com.estafet.invoicesystem.jpa.model.InvoiceResponse;
 import com.estafet.invoicesystem.jpa.model.TaxResponse;
 import org.apache.camel.Exchange;
 import org.apache.camel.processor.aggregate.AggregationStrategy;

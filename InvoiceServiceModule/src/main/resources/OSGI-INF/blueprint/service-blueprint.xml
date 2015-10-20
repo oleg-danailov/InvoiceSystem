@@ -15,7 +15,7 @@
                           address="http://localhost:10354/invoice_service"
                           endpointName="s:InvoiceServiceEndpoint"
                           serviceName="s:InvoiceServiceEndpointService"
-                          serviceClass="com.estafet.invoiceservice.api.InvoiceService"
+                          serviceClass="com.estafet.invoiceservice.api.webservice.InvoiceService"
                           wsdlURL="META-INF/wsdl/invoice_service.wsdl"
                           xmlns:s="http://invoiceservice.estafet.com/">
         <camelcxf:properties>
@@ -26,7 +26,7 @@
                           address="http://localhost:10355/invoice_service"
                           endpointName="s:InvoiceServiceEndpoint"
                           serviceName="s:InvoiceServiceEndpointService"
-                          serviceClass="com.estafet.invoiceservice.api.GetInvoiceService"
+                          serviceClass="com.estafet.invoiceservice.api.webservice.GetInvoiceService"
                           wsdlURL="META-INF/wsdl/invoice_service.wsdl"
                           xmlns:s="http://invoiceservice.estafet.com/">
         <camelcxf:properties>
@@ -51,10 +51,11 @@
         <property name="password" value="admin" />
     </bean>-->
 
-    <bean id="invoiceServiceRoutes" class="com.estafet.invoiceservice.route.InvoiceServiceRoute"/>
-
+    <bean id="invoiceServiceRoute" class="com.estafet.invoiceservice.route.InvoiceServiceRoute"/>
+    <bean id="getInvoiceServiceRoute" class="com.estafet.invoiceservice.route.GetInvoiceServiceRoute" />
     <camelContext id="camelInvoiceService" xmlns="http://camel.apache.org/schema/blueprint">
-        <routeBuilder ref="invoiceServiceRoutes"/>
+        <routeBuilder ref="invoiceServiceRoute"/>
+        <routeBuilder ref="getInvoiceServiceRoute"/>
     </camelContext>
     <!--<route id="file-to-jms-route">
             <from uri="file:/u01/xml/?noop=true" />

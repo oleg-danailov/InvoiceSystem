@@ -1,4 +1,4 @@
-package com.estafet.invoiceservice.api;
+package com.estafet.invoiceservice.api.webservice;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
