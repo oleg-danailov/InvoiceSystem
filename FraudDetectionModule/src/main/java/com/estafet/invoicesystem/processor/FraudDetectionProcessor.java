@@ -22,15 +22,9 @@ public class FraudDetectionProcessor {
         this.taxOSGIService = taxOSGIService;
     }
 
-    public void checkInvoice(Exchange exchange){
+    public void updateInvoiceStatus(Exchange exchange){
         InvoiceResponse invoiceRequest = exchange.getIn().getBody(InvoiceResponse.class);
-
-        Invoice invoice = new Invoice();
-        invoice.setInvoiceId(invoiceRequest.getInvoiceId());
-        invoice.setInvoiceAmount(invoiceRequest.getInvoiceAmount());
-        invoice.setInvoiceStatus(invoiceRequest.getInvoiceStatus());
-
-        invoiceDAO.updateInvoiceStatus(invoice.getInvoiceId(), invoice.getInvoiceStatus());
+        invoiceDAO.updateInvoiceStatus(invoiceRequest.getInvoiceId(), invoiceRequest.getInvoiceStatus());
     }
 
 }

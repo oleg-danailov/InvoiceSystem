@@ -25,7 +25,7 @@
         </camelcxf:properties>
     </camelcxf:cxfEndpoint>
 
-    <bean id="fraudDetectionRouteBuilder" class="com.estafet.invoicesystem.frauddetection.FraudDetectionRouteBuilder"/>
+    <bean id="fraudDetectionRouteBuilder" class="com.estafet.invoicesystem.route.FraudDetectionRouteBuilder"/>
 
     <camel:camelContext id="camelFrauDetectionService">
         <camel:routeBuilder ref="fraudDetectionRouteBuilder"/>
