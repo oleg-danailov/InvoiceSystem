@@ -76,16 +76,24 @@ public class TaxDAOImplTest {
 
     @Test
     public void testGetTax(){
-        Tax tax = taxDAO.getTax(12);
-        assertNotNull("Tax object with id = 12 was not retrieved from DB", tax);
+
+        Tax tax = taxDAO.findTaxByName("ProfitTax");
+        Integer id = tax.getTaxId();
+        tax = taxDAO.getTax(id);
+
+        assertNotNull("Tax object with id = "+ id +" was not retrieved from DB", tax);
+
     }
 
     @Test
     public void testRemoveTax(){
-        taxDAO.removeTax(12);
 
-        Tax tax = taxDAO.getTax(12);
-        assertNull("Tax object with id = 12 was not removed from DB", tax);
+        Tax tax = taxDAO.findTaxByName("ProfitTax");
+        Integer id = tax.getTaxId();
+        taxDAO.removeTax(id);
+
+        tax = taxDAO.getTax(id);
+        assertNull("Tax object with id = " + id  +" was not removed from DB", tax);
     }
 
 
