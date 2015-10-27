@@ -22,6 +22,7 @@ public class ObjectFactoryTest extends TestCase {
         InvoiceResponse invoiceResponse = objectFactory.createResponse();
         Tax tax = objectFactory.createTax();
         TaxResponse taxResponse = objectFactory.createTaxResponse();
+        AdditionalTaxResponse additionalTaxResponse = objectFactory.createAdditionalTaxResponse();
 
         Assert.assertNotNull(getInvoiceRequest);
         Assert.assertNotNull(getInvoiceResponse);
@@ -29,6 +30,7 @@ public class ObjectFactoryTest extends TestCase {
         Assert.assertNotNull(invoiceResponse);
         Assert.assertNotNull(tax);
         Assert.assertNotNull(taxResponse);
+        Assert.assertNotNull(additionalTaxResponse);
 
     }
 }

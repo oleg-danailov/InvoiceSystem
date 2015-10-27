@@ -21,6 +21,6 @@ public class ObjectFactory {
     public GetInvoiceRequest createGetInvoice() { return new GetInvoiceRequest(); }
 
     public GetInvoiceResponse createGetInvoiceResponse() { return new GetInvoiceResponse(); }
-
+    public AdditionalTaxResponse createAdditionalTaxResponse(){return new AdditionalTaxResponse();}
 
 }
