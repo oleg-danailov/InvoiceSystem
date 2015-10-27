@@ -19,3 +19,6 @@ public interface AdditionalTaxService {
             , @WebParam(name = "invoiceType" )String textInvoiceType
             , @WebParam(name = "taxPercent" )String textTaxPercent);
 }
+
+
+
