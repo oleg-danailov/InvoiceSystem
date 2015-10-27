@@ -11,13 +11,14 @@ import javax.jws.WebService;
 @WebService(targetNamespace = "http://taxservice.estafet.com/",
         portName = "TaxServiceEndpoint",
         serviceName = "TaxServiceEndpointService",
-        wsdlLocation = "META-INF/wsdl/tax_service.wsdl")
+        wsdlLocation = "META-INF/wsdl/tax_service.wsdl"
+        )
 public interface AdditionalTaxService {
 
     @WebMethod(action = "http://taxservice.estafet.com/createTax")
-    public String additionalTaxRequest(@WebParam(name = "taxName" )String textTaxName
-            , @WebParam(name = "invoiceType" )String textInvoiceType
-            , @WebParam(name = "taxPercent" )String textTaxPercent);
+    public String createTax(@WebParam(name = "taxName")String textTaxName
+            , @WebParam(name = "invoiceType")String textInvoiceType
+            , @WebParam(name = "taxPercent")String textTaxPercent);
 }
 
 
