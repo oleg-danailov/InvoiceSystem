@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 /**
  * Created by Yordan Stankov on 01/10/15.
  */
-@XmlRootElement(name = "taxRequest", namespace = "http://taxservice.estafet.com/")
+@XmlRootElement(name = "createTaxRequest", namespace = "http://taxservice.estafet.com/")
 @XmlType
 @Entity
 @Table(name = "TAX")

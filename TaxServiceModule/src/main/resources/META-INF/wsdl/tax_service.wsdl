@@ -14,6 +14,22 @@
                     <xsd:element minOccurs="0" name="percent" type="xsd:string"/>
                 </xsd:sequence>
             </xsd:complexType>
+            <xsd:element name="createTaxRequest" type="tns:createTaxRequest"/>
+                <xsd:complexType name="createTaxRequest">
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="taxName" type="xsd:string"/>
+                        <xsd:element minOccurs="0" name="invoiceType" type="xsd:string"/>
+                        <xsd:element minOccurs="0" name="taxPercent" type="xsd:string"/>
+                    </xsd:sequence>
+                 </xsd:complexType>
+
+            <xsd:element name="createTaxResponse" type="tns:createTaxResponse"/>
+                <xsd:complexType name="createTaxResponse">
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" name="code" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+
         </xsd:schema>
     </wsdl:types>
     <wsdl:message name="taxRequestResponse">
@@ -24,12 +40,22 @@
         <wsdl:part element="tns:taxRequest" name="parameters">
         </wsdl:part>
     </wsdl:message>
+    <wsdl:message name="createTaxRequest">
+        <wsdl:part element="tns:createTaxRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="createTaxResponse">
+        <wsdl:part element="tns:createTaxResponse" name="parameters"/>
+    </wsdl:message>
     <wsdl:portType name="TaxService">
         <wsdl:operation name="taxRequest">
             <wsdl:input message="tns:taxRequest" name="taxRequest">
             </wsdl:input>
             <wsdl:output message="tns:taxRequestResponse" name="taxRequestResponse">
             </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createTax">
+            <wsdl:input message="tns:createTaxRequest" name="createTaxRequest"/>
+            <wsdl:output message="tns:createTaxResponse" name="createTaxResponse"/>
         </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="TaxServiceEndpointServiceSoapBinding" type="tns:TaxService">
@@ -40,6 +66,15 @@
                 <soap:body use="literal"/>
             </wsdl:input>
             <wsdl:output name="taxRequestResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createTax">
+            <soap:operation soapAction="http://taxservice.estafet.com/createTax" style="document"/>
+            <wsdl:input name="createTaxRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="createTaxResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
