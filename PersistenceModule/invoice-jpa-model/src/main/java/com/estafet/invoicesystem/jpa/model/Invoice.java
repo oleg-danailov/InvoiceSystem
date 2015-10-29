@@ -51,6 +51,8 @@ public class Invoice {
     @Column(name = "INVOICE_STATUS")
     private String invoiceStatus = "unchecked"; //TODO Enum
 
+    private String currency;
+
 
     public String getInvoiceNumber() {
         return invoiceNumber;
@@ -130,5 +132,13 @@ public class Invoice {
 
     public void setInvoiceStatus(String invoiceStatus) {
         this.invoiceStatus = invoiceStatus;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }

@@ -45,6 +45,20 @@
         </camelcxf:properties>
     </camelcxf:cxfEndpoint>
 
+
+
+    <camelcxf:cxfEndpoint id="getConversionAmount"
+                          address="http://currencyconverter.kowabunga.net/converter.asmx"
+                          serviceName="s:Converter"
+                          endpointName="s:ConverterSoap"
+                          wsdlURL="http://currencyconverter.kowabunga.net/converter.asmx?wsdl"
+                          xmlns:s="http://tempuri.org/"
+            >
+        <camelcxf:properties>
+            <entry key="dataFormat" value="PAYLOAD"/>
+        </camelcxf:properties>
+    </camelcxf:cxfEndpoint>
+
     <!--<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
         <property name="brokerURL" value="tcp://localhost:61616" />
         <property name="userName" value="admin" />

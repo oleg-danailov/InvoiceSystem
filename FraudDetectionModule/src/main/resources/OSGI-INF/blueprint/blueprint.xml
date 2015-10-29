@@ -25,6 +25,7 @@
         </camelcxf:properties>
     </camelcxf:cxfEndpoint>
 
+
     <bean id="fraudDetectionRouteBuilder" class="com.estafet.invoicesystem.route.FraudDetectionRouteBuilder">
         <property name="invoiceValidityCheckerStrategy" ref="invoiceValidityChecker"/>
     </bean>

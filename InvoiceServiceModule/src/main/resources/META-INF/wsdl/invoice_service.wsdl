@@ -7,9 +7,11 @@
                 <xsd:sequence>
                     <xsd:element minOccurs="1"  name="invoiceNumber" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="invoiceType" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="currency" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="invoiceAmount" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="providerCompany" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="receiverCompany" type="xsd:string"/>
+
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:element name="invoiceRequestResponse" type="tns:invoiceRequestResponse"/>
@@ -32,6 +34,7 @@
             <xsd:complexType name="getInvoiceRequestResponse">
                 <xsd:sequence>
                     <xsd:element minOccurs="1" name="invoiceId" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="currency" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="invoiceAmount" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="invoiceCreationDate" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="invoiceNumber" type="xsd:string"/>
