@@ -6,14 +6,15 @@ import com.estafet.invoiceservice.model.GetConversionAmountResponse;
 import com.estafet.invoiceservice.processor.TaxRequestConstructorProcessor;
 import com.estafet.invoiceservice.strategy.CalculateInvoiceTaxStrategy;
 import com.estafet.invoicesystem.jpa.model.Invoice;
-import org.apache.camel.*;
+import org.apache.camel.Body;
+import org.apache.camel.Exchange;
+import org.apache.camel.ExchangePattern;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.converter.jaxb.JaxbDataFormat;
 import org.apache.camel.processor.aggregate.AggregationStrategy;
 
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Map;
 
 /**
  * Created by Angelo Atanasov on 07/10/15.
@@ -30,8 +31,15 @@ public class InvoiceServiceRoute extends RouteBuilder {
                 .transform().simple("Error reported: ${exception.message} - cannot process this message.");;//to("activemq:errorInvoices");
 
 
-        from("cxf:bean:invoiceRequest").multicast().parallelProcessing().to("direct:incomingInvoices", "direct:persist");
+        from("cxf:bean:invoiceRequest").log("Received: ${header.SOAPAction}")
+                .choice()
+                .when(header("SOAPAction").isEqualTo("http://invoiceservice.estafet.com/getInvoiceRequest"))
+                    .to("direct:getInvoiceRoute")
+                .when(header("SOAPAction").isEqualTo("http://invoiceservice.estafet.com/invoiceRequest"))
+                    .to("direct:invoiceRoute")
+                .endChoice();
 
+        from("direct:invoiceRoute").multicast().parallelProcessing().to("direct:incomingInvoices", "direct:persist");
 
         from("direct:incomingInvoices").id("invoice_service_route_activemq")
                 .streamCaching()
@@ -58,16 +66,21 @@ public class InvoiceServiceRoute extends RouteBuilder {
                 .enrich("direct:call_tax", new CalculateInvoiceTaxStrategy())
 
                 .beanRef("invoiceProcessor", "persistInvoice")
-                .beanRef("invoiceProcessor", "transform").marshal(jxb);
+                .log("Before transformation InvoiceRequest: ${body}")
+                .to("xslt:file:/u01/app/jboss-fuse-6.1.0.redhat-379/deploy/cfg/InvoiceRequestToInvoiceResponse.xsl")
+                .log("After transformation InvoiceRequest: ${body}")
+                .unmarshal(jxb)
+                .log("After Transformation: ${body}").marshal(jxb);
 
 
 
 
-        from("direct:call_tax").streamCaching().process(new TaxRequestConstructorProcessor())
-                .log("Before call to Tax Request: >>>>>>>>>> ${body} ").marshal(jxb).to("cxf:bean:taxRequest").end();
+        from("direct:call_tax").streamCaching()
+                .to("xslt:file:/u01/app/jboss-fuse-6.1.0.redhat-379/deploy/cfg/InvoiceRequestToTaxRequest.xsl")
+                .process(new TaxRequestConstructorProcessor())
+                .unmarshal(jxb).log("Before call to Tax Request: >>>>>>>>>> ${body} ").marshal(jxb).to("cxf:bean:taxRequest").end();
 
-
-        JaxbDataFormat jaxb = new  JaxbDataFormat("com.estafet.invoiceservice.model");
+        JaxbDataFormat jaxb = new JaxbDataFormat("com.estafet.invoiceservice.model");
         from("direct:getConversionRates").streamCaching().process(new Processor() {
             @Override
             public void process(Exchange exchange) throws Exception {
@@ -90,8 +103,11 @@ public class InvoiceServiceRoute extends RouteBuilder {
 
             }
         }).marshal(jaxb).log("Body after marshal : ${body}").to("cxf:bean:getConversionAmount").log("Body after cxf : ${body}").unmarshal(jaxb).end();
+        
+        from("direct:getInvoiceRoute").streamCaching().unmarshal(jxb).beanRef("getInvoiceProcessor", "getInvoice")
+                .log("GetInvoice Request: ${body}").marshal(jxb).to("mock:result");
     }
-    public static class MyFilter{
+    public static class MyFilter {
        public boolean isWrongCurrency(@Body Invoice invoice){
            String currency = invoice.getCurrency();
            if(currency != null && "GBP".equals(currency)){
@@ -101,4 +117,3 @@ public class InvoiceServiceRoute extends RouteBuilder {
        }
     }
 }
-

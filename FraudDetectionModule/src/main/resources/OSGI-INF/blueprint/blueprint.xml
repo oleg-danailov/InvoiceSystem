@@ -43,8 +43,4 @@
     <bean id="invoiceValidityChecker" class="com.estafet.invoicesystem.strategy.InvoiceValidityCheckerStrategy">
         <property name="invoiceDAO" ref="invoiceDAOService"/>
     </bean>
-
-
-
-
 </blueprint>

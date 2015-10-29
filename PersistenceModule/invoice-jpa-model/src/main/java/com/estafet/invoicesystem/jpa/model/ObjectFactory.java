@@ -15,12 +15,15 @@ public class ObjectFactory {
         return new InvoiceResponse();
     }
 
-    public Tax createTax() { return new Tax(); }
+    public TaxRequest createTaxRequest () { return new TaxRequest(); }
     public TaxResponse createTaxResponse() { return  new TaxResponse(); }
 
     public GetInvoiceRequest createGetInvoice() { return new GetInvoiceRequest(); }
-
     public GetInvoiceResponse createGetInvoiceResponse() { return new GetInvoiceResponse(); }
+
+    public Tax createTax() { return new Tax(); }
     public AdditionalTaxResponse createAdditionalTaxResponse(){return new AdditionalTaxResponse();}
+
+
 
 }

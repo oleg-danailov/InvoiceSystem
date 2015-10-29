@@ -51,7 +51,12 @@ jar {
     }
 }
 
-task deployLocallyInFuse(type: Copy, dependsOn: jar) {
+task copyXSLTFiles(type: Copy) {
+    from project.file("src/main/java/com/estafet/invoiceservice/xslt/")
+    into project.file('/u01/app/jboss-fuse-6.1.0.redhat-379/deploy/cfg')
+}
+
+task deployLocallyInFuse(type: Copy, dependsOn: [jar , copyXSLTFiles]) {
     from project.file("build/libs")
     into project.file('/u01/app/jboss-fuse-6.1.0.redhat-379/deploy/')
 }

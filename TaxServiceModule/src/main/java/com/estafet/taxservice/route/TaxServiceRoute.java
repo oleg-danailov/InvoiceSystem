@@ -2,6 +2,7 @@ package com.estafet.taxservice.route;
 
 import com.estafet.invoicesystem.jpa.dao.api.TaxDAO;
 import com.estafet.invoicesystem.jpa.model.Tax;
+import com.estafet.invoicesystem.jpa.model.TaxRequest;
 import com.estafet.invoicesystem.jpa.model.TaxResponse;
 import com.estafet.taxservice.exception.InvalidTaxRequestException;
 import org.apache.camel.Exchange;
@@ -31,35 +32,44 @@ public class TaxServiceRoute  extends RouteBuilder {
                 .id("tax_service_route")
                 .streamCaching()
                 .log("Tax Request Inner: ${body}")
-                .process(new Processor() {
-                             @Override
-                             public void process(Exchange exchange) throws Exception {
-                                 Tax tax = exchange.getIn().getBody(Tax.class);
-                                 //TODO if null ->
-                                 if (tax == null) {
-                                     throw new InvalidTaxRequestException("No tax found in the request.");
+                .choice()
+                    .when(header("SOAPAction").isEqualTo("http://taxservice.estafet.com/taxRequest"))
+                        .to("direct:getTaxRequest")
+                    .when(header("SOAPAction").isEqualTo("http://taxservice.estafet.com/createTax"))
+                        .to("direct:createTaxRequest")
+                .endChoice()
+                .log("Tax Response Inner: ${body}");
+
+            from("direct:getTaxRequest")
+                    .streamCaching()
+                    .process(new Processor() {
+                                 @Override
+                                 public void process(Exchange exchange) throws Exception {
+                                     TaxRequest tax = exchange.getIn().getBody(TaxRequest.class);
+                                     //TODO if null ->
+                                     if (tax == null) {
+                                         throw new InvalidTaxRequestException("No tax found in the request.");
+                                     }
+
+                                     List<Tax> taxes = taxDao.findTaxesByInvoiceType(tax.getInvoiceType());
+                                     if (taxes == null || taxes.size() == 0) {
+                                         throw new InvalidTaxRequestException("No tax for this type: " + tax.getInvoiceType() + " found in DB.");
+                                     }
+                                     Tax temp = taxes.get(0);
+
+                                     TaxResponse taxResponse = new TaxResponse();
+
+                                     taxResponse.setTaxId(temp.getTaxId());
+                                     taxResponse.setInvoiceType(temp.getInvoiceType());
+                                     taxResponse.setTaxName(temp.getTaxName());
+                                     taxResponse.setTaxPercent(temp.getTaxPercent());
+
+                                     exchange.getOut().setBody(taxResponse);
                                  }
-
-                                 System.out.println("Tax Invoice type:" + tax.getInvoiceType());
-
-                                 List<Tax> taxes = taxDao.findTaxesByInvoiceType(tax.getInvoiceType());
-                                 if (taxes == null || taxes.size() == 0) {
-                                     throw new InvalidTaxRequestException("No tax for this type: "+ tax.getInvoiceType() +" found in DB.");
-                                 }
-                                 Tax temp = taxes.get(0);
-
-                                 TaxResponse taxResponse = new TaxResponse();
-
-                                 taxResponse.setTaxId(temp.getTaxId());
-                                 taxResponse.setInvoiceType(temp.getInvoiceType());
-                                 taxResponse.setTaxName(temp.getTaxName());
-                                 taxResponse.setTaxPercent(temp.getTaxPercent());
-
-                                 exchange.getOut().setBody(taxResponse);
                              }
-                         }
-                ).log("Tax Response Inner: ${body}")
-                .marshal(jxb)
-                .to("mock:result");
+                    ).marshal(jxb);
+
+            from("direct:createTaxRequest")
+                    .processRef("additionalTaxProcessor").marshal(jxb);
         }
     }

@@ -11,6 +11,7 @@ import java.math.BigDecimal;
  * Created by estafet on 20/10/15.
  */
 public class CalculateInvoiceTaxStrategy implements AggregationStrategy {
+
     @Override
     public Exchange aggregate(Exchange original, Exchange resource) {
 

@@ -106,7 +106,7 @@
 
     <wsdl:service name="InvoiceServiceEndpointService">
         <wsdl:port binding="tns:InvoiceServiceEndpointServiceSoapBinding" name="InvoiceServiceEndpoint">
-            <soap:address location="http://localhost:10354/invoice_service"/>
+            <soap:address location="http://localhost:10355/invoice_service"/>
         </wsdl:port>
     </wsdl:service>
 

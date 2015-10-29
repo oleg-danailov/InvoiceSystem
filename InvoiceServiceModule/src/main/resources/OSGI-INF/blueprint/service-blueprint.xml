@@ -12,21 +12,9 @@
              ">
     <!-- " -->
     <camelcxf:cxfEndpoint id="invoiceRequest"
-                          address="http://localhost:10354/invoice_service"
-                          endpointName="s:InvoiceServiceEndpoint"
-                          serviceName="s:InvoiceServiceEndpointService"
-                          serviceClass="com.estafet.invoiceservice.api.webservice.InvoiceService"
-                          wsdlURL="META-INF/wsdl/invoice_service.wsdl"
-                          xmlns:s="http://invoiceservice.estafet.com/">
-        <camelcxf:properties>
-            <entry key="dataFormat" value="PAYLOAD"/>
-        </camelcxf:properties>
-    </camelcxf:cxfEndpoint>
-    <camelcxf:cxfEndpoint id="getInvoiceRequest"
                           address="http://localhost:10355/invoice_service"
                           endpointName="s:InvoiceServiceEndpoint"
                           serviceName="s:InvoiceServiceEndpointService"
-                          serviceClass="com.estafet.invoiceservice.api.webservice.GetInvoiceService"
                           wsdlURL="META-INF/wsdl/invoice_service.wsdl"
                           xmlns:s="http://invoiceservice.estafet.com/">
         <camelcxf:properties>
@@ -42,10 +30,10 @@
                           xmlns:s="http://taxservice.estafet.com/">
         <camelcxf:properties>
             <entry key="dataFormat" value="PAYLOAD"/>
+            <entry key="defaultOperationName" value="taxRequest"/>
+            <entry key="defaultOperationNamespace" value="http://taxservice.estafet.com/"/>
         </camelcxf:properties>
     </camelcxf:cxfEndpoint>
-
-
 
     <camelcxf:cxfEndpoint id="getConversionAmount"
                           address="http://currencyconverter.kowabunga.net/converter.asmx"
@@ -59,37 +47,19 @@
         </camelcxf:properties>
     </camelcxf:cxfEndpoint>
 
-    <!--<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
-        <property name="brokerURL" value="tcp://localhost:61616" />
-        <property name="userName" value="admin" />
-        <property name="password" value="admin" />
-    </bean>-->
-
     <bean id="invoiceServiceRoute" class="com.estafet.invoiceservice.route.InvoiceServiceRoute"/>
-    <bean id="getInvoiceServiceRoute" class="com.estafet.invoiceservice.route.GetInvoiceServiceRoute" />
+
     <camelContext id="camelInvoiceService" xmlns="http://camel.apache.org/schema/blueprint">
         <routeBuilder ref="invoiceServiceRoute"/>
-        <routeBuilder ref="getInvoiceServiceRoute"/>
     </camelContext>
-    <!--<route id="file-to-jms-route">
-            <from uri="file:/u01/xml/?noop=true" />
-            <log message="Receiving order ${file:name}" />
-            <to uri="activemq:incomingOrders" />
-            <to uri="mock:result"/>
-        </route>-->
+
     <reference id="invoiceDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.InvoiceDAO" />
 
     <bean id="invoiceProcessor" class="com.estafet.invoiceservice.processor.InvoiceProcessor">
         <property name="invoiceDao" ref="invoiceDAOService"></property>
-        <property name="taxOSGIService" ref="taxOSGIService"></property>
     </bean>
 
     <bean id="getInvoiceProcessor" class="com.estafet.invoiceservice.processor.GetInvoiceProcessor">
         <property name="invoiceDao" ref="invoiceDAOService"></property>
     </bean>
-
-    <reference id="taxOSGIService" interface="com.estafet.taxservice.api.TaxOSGIService" />
-
-
-
 </blueprint>

@@ -10,23 +10,12 @@
              http://cxf.apache.org/blueprint/jaxws http://cxf.apache.org/schemas/blueprint/jaxws.xsd
              http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd
              ">
-<!-- wsdlURL="META-INF/wsdl/tax_service.wsdl" -->
+
     <camelcxf:cxfEndpoint id="taxRequest"
                           address="http://localhost:10354/tax_service"
                           endpointName="s:TaxServiceEndpoint"
                           serviceName="s:TaxServiceEndpointService"
-                          serviceClass="com.estafet.taxservice.api.TaxService"
-                          xmlns:s="http://taxservice.estafet.com/">
-        <camelcxf:properties>
-            <entry key="dataFormat" value="PAYLOAD"/>
-        </camelcxf:properties>
-    </camelcxf:cxfEndpoint>
-
-    <camelcxf:cxfEndpoint id="createTax"
-                          address="http://localhost:10356/tax_service"
-                          endpointName="s:TaxServiceEndpoint"
-                          serviceName="s:TaxServiceEndpointService"
-                          serviceClass="com.estafet.taxservice.api.AdditionalTaxService"
+                          wsdlURL="META-INF/wsdl/tax_service.wsdl"
                           xmlns:s="http://taxservice.estafet.com/">
         <camelcxf:properties>
             <entry key="dataFormat" value="PAYLOAD"/>
@@ -40,14 +29,12 @@
     <bean id="taxServiceRoute" class="com.estafet.taxservice.route.TaxServiceRoute">
         <property name="taxDao" ref="taxDAOService"/>
     </bean>
-    <bean id="additionalTaxServiceRoute" class="com.estafet.taxservice.route.AdditionalTaxServiceRoute"/>
     <bean id="additionalTaxProcessor" class="com.estafet.taxservice.processor.AdditionalTaxProcessor">
         <property name="taxDao" ref="taxDAOService"/>
     </bean>
 
     <camelContext id="taxServiceCamelRoute" xmlns="http://camel.apache.org/schema/blueprint">
         <routeBuilder ref="taxServiceRoute"/>
-        <routeBuilder ref="additionalTaxServiceRoute"/>
     </camelContext>
 
     <reference id="taxDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.TaxDAO" />
