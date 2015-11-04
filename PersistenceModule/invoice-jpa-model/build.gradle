@@ -1,6 +1,7 @@
 plugins {
     id 'osgi'
     id 'application'
+    id 'maven'
 }
 
 repositories {
@@ -8,7 +9,8 @@ repositories {
     mavenLocal()
 }
 
-
+group = 'myGroup'
+// artifactId is taken by default, from folder name
 version = '1.0'
 
 dependencies {
