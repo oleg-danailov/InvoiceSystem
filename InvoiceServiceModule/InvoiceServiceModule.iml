@@ -114,6 +114,8 @@
     <orderEntry type="module" module-name="invoice-jpa-dao" />
     <orderEntry type="module" module-name="invoice-jpa-model" />
     <orderEntry type="module" module-name="invoice-jpa-dao" />
+    <orderEntry type="module" module-name="invoice-jpa-model" />
+    <orderEntry type="module" module-name="invoice-jpa-dao" />
     <orderEntry type="library" name="Maven: myGroup:invoice-jpa-model:1.0" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Maven: org.apache.openjpa:openjpa:2.3.0" level="project" />

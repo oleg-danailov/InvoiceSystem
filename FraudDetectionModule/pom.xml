@@ -5,8 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.estafet.invoicesystem</groupId>
-    <artifactId>InvoiceServiceModule</artifactId>
+    <artifactId>FraudDetectionModule</artifactId>
     <version>1.0</version>
+
+
 
     <dependencies>
         <dependency>
@@ -22,26 +24,8 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-broker</artifactId>
-            <version>5.9.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-cxf</artifactId>
-            <version>2.12.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-test</artifactId>
-            <version>2.12.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-jackson</artifactId>
             <version>2.12.0</version>
             <scope>compile</scope>
         </dependency>
@@ -55,6 +39,18 @@
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-kahadb-store</artifactId>
             <version>5.9.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-broker</artifactId>
+            <version>5.9.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-cxf</artifactId>
+            <version>2.12.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -76,31 +72,30 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>myGroup</groupId>
-            <artifactId>TaxServiceModule</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.2-1004-jdbc4</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-blueprint</artifactId>
+            <version>2.12.0</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
             <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -111,7 +106,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-Name>Invoice Module</Bundle-Name>
+                        <Bundle-Name>Fraud Detection Module</Bundle-Name>
 
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Import-Package>*</Import-Package>
@@ -140,12 +135,6 @@
 
                                     <fileset dir="./target">
                                         <include name="*.jar"/>
-                                    </fileset>
-                                </copy>
-                                <copy overwrite="true" todir="/u01/app/jboss-fuse-6.1.0.redhat-379/deploy/cfg">
-
-                                    <fileset dir="./src/main/java/com/estafet/invoiceservice/xslt/">
-                                        <include name="*.xsl"/>
                                     </fileset>
                                 </copy>
                             </tasks>

@@ -11,8 +11,8 @@
     <modules>
         <module>PersistenceModule</module>
         <module>TaxServiceModule</module>
-        <!--<module>InvoiceServiceModule</module>
-        <module>FraudDetectionModule</module>-->
+        <module>InvoiceServiceModule</module>
+        <module>FraudDetectionModule</module>
     </modules>
     
 </project>
