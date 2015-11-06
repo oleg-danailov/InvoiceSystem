@@ -3,6 +3,7 @@ package com.estafet.invoicesystem.jpa.dao.impl;
 import com.estafet.invoicesystem.jpa.dao.api.InvoiceDAO;
 import com.estafet.invoicesystem.jpa.model.Invoice;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -47,9 +48,8 @@ public class InvoiceDAOImpl implements InvoiceDAO {
                 .createNamedQuery("invoice.findByNumberAndProvider");
         query.setParameter("invoiceNumber",number);
         query.setParameter("providerCompany", provider) ;
-        Invoice invoice = (Invoice) query.getSingleResult();
 
-        return invoice;
+        return (Invoice) query.getSingleResult();
     }
 
     public Invoice getInvoice(Integer id){

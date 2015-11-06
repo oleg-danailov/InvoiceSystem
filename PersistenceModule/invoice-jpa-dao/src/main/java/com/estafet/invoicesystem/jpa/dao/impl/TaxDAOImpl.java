@@ -34,7 +34,7 @@ public class TaxDAOImpl implements TaxDAO {
     public List<Tax> getAll(){
         Query q = this.entityManager.createQuery(findTax);
 
-        List list = q.getResultList();
+        List<Tax> list = q.getResultList();
 
         return list;
     }
@@ -49,9 +49,8 @@ public class TaxDAOImpl implements TaxDAO {
     public Tax findTaxByName(String name){
         Query q = this.entityManager.createQuery(findTaxByName);
         q.setParameter("tax_name", name);
-        Tax result = (Tax)q.getSingleResult();
 
-        return result;
+        return (Tax)q.getSingleResult();
     }
 
     public Tax getTax(Integer id){
