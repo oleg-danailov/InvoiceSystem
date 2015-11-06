@@ -10,8 +10,8 @@
     <version>1.0</version>
     <modules>
         <module>PersistenceModule</module>
-        <!--<module>TaxServiceModule</module>
-        <module>InvoiceServiceModule</module>
+        <module>TaxServiceModule</module>
+        <!--<module>InvoiceServiceModule</module>
         <module>FraudDetectionModule</module>-->
     </modules>
     

@@ -40,8 +40,7 @@
                           serviceName="s:Converter"
                           endpointName="s:ConverterSoap"
                           wsdlURL="http://currencyconverter.kowabunga.net/converter.asmx?wsdl"
-                          xmlns:s="http://tempuri.org/"
-            >
+                          xmlns:s="http://tempuri.org/">
         <camelcxf:properties>
             <entry key="dataFormat" value="PAYLOAD"/>
         </camelcxf:properties>

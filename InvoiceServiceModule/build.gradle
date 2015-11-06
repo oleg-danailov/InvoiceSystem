@@ -2,6 +2,7 @@
 plugins {
     id 'osgi'
     id 'application'
+    id 'maven'
 }
 
 repositories {
@@ -9,6 +10,7 @@ repositories {
     mavenCentral()
 }
 
+group = 'myGroup'
 version = '1.0'
 
 dependencies {
