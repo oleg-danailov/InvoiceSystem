@@ -27,11 +27,11 @@ public class FraudDetectionRouteBuilder extends RouteBuilder {
                 .streamCaching()
                 .unmarshal(jxb)
                 .log(LoggingLevel.INFO, "Received message with body: ${body}")
-                .enrich("direct:call_tax", invoiceValidityCheckerStrategy)
-                .beanRef("fraudDetectionProcessor", "updateInvoiceStatus");
+                .enrich("direct:call_tax", invoiceValidityCheckerStrategy).id("enricher")
+                .beanRef("fraudDetectionProcessor", "updateInvoiceStatus").id("updater");
 
         //route for retrieval taxResponse by type
-        from("direct:call_tax").streamCaching().process(new TaxRequestConstructorProcessor())
+        from("direct:call_tax").routeId("call_tax_route").streamCaching().process(new TaxRequestConstructorProcessor())
                 .log("Before call to Tax Request: ${body} ").marshal(jxb).to("cxf:bean:taxRequest").end();
 
 
