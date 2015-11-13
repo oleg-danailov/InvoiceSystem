@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spring:beans xmlns="http://www.citrusframework.org/schema/testcase" 
+              xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+                 http://www.citrusframework.org/schema/testcase http://www.citrusframework.org/schema/testcase/citrus-testcase.xsd">
+    
+    <testcase name="TaxServicetaxRequest_Test">
+        <meta-info>
+            <author>Miroslava Stancheva</author>
+            <creationdate>2015-11-13</creationdate>
+            <status>DRAFT</status>
+            <last-updated-by>Miroslava Stancheva</last-updated-by>
+            <last-updated-on>2015-11-13T11:09:51</last-updated-on>
+        </meta-info>
+        
+        <description>TODO: Description</description>
+        
+        <actions>
+            <echo>
+                <message>TODO: Code the test TaxServicetaxRequest_Test</message>
+            </echo>
+
+			<send endpoint="createTaxSoapClient">
+				<message>
+					<data>
+					 <![CDATA[
+<tax:taxRequest xmlns:tax="http://taxservice.estafet.com/">
+  <invoiceType>Food</invoiceType>
+</tax:taxRequest>
+					 ]]>
+		             </data>
+				</message>
+                <header>
+                    <element name="citrus_soap_action" value="http://taxservice.estafet.com/taxRequest"/>
+                </header>
+			</send>
+			
+			<receive endpoint="createTaxSoapClient">
+				<message>
+					<data>
+					 <![CDATA[
+<tax:taxRequestResponse xmlns:tax="http://taxservice.estafet.com/">
+  <invoiceType>Food</invoiceType>
+  <taxId>2</taxId>
+  <taxName>TestTax</taxName>
+  <taxPercent>9</taxPercent>
+</tax:taxRequestResponse>
+					 ]]>
+		             </data>
+				</message>
+			</receive>
+        </actions>
+    </testcase>
+</spring:beans>
