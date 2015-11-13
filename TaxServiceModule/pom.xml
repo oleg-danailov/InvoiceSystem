@@ -112,16 +112,16 @@
     </dependencies>
     <repositories>
         <repository>
-        <id>consol-labs-release</id>
-        <url>http://labs.consol.de/maven/repository/</url>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-    </repository>
-       <repository>
+            <id>consol-labs-release</id>
+            <url>http://labs.consol.de/maven/repository/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
             <id>consol-labs-snapshots</id>
             <url>http://labs.consol.de/maven/snapshots-repository/</url>
             <snapshots>
@@ -233,5 +233,5 @@
             </plugin>
         </plugins>
     </build>
-    
+
 </project>

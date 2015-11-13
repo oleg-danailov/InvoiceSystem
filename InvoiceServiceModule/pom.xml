@@ -76,12 +76,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>myGroup</groupId>
-            <artifactId>TaxServiceModule</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.2-1004-jdbc4</version>
