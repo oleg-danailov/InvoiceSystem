@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spring:beans xmlns="http://www.citrusframework.org/schema/testcase" 
+              xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+                 http://www.citrusframework.org/schema/testcase http://www.citrusframework.org/schema/testcase/citrus-testcase.xsd">
+
+    <testcase name="InvoiceServiceInvoiceRequest_IntegrationTest">
+        <meta-info>
+            <author>Miroslava Stancheva</author>
+            <creationdate>2015-11-16</creationdate>
+            <status>DRAFT</status>
+            <last-updated-by>Miroslava Stancheva</last-updated-by>
+            <last-updated-on>2015-11-16T13:41:53</last-updated-on>
+        </meta-info>
+        <description>TODO: Description</description>
+
+        <variables>
+            <variable name="invoiceTypeVariable" value="Drinks"/>
+            <variable name="defaultStringValue" value="string"/>
+            <variable name="defaultNumberValue" value="0"/>
+        </variables>
+
+        
+        <actions>
+            <echo>
+                <message>TODO: Code the test InvoiceServiceInvoiceRequest_IntegrationTest</message>
+            </echo>
+
+			<send endpoint="invoiceServiceSoapClient">
+				<message>
+					<data>
+					 <![CDATA[
+                        <inv:invoiceRequest xmlns:inv="http://invoiceservice.estafet.com/">
+                          <invoiceNumber>${defaultStringValue}</invoiceNumber>
+                          <invoiceType>${invoiceTypeVariable}</invoiceType>
+                          <currency>${defaultStringValue}</currency>
+                          <invoiceAmount>${defaultStringValue}</invoiceAmount>
+                          <providerCompany>${defaultStringValue}</providerCompany>
+                          <receiverCompany>${defaultStringValue}</receiverCompany>
+                        </inv:invoiceRequest>
+					 ]]>
+		             </data>
+				</message>
+                <header>
+                    <element name="citrus_soap_action" value="http://invoiceservice.estafet.com/invoiceRequest"/>
+                </header>
+			</send>
+			
+			<receive endpoint="invoiceServiceSoapClient">
+				<message>
+                    <data>
+                    <![CDATA[
+                    <ns2:invoiceRequestResponse xmlns:ns2="http://invoiceservice.estafet.com/" xmlns:ns3="http://taxservice.estafet.com/">
+                     <invoiceAmount>${defaultNumberValue}</invoiceAmount>
+                     <invoiceId>@ignore@</invoiceId>
+                     <invoiceNumber>${defaultStringValue}</invoiceNumber>
+                     <invoiceStatus>unchecked</invoiceStatus>
+                     <invoiceType>${invoiceTypeVariable}</invoiceType>
+                     <providerCompany>${defaultStringValue}</providerCompany>
+                     <receiverCompany>${defaultStringValue}</receiverCompany>
+                     <taxesAmount>${defaultNumberValue}</taxesAmount>
+                     <totalAmount>${defaultNumberValue}</totalAmount>
+                  </ns2:invoiceRequestResponse>
+                    ]]>
+                </data>
+				</message>
+			</receive>
+        </actions>
+    </testcase>
+</spring:beans>

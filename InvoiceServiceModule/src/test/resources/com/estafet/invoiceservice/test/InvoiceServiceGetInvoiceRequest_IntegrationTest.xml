@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spring:beans xmlns="http://www.citrusframework.org/schema/testcase" 
+              xmlns:jms="http://www.citrusframework.org/schema/jms/testcase"
+              xmlns:ws="http://www.citrusframework.org/schema/ws/testcase"
+              xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+                  http://www.citrusframework.org/schema/jms/testcase http://www.citrusframework.org/schema/jms/testcase/citrus-jms-testcase.xsd
+                  http://www.citrusframework.org/schema/ws/testcase http://www.citrusframework.org/schema/ws/testcase/citrus-ws-testcase.xsd
+                  http://www.citrusframework.org/schema/testcase http://www.citrusframework.org/schema/testcase/citrus-testcase.xsd">
+    
+    <testcase name="InvoiceServiceGetInvoiceRequest_IntegrationTest">
+        <meta-info>
+            <author>Miroslava Stancheva</author>
+            <creationdate>2015-11-16</creationdate>
+            <status>DRAFT</status>
+            <last-updated-by>Miroslava Stancheva</last-updated-by>
+            <last-updated-on>2015-11-16T13:41:53</last-updated-on>
+        </meta-info>
+        
+        <description>TODO: Description</description>
+        
+        <actions>
+            <echo>
+                <message>TODO: Code the test InvoiceServiceGetInvoiceRequest_IntegrationTest</message>
+            </echo>
+
+			<send endpoint="invoiceServiceSoapClient">
+				<message>
+					<data>
+					 <![CDATA[
+<inv:getInvoiceRequest xmlns:inv="http://invoiceservice.estafet.com/">
+  <invoiceId>10</invoiceId>
+</inv:getInvoiceRequest>
+					 ]]>
+		             </data>
+				</message>
+                <header>
+                    <element name="citrus_soap_action" value="http://invoiceservice.estafet.com/getInvoiceRequest"/>
+                </header>
+			</send>
+			
+			<receive endpoint="invoiceServiceSoapClient">
+				<message>
+					<data>
+					 <![CDATA[
+<inv:getInvoiceRequestResponse xmlns:inv="http://invoiceservice.estafet.com/">
+    <invoiceAmount>100.00</invoiceAmount>
+    <invoiceCreationDate>2015-10-12T00:00:00+03:00</invoiceCreationDate>
+    <invoiceId>10</invoiceId>
+    <invoiceNumber>98887766710</invoiceNumber>
+    <invoiceStatus>unchecked</invoiceStatus>
+    <invoiceType>VAT</invoiceType>
+    <providerCompany>Estafet</providerCompany>
+    <receiverCompany>Oracle</receiverCompany>
+    <taxesAmount>18.00</taxesAmount>
+    <totalAmount>118.00</totalAmount>
+</inv:getInvoiceRequestResponse>
+					 ]]>
+		             </data>
+				</message>
+			</receive>
+        </actions>
+    </testcase>
+</spring:beans>

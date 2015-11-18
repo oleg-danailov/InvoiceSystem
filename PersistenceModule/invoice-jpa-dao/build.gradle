@@ -1,9 +1,11 @@
 plugins {
     id 'osgi'
     id 'application'
+    id 'maven'
 }
 
 version = '1.0'
+group = 'myGroup'
 
 repositories {
     mavenLocal();

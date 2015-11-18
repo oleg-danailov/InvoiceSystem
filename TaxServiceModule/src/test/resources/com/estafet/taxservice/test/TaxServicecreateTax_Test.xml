@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spring:beans xmlns="http://www.citrusframework.org/schema/testcase"
+              xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+                  http://www.citrusframework.org/schema/testcase http://www.citrusframework.org/schema/testcase/citrus-testcase.xsd
+                  ">
+
+    <testcase name="TaxServicecreateTax_Test">
+        <meta-info>
+            <author>Miroslava Stancheva</author>
+            <creationdate>2015-11-10</creationdate>
+            <status>DRAFT</status>
+            <last-updated-by>Miroslava Stancheva</last-updated-by>
+            <last-updated-on>2015-11-10T15:02:32</last-updated-on>
+        </meta-info>
+
+        <description>TODO: Description</description>
+
+        <actions>
+            <echo>
+                <message>TODO: Code the test TaxServicecreateTax_Test</message>
+            </echo>
+
+            <send endpoint="createTaxSoapClient">
+                <message>
+                    <data>
+                        <![CDATA[
+<tax:createTaxRequest xmlns:tax="http://taxservice.estafet.com/">
+  <taxName>NewTestTax</taxName>
+  <invoiceType>Food</invoiceType>
+  <taxPercent>12</taxPercent>
+</tax:createTaxRequest>
+					 ]]>
+                    </data>
+                </message>
+                <header>
+                    <element name="citrus_soap_action" value="http://taxservice.estafet.com/createTax"/>
+                </header>
+            </send>
+
+            <receive endpoint="createTaxSoapClient">
+                <message>
+                    <data>
+                        <![CDATA[
+<tax:createTaxResponse xmlns:tax="http://taxservice.estafet.com/">
+  <code>OK</code>
+</tax:createTaxResponse>
+					 ]]>
+                    </data>
+                </message>
+            </receive>
+        </actions>
+    </testcase>
+</spring:beans>
