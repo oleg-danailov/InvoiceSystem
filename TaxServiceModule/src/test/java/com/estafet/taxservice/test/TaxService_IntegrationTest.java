@@ -10,10 +10,16 @@ import org.junit.Test;
  * @author Miroslava Stancheva
  * @since 2015-11-13
  */
-public class TaxServicecreateTax_Test extends AbstractJUnit4CitrusTest {
+public class TaxService_IntegrationTest extends AbstractJUnit4CitrusTest {
     @Test
-    @CitrusXmlTest
-    public void TaxServicecreateTax_Test() {
+    @CitrusXmlTest(name="TaxServicecreateTax_Test")
+    public void testCreateTax() {
+        executeTest();
+    }
+
+    @Test
+    @CitrusXmlTest(name="TaxServicetaxRequest_Test")
+    public void testTaxRequest() {
         executeTest();
     }
 }

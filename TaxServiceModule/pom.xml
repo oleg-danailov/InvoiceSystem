@@ -95,19 +95,11 @@
             <groupId>com.consol.citrus</groupId>
             <artifactId>citrus-core</artifactId>
             <version>2.4</version>
-
-        </dependency>
-        <dependency>
-            <groupId>com.consol.citrus</groupId>
-            <artifactId>citrus-camel</artifactId>
-            <version>2.4</version>
-
         </dependency>
         <dependency>
             <groupId>com.consol.citrus</groupId>
             <artifactId>citrus-ws</artifactId>
             <version>2.4</version>
-
         </dependency>
     </dependencies>
     <repositories>
