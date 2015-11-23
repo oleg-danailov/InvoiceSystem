@@ -20,3 +20,11 @@ CREATE TABLE tax
   tax_percent numeric,
   CONSTRAINT tax_pk PRIMARY KEY (tax_id)
 )
+
+CREATE TABLE client
+(
+  client_id serial NOT NULL,
+  name character varying(100),
+  number character varying(100),
+  CONSTRAINT client_pk PRIMARY KEY (client_id)
+)

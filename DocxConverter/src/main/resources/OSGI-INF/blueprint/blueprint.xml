@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:camel="http://camel.apache.org/schema/blueprint"
+           xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+
+    <camel:camelContext >
+        <camel:routeBuilder ref="docxConverterRoute"/>
+    </camel:camelContext>
+
+    <bean id="docxConverterRoute" class="com.estafet.invoicesystem.route.DocxConverterRoute"></bean>
+
+    <reference id="clientDao" interface="com.estafet.invoicesystem.jpa.dao.api.ClientDAO"/>
+
+    <bean id="persistenceProcessor" class="com.estafet.invoicesystem.processor.PersistenceProcessor">
+        <property name="dao" ref="clientDao"/>
+    </bean>
+
+    <bean id="docx2PojoProcessor" class="com.estafet.invoicesystem.processor.Docx2PojoProcessor"></bean>
+
+</blueprint>

@@ -10,6 +10,7 @@
 
         <class>com.estafet.invoicesystem.jpa.model.Invoice</class>
         <class>com.estafet.invoicesystem.jpa.model.Tax</class>
+        <class>com.estafet.invoicesystem.jpa.model.Client</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 

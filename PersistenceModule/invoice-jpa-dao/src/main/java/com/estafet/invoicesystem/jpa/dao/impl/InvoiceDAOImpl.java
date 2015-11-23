@@ -25,12 +25,12 @@ public class InvoiceDAOImpl implements InvoiceDAO {
 
 
     public void setEntityManager(EntityManager entityManager) {
-    this.entityManager = entityManager;
-}
+        this.entityManager = entityManager;
+    }
 
     public EntityManager getEntityManager() {
-    return entityManager;
-}
+        return entityManager;
+    }
 
     public List<Invoice> getAll(){
         Query q = this.entityManager.createQuery(findInvoice);

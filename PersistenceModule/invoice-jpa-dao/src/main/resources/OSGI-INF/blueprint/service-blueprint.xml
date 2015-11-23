@@ -25,4 +25,11 @@
 
     <service id="taxDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.TaxDAO" ref="taxDAO"/>
 
+    <bean id="clientDAO" class="com.estafet.invoicesystem.jpa.dao.impl.ClientDAOImpl">
+        <jpa:context unitname="invoice-persistence-unit" property="entityManager"/>
+        <tx:transaction method="*" value="Required"/>
+    </bean>
+
+    <service id="clientDaoService" interface="com.estafet.invoicesystem.jpa.dao.api.ClientDAO" ref="clientDAO"/>
+
 </blueprint>
