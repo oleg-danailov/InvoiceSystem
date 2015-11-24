@@ -75,10 +75,6 @@
     <orderEntry type="library" exported="" name="Gradle: org.apache.camel:camel-spring:2.12.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.postgresql:postgresql:9.2-1004-jdbc4" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.camel:camel-jaxb:2.12.0" level="project" />
-    <orderEntry type="module" module-name="invoice-jpa-model" exported="" />
-    <orderEntry type="module" module-name="invoice-jpa-dao" exported="" />
-    <orderEntry type="module" module-name="invoice-jpa-model" />
-    <orderEntry type="module" module-name="invoice-jpa-dao" />
     <orderEntry type="module" module-name="invoice-jpa-model" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.6.1" level="project" />

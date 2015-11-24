@@ -101,6 +101,7 @@
             <artifactId>citrus-ws</artifactId>
             <version>2.4</version>
         </dependency>
+
     </dependencies>
     <repositories>
         <repository>
@@ -125,6 +126,12 @@
             </releases>
         </repository>
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>eviwarePluginRepository</id>
+            <url>http://www.eviware.com/repository/maven2/</url>
+        </pluginRepository>
+    </pluginRepositories>
     <build>
         <testSourceDirectory>src/test/java</testSourceDirectory>
         <testResources>
@@ -223,6 +230,39 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>eviware</groupId>
+                <artifactId>maven-soapui-plugin</artifactId>
+                <version>4.0.1</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>9.2-1004-jdbc4</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <!--<projectFile>test/src/test/soapUI/CarMaintenance-soapui-project.xml</projectFile> TODO-->
+                    <projectFile>/home/estafet/SoapUI/Tax-Module-soapui-project.xml</projectFile>
+                    <outputFolder>./test/target/soapUI</outputFolder>
+                    <junitReport>true</junitReport>
+                    <printReport>true</printReport>
+                    <projectProperties>
+                        <value>getTax_invoiceType=DDS</value>
+                        <value>getTax_taxPercent=0.22</value>
+                    </projectProperties>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
         </plugins>
     </build>
 
