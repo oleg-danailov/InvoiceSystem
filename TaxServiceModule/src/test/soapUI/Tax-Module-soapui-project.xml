@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="602255ac-ab4b-4f5d-8366-44a7b6194812" activeEnvironment="Default" name="TaxModule" resourceRoot="" soapui-version="5.2.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Environment" value="Default"/>
+  <con:entry key="Global Properties" value=""/>
+  <con:entry key="TestSuite" value="TaxServiceSuite"/>
+  <con:entry key="Password" value=""/>
+  <con:entry key="TestRunner Path" value=""/>
+  <con:entry key="Tool Args" value=""/>
+  <con:entry key="Ignore Errors" value="false"/>
+  <con:entry key="Host:Port" value=""/>
+  <con:entry key="user-settings.xml Password" value=""/>
+  <con:entry key="WSS Password Type" value=""/>
+  <con:entry key="Save Project" value="false"/>
+  <con:entry key="Enable UI" value="false"/>
+  <con:entry key="System Properties" value=""/>
+  <con:entry key="Domain" value=""/>
+  <con:entry key="Coverage Report" value="false"/>
+  <con:entry key="Export JUnit Results" value="false"/>
+  <con:entry key="Open Report" value="false"/>
+  <con:entry key="Project Properties" value=""/>
+  <con:entry key="Export All" value="false"/>
+  <con:entry key="Project Password" value=""/>
+  <con:entry key="Report Format(s)" value=""/>
+  <con:entry key="TestCase" value="TaxServiceTestCase"/>
+  <con:entry key="Print Report" value="false"/>
+  <con:entry key="Username" value=""/>
+  <con:entry key="Root Folder" value=""/>
+  <con:entry key="Save After" value="false"/>
+  <con:entry key="Add Settings" value="false"/>
+  <con:entry key="Endpoint" value=""/>
+  <con:entry key="Select Report Type" value=""/>
+</xml-fragment>]]></con:setting></con:settings><con:interface xsi:type="con:WsdlInterface" id="18494d79-4e85-4cd3-86f6-0e6f72c8f0d5" wsaVersion="NONE" name="TaxServiceEndpointServiceSoapBinding" type="wsdl" bindingName="{http://taxservice.estafet.com/}TaxServiceEndpointServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="file:/home/estafet/prj/InvoiceSystem/TaxServiceModule/src/main/resources/META-INF/wsdl/tax_service.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/home/estafet/prj/InvoiceSystem/TaxServiceModule/src/main/resources/META-INF/wsdl/tax_service.wsdl"><con:part><con:url>file:/home/estafet/prj/InvoiceSystem/TaxServiceModule/src/main/resources/META-INF/wsdl/tax_service.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="TaxServiceEndpointService" targetNamespace="http://taxservice.estafet.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://taxservice.estafet.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://taxservice.estafet.com/">
+      <xsd:element name="taxRequest" type="tns:taxRequest"/>
+      <xsd:complexType name="taxRequest">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="invoiceType" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="taxRequestResponse" type="tns:taxRequestResponse"/>
+      <xsd:complexType name="taxRequestResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="percent" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="createTaxRequest" type="tns:createTaxRequest"/>
+      <xsd:complexType name="createTaxRequest">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="taxName" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="invoiceType" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="taxPercent" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="createTaxResponse" type="tns:createTaxResponse"/>
+      <xsd:complexType name="createTaxResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" name="code" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="taxRequestResponse">
+    <wsdl:part element="tns:taxRequestResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="taxRequest">
+    <wsdl:part element="tns:taxRequest" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createTaxRequest">
+    <wsdl:part element="tns:createTaxRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="createTaxResponse">
+    <wsdl:part element="tns:createTaxResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="TaxService">
+    <wsdl:operation name="taxRequest">
+      <wsdl:input message="tns:taxRequest" name="taxRequest"></wsdl:input>
+      <wsdl:output message="tns:taxRequestResponse" name="taxRequestResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createTax">
+      <wsdl:input message="tns:createTaxRequest" name="createTaxRequest"/>
+      <wsdl:output message="tns:createTaxResponse" name="createTaxResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TaxServiceEndpointServiceSoapBinding" type="tns:TaxService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="taxRequest">
+      <soap:operation soapAction="http://taxservice.estafet.com/taxRequest" style="document"/>
+      <wsdl:input name="taxRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="taxRequestResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createTax">
+      <soap:operation soapAction="http://taxservice.estafet.com/createTax" style="document"/>
+      <wsdl:input name="createTaxRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createTaxResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TaxServiceEndpointService">
+    <wsdl:port binding="tns:TaxServiceEndpointServiceSoapBinding" name="TaxServiceEndpoint">
+      <soap:address location="http://localhost:10354/tax_service"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:10354/tax_service</con:endpoint></con:endpoints><con:operation id="4f9e140f-1d31-4404-96d9-5542ff0fd036" isOneWay="false" action="http://taxservice.estafet.com/createTax" name="createTax" bindingOperationName="createTax" type="Request-Response" outputName="createTaxResponse" inputName="createTaxRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="bfb83e76-ac8d-4e51-804d-168563ca40bd" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10354/tax_service</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tax="http://taxservice.estafet.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tax:createTaxRequest>
+         <taxName>DDS</taxName>
+         <invoiceType>DDS</invoiceType>
+         <taxPercent>0.22</taxPercent>
+      </tax:createTaxRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://taxservice.estafet.com/createTax"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="0d2e1c9f-5b59-4420-9df1-0e88e4ad82c4" isOneWay="false" action="http://taxservice.estafet.com/taxRequest" name="taxRequest" bindingOperationName="taxRequest" type="Request-Response" outputName="taxRequestResponse" inputName="taxRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5dbb7802-d7d3-4c34-8175-fba652b63014" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10354/tax_service</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tax="http://taxservice.estafet.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tax:taxRequest>
+         <invoiceType>DDS</invoiceType>
+      </tax:taxRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://taxservice.estafet.com/taxRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="ac047324-e0c3-41d1-9161-635dc1b9b8c9" name="TaxServiceSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="fd88bbb8-6585-4a9c-8a38-4624eae83b29" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TaxServiceTestCase" searchProperties="true"><con:settings/><con:testStep type="jdbc" name="Init DB" id="f7795cae-5af6-4b3c-871e-8f7a3988dd17"><con:settings/><con:config xsi:type="con:JdbcRequestTestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:driver>org.postgresql.Driver</con:driver><con:connectionString>jdbc:postgresql://localhost:5432/invoice_system?user=postgres&amp;password=welcome1</con:connectionString><con:query>INSERT INTO tax (tax_name, invoice_type, tax_percent)
+    VALUES ('TestTax','TestType', 0.2);</con:query><con:assertion type="JDBC Status" id="0d58c4f7-aa9d-419e-b696-f838bf16ef9a" name="JDBC Status"/><con:properties/></con:config></con:testStep><con:testStep type="request" name="GetTax" id="f266174e-372e-42d7-ae57-2f65670ebae1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>TaxServiceEndpointServiceSoapBinding</con:interface><con:operation>taxRequest</con:operation><con:request name="GetTax" id="8cdfacac-d179-4fb1-9e1e-64a2da50de2e"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10354/tax_service</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tax="http://taxservice.estafet.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tax:taxRequest>
+         <invoiceType>${#Project#getTax_invoiceType}</invoiceType>
+      </tax:taxRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="7253f650-7009-4337-9505-157faf828ef9"/><con:assertion type="Simple Contains" id="6058f36b-8938-437f-b9ae-3a6f44d4ae3c" name="Contains"><con:configuration><token>&lt;taxPercent>${#Project#getTax_taxPercent}&lt;/taxPercent></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="jdbc" name="CleanAfterGet" id="c41e5a0d-6f0d-407a-8098-a063e682a70b"><con:settings/><con:config xsi:type="con:JdbcRequestTestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:driver>org.postgresql.Driver</con:driver><con:connectionString>jdbc:postgresql://localhost:5432/invoice_system?user=postgres&amp;password=welcome1</con:connectionString><con:query>DELETE FROM tax
+ WHERE tax_id IN (SELECT tax_id from tax WHERE tax_name = 'TestTax' AND invoice_type = 'TestType');</con:query><con:assertion type="JDBC Status" id="8ca5f7c2-05bc-4d1b-bf11-99536659975a" name="JDBC Status"/><con:properties/></con:config></con:testStep><con:testStep type="request" name="CreateTax" id="2f336bc0-aae5-4789-97df-738c17c93b68"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>TaxServiceEndpointServiceSoapBinding</con:interface><con:operation>createTax</con:operation><con:request name="CreateTax" id="18bda989-99f7-4ef4-a157-902223dd71f7"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10354/tax_service</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tax="http://taxservice.estafet.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tax:createTaxRequest>
+         <taxName>TestTax</taxName>
+         <invoiceType>testType</invoiceType>
+         <taxPercent>0.22</taxPercent>
+      </tax:createTaxRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="89b70e5d-e8cd-4d2c-975c-0f1e789a7251"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="jdbc" name="CheckForCreatedTax" id="92041b26-b6e9-4a0f-8571-f2d68ccb643f"><con:settings/><con:config xsi:type="con:JdbcRequestTestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:driver>org.postgresql.Driver</con:driver><con:connectionString>jdbc:postgresql://localhost:5432/invoice_system?user=postgres&amp;password=welcome1</con:connectionString><con:query>SELECT * from tax WHERE tax_name = 'TestTax' AND invoice_type = 'testType'</con:query><con:assertion type="Simple Contains" id="b10926b5-3c81-4b8c-88b4-9c35159a18ae" name="Contains TAX_NAME"><con:configuration><token>&lt;TAX_NAME>TestTax&lt;/TAX_NAME></token><ignoreCase>true</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="3538037c-18c4-4baf-839c-3d73dde1ba67" name="Contains INVOICE_TYPE"><con:configuration><token>&lt;INVOICE_TYPE>testType&lt;/INVOICE_TYPE></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="Simple Contains" id="1d9347ef-4035-480b-a1fd-8aeba3964e29" name="Contains TAX_PERCENT"><con:configuration><token>&lt;TAX_PERCENT>0.22&lt;/TAX_PERCENT></token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="JDBC Status" id="c0ef9fc5-aaeb-4753-bcd0-749d0f7c549d" name="JDBC Status"/><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="CleanAfterCreate" id="21adacff-8422-4acb-be33-4e96581ce659"><con:settings/><con:config xsi:type="con:JdbcRequestTestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:driver>org.postgresql.Driver</con:driver><con:connectionString>jdbc:postgresql://localhost:5432/invoice_system?user=postgres&amp;password=welcome1</con:connectionString><con:query>DELETE FROM tax
+ WHERE tax_id IN (SELECT tax_id from tax WHERE tax_name = 'TestTax' AND invoice_type = 'testType');</con:query><con:assertion type="JDBC Status" id="30981e25-531a-47d9-b1b1-7cc9ed6b1ecb" name="JDBC Status"/><con:properties/></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties><con:property><con:name>getTax_invoiceType</con:name><con:value>DDS</con:value></con:property><con:property><con:name>getTax_taxPercent</con:name><con:value>0.22</con:value></con:property></con:properties><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>
