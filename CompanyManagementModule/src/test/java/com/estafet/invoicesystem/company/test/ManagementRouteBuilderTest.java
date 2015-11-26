@@ -38,7 +38,7 @@ public class ManagementRouteBuilderTest extends CamelBlueprintTestSupport{
     }
 
     @Test
-    public void testAddCompanyRoute() throws Exception{
+    public void testAddCompanyRoute() throws Exception {
         MockEndpoint endpoint = getMockEndpoint("mock:result_companyRequest");
         endpoint.expectedMessageCount(1);
 

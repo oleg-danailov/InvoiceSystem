@@ -26,14 +26,14 @@ public class ManagementRouteBuilder extends RouteBuilder {
         from("direct:add_company")
                 .log("before persist")
                 .streamCaching()
-                .beanRef("companyProcessor", "persistCompany")
+                .beanRef("companyProcessor", "persistCompany").id("perssistor")
                 .marshal(jxb)
         .to("mock:result_add");
 
         from("direct:remove_company")
                 .log("In Remove Company")
                 .streamCaching()
-                .beanRef("companyProcessor","removeCompany")
+                .beanRef("companyProcessor","removeCompany").id("remover")
                 .marshal(jxb)
         .to("mock:result_remove");
     }
