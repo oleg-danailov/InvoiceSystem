@@ -34,6 +34,7 @@ public class ManagementRouteBuilder extends RouteBuilder {
                 .log("In Remove Company")
                 .streamCaching()
                 .beanRef("companyProcessor","removeCompany")
-                .marshal(jxb);
+                .marshal(jxb)
+        .to("mock:result_remove");
     }
 }

@@ -40,12 +40,14 @@ public class ManagementRouteBuilderTest extends CamelBlueprintTestSupport{
     @Test
     public void testAddCompanyRoute() throws Exception{
         MockEndpoint endpoint = getMockEndpoint("mock:result_companyRequest");
+        endpoint.expectedMessageCount(1);
 
         RouteDefinition route = context.getRouteDefinition("company_management_route");
         route.adviceWith(context, new AdviceWithRouteBuilder() {
             @Override
             public void configure() throws Exception {
                 replaceFromWith("direct:start");
+
                 interceptSendToEndpoint("mock:result_add")
                         .skipSendToOriginalEndpoint()
                         .to("mock:result_companyRequest");
@@ -60,9 +62,40 @@ public class ManagementRouteBuilderTest extends CamelBlueprintTestSupport{
         "      </com:company>";
         Map<String, String> mapHeaders=new HashMap();
         mapHeaders.put("SOAPAction","http://companyservice.estafet.com/addCompanyRequest");
+
+        template.setDefaultEndpointUri("mock:result_companyRequest");
         template.sendBodyAndHeader("direct:start", requestBody, mapHeaders);
 
+        assertMockEndpointsSatisfied();
+    }
+
+    @Test
+    public void testRemoveCompanyRoute() throws Exception{
+        MockEndpoint endpoint = getMockEndpoint("mock:result_companyRequest");
         endpoint.expectedMessageCount(1);
+
+        RouteDefinition route = context.getRouteDefinition("company_management_route");
+        route.adviceWith(context, new AdviceWithRouteBuilder() {
+            @Override
+            public void configure() throws Exception {
+                replaceFromWith("direct:start");
+
+                interceptSendToEndpoint("mock:result_remove")
+                        .skipSendToOriginalEndpoint()
+                        .to("mock:result_companyRequest");
+
+            }
+        });
+        context.start();
+
+        String requestBody = "<com:company>\n" +
+                "         <companyName>TestName</companyName>\n" +
+                "      </com:company>";
+        Map<String, String> mapHeaders=new HashMap();
+        mapHeaders.put("SOAPAction","http://companyservice.estafet.com/removeCompanyRequest");
+
+        template.setDefaultEndpointUri("mock:result_companyRequest");
+        template.sendBodyAndHeader("direct:start", requestBody, mapHeaders);
 
         assertMockEndpointsSatisfied();
     }
