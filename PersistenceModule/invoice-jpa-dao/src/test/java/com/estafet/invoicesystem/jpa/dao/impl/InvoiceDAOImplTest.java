@@ -1,25 +1,23 @@
 package com.estafet.invoicesystem.jpa.dao.impl;
 
+import com.estafet.invoicesystem.jpa.model.Company;
 import com.estafet.invoicesystem.jpa.model.Invoice;
 import org.dbunit.DatabaseUnitException;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.operation.DatabaseOperation;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 
-import static com.estafet.invoicesystem.test.JPAUnitTestingUtils.*;
+import static com.estafet.invoicesystem.test.JPAUnitTestingUtils.loadBaseDataSet;
+import static com.estafet.invoicesystem.test.JPAUnitTestingUtils.wrapDatabaseConnection;
+import static org.junit.Assert.*;
 
 public class InvoiceDAOImplTest {
 
@@ -44,8 +42,11 @@ public class InvoiceDAOImplTest {
 
         connection = wrapDatabaseConnection(entityManager);
         dataSet = loadBaseDataSet("invoice_dao/base-dataset.xml");
+        CompanyDAOImpl companyDAO = new CompanyDAOImpl();
+        companyDAO.setEntityManager(entityManager);
         invoiceDAO = new InvoiceDAOImpl();
         invoiceDAO.setEntityManager(entityManager);
+        invoiceDAO.setCompanyDAO(companyDAO);
     }
 
     @AfterClass
@@ -60,8 +61,12 @@ public class InvoiceDAOImplTest {
 
     @Test
     public void testSaveInvoice() {
+        Company company = new Company();
+        company.setCompanyName("Estafet");
         Invoice invoice = new Invoice();
         invoice.setInvoiceNumber("12345678");
+        invoice.setProviderCompany(company);
+        invoice.setReceiverCompany(company);
 
         assertNull("invoiceId should be null, not inserted yet in db", invoice.getInvoiceId());
 
@@ -93,13 +98,17 @@ public class InvoiceDAOImplTest {
 
         assertEquals("Invoice type don't match VAT","VAT", invoice.getInvoiceType());
         assertEquals("Invoice number don't match 1234","1234", invoice.getInvoiceNumber());
-        assertEquals("Invoice provider company don't match Estafet", "Estafet", invoice.getProviderCompany());
+        assertEquals("Invoice provider company don't match Estafet", "Estafet", invoice.getProviderCompany().getCompanyName());
 
     }
     @Test
     public void testUpdateInvoiceStatus(){
+        Company company = new Company();
+        company.setCompanyName("Estafet");
         Invoice invoice = new Invoice();
         invoice.setInvoiceStatus("error");
+        invoice.setProviderCompany(company);
+        invoice.setReceiverCompany(company);
 
         EntityTransaction trx = entityManager.getTransaction();
         // New transaction
@@ -131,7 +140,11 @@ public class InvoiceDAOImplTest {
     }
     @Test
     public void testRemoveInvoice(){
+        Company company = new Company();
+        company.setCompanyName("Estafet");
         Invoice invoice = new Invoice();
+        invoice.setProviderCompany(company);
+        invoice.setReceiverCompany(company);
 
         EntityTransaction trx = entityManager.getTransaction();
 
@@ -167,7 +180,7 @@ public class InvoiceDAOImplTest {
     @Test
     public void testGetAll(){
         List<Invoice> list = invoiceDAO.getAll();
-        assertTrue("Size of all entities i different then expected", list.size() == 2);
+        assertTrue("Size of all entities is different then expected. Expected 2, got "+list.size(), list.size() == 2);
     }
 
 }

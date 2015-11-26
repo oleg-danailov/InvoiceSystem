@@ -2,6 +2,12 @@
 <wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://invoiceservice.estafet.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="invoiceServiceEndpointService" targetNamespace="http://invoiceservice.estafet.com/">
     <wsdl:types>
         <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://invoiceservice.estafet.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://invoiceservice.estafet.com/">
+            <xsd:element name="companyRequest" type="tns:companyRequest"/>
+            <xsd:complexType name="companyRequest">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" name="companyName" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
             <xsd:element name="invoiceRequest" type="tns:invoiceRequest"/>
             <xsd:complexType name="invoiceRequest">
                 <xsd:sequence>
@@ -9,8 +15,8 @@
                     <xsd:element minOccurs="1" name="invoiceType" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="currency" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="invoiceAmount" type="xsd:string"/>
-                    <xsd:element minOccurs="1" name="providerCompany" type="xsd:string"/>
-                    <xsd:element minOccurs="1" name="receiverCompany" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="providerCompany" type="tns:companyRequest"/>
+                    <xsd:element minOccurs="1" name="receiverCompany" type="tns:companyRequest"/>
 
                 </xsd:sequence>
             </xsd:complexType>
@@ -39,8 +45,8 @@
                     <xsd:element minOccurs="1" name="invoiceCreationDate" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="invoiceNumber" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="invoiceType" type="xsd:string"/>
-                    <xsd:element minOccurs="1" name="providerCompany" type="xsd:string"/>
-                    <xsd:element minOccurs="1" name="receiverCompany" type="xsd:string"/>
+                    <xsd:element minOccurs="1" name="providerCompany" type="tns:companyRequest"/>
+                    <xsd:element minOccurs="1" name="receiverCompany" type="tns:companyRequest"/>
                     <xsd:element minOccurs="1" name="taxesAmount" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="totalAmount" type="xsd:string"/>
                     <xsd:element minOccurs="1" name="invoiceStatus" type="xsd:string"/>

@@ -7,8 +7,6 @@ import com.estafet.invoicesystem.jpa.model.GetInvoiceResponse;
 import com.estafet.invoicesystem.jpa.model.Invoice;
 import org.apache.camel.Exchange;
 
-import java.util.List;
-
 /**
  * Created by Angelo Atanasov on 12/10/15.
  */
@@ -33,8 +31,8 @@ public class GetInvoiceProcessor {
             invoiceResponse.setInvoiceCreationDate(temp.getInvoiceCreationDate());
             invoiceResponse.setInvoiceNumber(temp.getInvoiceNumber());
             invoiceResponse.setInvoiceType(temp.getInvoiceType());
-            invoiceResponse.setProviderCompany(temp.getProviderCompany());
-            invoiceResponse.setReceiverCompany(temp.getReceiverCompany());
+            invoiceResponse.setProviderCompany(temp.getProviderCompany().getCompanyName());
+            invoiceResponse.setReceiverCompany(temp.getReceiverCompany().getCompanyName());
             invoiceResponse.setTotalAmount(temp.getTotalAmount());
             invoiceResponse.setInvoiceStatus(temp.getInvoiceStatus());
 

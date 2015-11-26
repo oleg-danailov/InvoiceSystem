@@ -26,7 +26,7 @@ public class InvoiceValidityCheckerStrategy implements AggregationStrategy {
         Invoice originalBody = original.getIn().getBody(Invoice.class);
 
         if (originalBody.getInvoiceId() == null) {
-            originalBody = invoiceDAO.findByNumberAndProvider(originalBody.getInvoiceNumber(), originalBody.getProviderCompany());
+            originalBody = invoiceDAO.findByNumberAndProvider(originalBody.getInvoiceNumber(), originalBody.getProviderCompany().getCompanyName());
         } else {
             originalBody = invoiceDAO.getInvoice(originalBody.getInvoiceId());
         }

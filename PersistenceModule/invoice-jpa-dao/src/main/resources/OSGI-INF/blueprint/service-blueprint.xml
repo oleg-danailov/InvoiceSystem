@@ -11,9 +11,14 @@
                 http://camel.apache.org/schema/blueprint/cxf/ http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
 
 
+    <bean id="companyDAO" class="com.estafet.invoicesystem.jpa.dao.impl.CompanyDAOImpl">
+        <jpa:context unitname="invoice-persistence-unit" property="entityManager"/>
+        <tx:transaction method="*" value="Required"/>
+    </bean>
     <bean id="invoiceDAO" class="com.estafet.invoicesystem.jpa.dao.impl.InvoiceDAOImpl">
         <jpa:context unitname="invoice-persistence-unit" property="entityManager"/>
         <tx:transaction method="*" value="Required"/>
+        <property name="companyDAO" ref="companyDAO"/>
     </bean>
 
     <service id="invoiceDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.InvoiceDAO" ref="invoiceDAO"/>
@@ -24,5 +29,6 @@
     </bean>
 
     <service id="taxDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.TaxDAO" ref="taxDAO"/>
+    <service id="companyDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.CompanyDAO" ref="companyDAO"/>
 
 </blueprint>

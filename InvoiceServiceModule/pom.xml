@@ -172,7 +172,7 @@
                         <Bundle-Name>Invoice Module</Bundle-Name>
 
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Import-Package>*</Import-Package>
+                        <Import-Package>*, com.estafet.invoicesystem.jpa.dao.api</Import-Package>
                     </instructions>
                 </configuration>
                 <executions>

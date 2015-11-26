@@ -1,7 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
 
-    <invoice invoice_number="1234" invoice_type="VAT" provider_company="Estafet"/>
-    <invoice invoice_number="1235" invoice_type="VAT" provider_company="Estafet"/>
+    <company company_name="Estafet" company_address="Sample Address" company_id="99"/>
+
+    <invoice invoice_number="1234" invoice_type="VAT" provider_company="99" receiver_company="99" />
+
+    <invoice invoice_number="1235" invoice_type="VAT" provider_company="99" receiver_company="99" />
 	
 </dataset>

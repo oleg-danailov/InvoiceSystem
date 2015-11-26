@@ -1,11 +1,11 @@
 package com.estafet.invoicesystem.jpa.dao.impl;
 
+import com.estafet.invoicesystem.jpa.dao.api.CompanyDAO;
 import com.estafet.invoicesystem.jpa.dao.api.InvoiceDAO;
+import com.estafet.invoicesystem.jpa.model.Company;
 import com.estafet.invoicesystem.jpa.model.Invoice;
 
-
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
@@ -19,6 +19,7 @@ public class InvoiceDAOImpl implements InvoiceDAO {
         //private static final transient Log LOG = LogFactory.getLog(InvoiceDAOImpl.class);
 
         private EntityManager entityManager;
+        private CompanyDAO companyDAO;
 
         private static final String findInvoiceByReference = "select inv from Invoice as inv where inv.invoiceId = :inv_id";
         private static final String findInvoice = "select inv from Invoice as inv";
@@ -31,6 +32,14 @@ public class InvoiceDAOImpl implements InvoiceDAO {
     public EntityManager getEntityManager() {
     return entityManager;
 }
+
+    public CompanyDAO getCompanyDAO() {
+        return companyDAO;
+    }
+
+    public void setCompanyDAO(CompanyDAO companyDAO) {
+        this.companyDAO = companyDAO;
+    }
 
     public List<Invoice> getAll(){
         Query q = this.entityManager.createQuery(findInvoice);
@@ -63,6 +72,12 @@ public class InvoiceDAOImpl implements InvoiceDAO {
 
     @Override
     public void saveInvoice(Invoice invoice) {
+        Company provider= companyDAO.getCompanyByName(invoice.getProviderCompany().getCompanyName());
+        invoice.setProviderCompany(provider);
+
+        Company receiver= companyDAO.getCompanyByName(invoice.getReceiverCompany().getCompanyName());
+        invoice.setReceiverCompany(receiver);
+
         entityManager.persist(invoice);
     }
 

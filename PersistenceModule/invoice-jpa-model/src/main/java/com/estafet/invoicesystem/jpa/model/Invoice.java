@@ -12,7 +12,8 @@ import java.util.Date;
 @Table(name = "INVOICE", uniqueConstraints = @UniqueConstraint(name="provider_company_invoice_number_unique",columnNames = {"invoice_number","provider_company"}))
 
 @NamedQueries({@NamedQuery(name= "invoice.findByNumberAndProvider", query = "SELECT inv FROM Invoice inv " +
-        " WHERE inv.invoiceNumber = :invoiceNumber AND inv.providerCompany = :providerCompany"),
+        " JOIN inv.providerCompany c " +
+        " WHERE inv.invoiceNumber = :invoiceNumber AND c.companyName = :providerCompany"),
         @NamedQuery(name="invoice.updateStatus", query = "UPDATE Invoice SET invoiceStatus = :invoiceStatus " +
                 "WHERE invoiceId = :invoiceId")})
 
@@ -39,11 +40,13 @@ public class Invoice {
     @Column(name = "TAXES_AMOUNT")
     private BigDecimal taxesAmount;
 
-    @Column(name = "PROVIDER_COMPANY")
-    private String providerCompany;
+    @JoinColumn(name ="PROVIDER_COMPANY" , referencedColumnName = "COMPANY_ID")
+    @ManyToOne(optional = false)
+    private Company providerCompany;
 
-    @Column(name = "RECEIVER_COMPANY")
-    private String receiverCompany;
+    @JoinColumn(name = "RECEIVER_COMPANY", referencedColumnName = "COMPANY_ID")
+    @ManyToOne(optional = false)
+    private Company receiverCompany;
 
     @Column(name = "TOTAL_AMOUNT")
     private BigDecimal totalAmount;
@@ -102,19 +105,19 @@ public class Invoice {
         this.taxesAmount = taxesAmount;
     }
 
-    public String getProviderCompany() {
+    public Company getProviderCompany() {
         return providerCompany;
     }
 
-    public void setProviderCompany(String providerCompany) {
+    public void setProviderCompany(Company providerCompany) {
         this.providerCompany = providerCompany;
     }
 
-    public String getReceiverCompany() {
+    public Company getReceiverCompany() {
         return receiverCompany;
     }
 
-    public void setReceiverCompany(String receiverCompany) {
+    public void setReceiverCompany(Company receiverCompany) {
         this.receiverCompany = receiverCompany;
     }
 

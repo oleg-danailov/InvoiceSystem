@@ -1,6 +1,8 @@
 package com.estafet.invoicesystem.strategy;
 
+import com.estafet.invoicesystem.jpa.dao.impl.CompanyDAOImpl;
 import com.estafet.invoicesystem.jpa.dao.impl.InvoiceDAOImpl;
+import com.estafet.invoicesystem.jpa.model.Company;
 import com.estafet.invoicesystem.jpa.model.Invoice;
 import com.estafet.invoicesystem.jpa.model.TaxResponse;
 import org.apache.camel.Exchange;
@@ -14,11 +16,10 @@ import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
-
 public class InvoiceValidityCheckerStrategyTest {
     private Invoice invoice = new Invoice();
     private InvoiceDAOImpl dao;
+    private CompanyDAOImpl companyDao;
     private InvoiceValidityCheckerStrategy strategy;
     private Exchange original;
     private Exchange resource;
@@ -31,7 +32,10 @@ public class InvoiceValidityCheckerStrategyTest {
         invoice.setInvoiceAmount(new BigDecimal("100"));
         invoice.setTotalAmount(new BigDecimal("120"));
 
+        companyDao = Mockito.mock(CompanyDAOImpl.class);
+
         dao = Mockito.mock(InvoiceDAOImpl.class);
+        dao.setCompanyDAO(companyDao);
 
         strategy = new InvoiceValidityCheckerStrategy();
         strategy.setInvoiceDAO(dao);
@@ -61,10 +65,14 @@ public class InvoiceValidityCheckerStrategyTest {
 
     @Test
     public void testAggregateWithInvoiceNumber() throws Exception {
+        Company company = new Company();
+        company.setCompanyName("provider");
+
+        Mockito.when(companyDao.getCompanyByName("provider")).thenReturn(company);
 
         invoice.setInvoiceId(null);
         invoice.setInvoiceNumber("1234");
-        invoice.setProviderCompany("provider");
+        invoice.setProviderCompany(company);
 
         Mockito.when(dao.findByNumberAndProvider("1234", "provider")).thenReturn(invoice);
 

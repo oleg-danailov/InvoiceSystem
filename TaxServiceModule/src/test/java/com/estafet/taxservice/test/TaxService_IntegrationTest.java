@@ -19,7 +19,5 @@ public class TaxService_IntegrationTest extends AbstractJUnit4CitrusTest {
 
     @Test
     @CitrusXmlTest(name="TaxServicetaxRequest_Test")
-    public void testTaxRequest() {
-        executeTest();
-    }
+    public void testTaxRequest() { executeTest(); }
 }

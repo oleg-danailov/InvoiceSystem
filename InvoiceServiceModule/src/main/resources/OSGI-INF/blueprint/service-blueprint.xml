@@ -53,9 +53,11 @@
     </camelContext>
 
     <reference id="invoiceDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.InvoiceDAO" />
+    <reference id="companyDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.CompanyDAO"/>
 
     <bean id="invoiceProcessor" class="com.estafet.invoiceservice.processor.InvoiceProcessor">
-        <property name="invoiceDao" ref="invoiceDAOService"></property>
+        <property name="invoiceDao" ref="invoiceDAOService"/>
+        <property name="companyDao" ref="companyDAOService"/>
     </bean>
 
     <bean id="getInvoiceProcessor" class="com.estafet.invoiceservice.processor.GetInvoiceProcessor">

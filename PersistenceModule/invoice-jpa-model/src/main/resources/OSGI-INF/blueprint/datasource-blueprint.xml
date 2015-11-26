@@ -6,6 +6,16 @@
 
     <cm:property-placeholder id="placeholder" update-strategy="reload"
                              persistent-id="com.estsfet.invoicesystem.jpa.model">
+        <cm:default-properties>
+            <cm:property name="postgres.serverName" value="localhost"/>
+            <cm:property name="postgres.portNumber" value="5432"/>
+            <cm:property name="postgres.user" value="postgres"/>
+            <cm:property name="postgres.databaseName" value="invoice_system"/>
+            <cm:property name="postgres.initialConnections" value="2"/>
+            <cm:property name="postgres.maxConnections" value="4"/>
+            <cm:property name="postgres.password" value="welcome1"/>
+            <cm:property name="postgres.dataSourceName" value="invoice-system-datasource"/>
+        </cm:default-properties>
     </cm:property-placeholder>
 
     <!-- PostgreSQL DataSource Definition -->

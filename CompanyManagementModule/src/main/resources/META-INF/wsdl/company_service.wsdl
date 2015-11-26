@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://companyservice.estafet.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="companyServiceEndpointService"
+                  targetNamespace="http://companyservice.estafet.com/">
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://companyservice.estafet.com/"
+                    attributeFormDefault="unqualified" elementFormDefault="unqualified"
+                    targetNamespace="http://companyservice.estafet.com/">
+            <xsd:element name="company" type="tns:company"/>
+            <xsd:complexType name="company">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" name="companyName" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="address" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="company_id" type="tns:company_id"/>
+            <xsd:complexType name="company_id">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" name="company_id" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="deleteCompanyResponse" type="tns:deleteCompanyResponse"/>
+            <xsd:complexType name="deleteCompanyResponse">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" name="result" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="addCompanyRequest">
+        <wsdl:part element="tns:company" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="addCompanyResponse">
+        <wsdl:part element="tns:company_id" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="removeCompanyRequest">
+        <wsdl:part name="parameters" element="tns:company"/>
+    </wsdl:message>
+    <wsdl:message name="removeCompanyResponse">
+        <wsdl:part name="parameters" element="tns:deleteCompanyResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="CompanyService">
+        <wsdl:operation name="AddCompanyService">
+            <wsdl:input message="tns:addCompanyRequest" name="addCompanyRequest"/>
+            <wsdl:output message="tns:addCompanyResponse" name="addCompanyResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveCompanyService">
+            <wsdl:input message="tns:removeCompanyRequest" name="removeCompanyRequest"/>
+            <wsdl:output message="tns:removeCompanyResponse" name="removeCompanyResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="CompanyServiceEndpointSoapBinding" type="tns:CompanyService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="AddCompanyService">
+            <soap:operation soapAction="http://companyservice.estafet.com/addCompanyRequest" style="document"/>
+            <wsdl:input name="addCompanyRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="addCompanyResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="RemoveCompanyService">
+            <soap:operation soapAction="http://companyservice.estafet.com/removeCompanyRequest" style="document"/>
+            <wsdl:input name="removeCompanyRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="removeCompanyResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="CompanyServiceEndpointService">
+        <wsdl:port binding="tns:CompanyServiceEndpointSoapBinding" name="CompanyServiceEndpoint">
+            <soap:address location="http://localhost:10358/company_service"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

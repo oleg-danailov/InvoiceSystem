@@ -2,50 +2,57 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
-    <groupId>com.estafet.invoicesystem</groupId>
-    <version>1.0</version>
-
+    <parent>
+        <artifactId>com.estafet.invoicesystem</artifactId>
+        <groupId>com.estafet.invoicesystem</groupId>
+        <version>1.0</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>invoice-jpa-model</artifactId>
+
+    <artifactId>CompanyManagementModule</artifactId>
 
     <dependencies>
+        <!--This dependency should be on top-->
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm-all</artifactId>
+            <version>4.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.estafet.invoicesystem</groupId>
+            <artifactId>invoice-jpa-dao</artifactId>
+            <version>1.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.6.1</version>
+            <groupId>com.estafet.invoicesystem</groupId>
+            <artifactId>invoice-jpa-model</artifactId>
+            <version>1.0</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>9.2-1004-jdbc4</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.openjpa</groupId>
-            <artifactId>openjpa</artifactId>
-            <version>2.3.0</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <!--Test-->
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-test</artifactId>
+            <artifactId>camel-core</artifactId>
             <version>2.12.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-cxf</artifactId>
+            <version>2.12.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jaxb</artifactId>
+            <version>2.12.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -55,18 +62,54 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-blueprint</artifactId>
+            <version>2.12.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-bindings-soap</artifactId>
+            <version>3.1.4</version>
+            <scope>test</scope>
+        </dependency>
+       <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.compendium</artifactId>
+            <version>4.3.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>test</scope>
+        </dependency>
+       <dependency>
 
+        <groupId>org.apache.camel</groupId>
 
+        <artifactId>camel-test</artifactId>
+
+        <version>2.12.0</version>
+
+        <scope>compile</scope>
+
+    </dependency>
     </dependencies>
-
     <build>
-   
-    	<plugins>
+        <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -74,12 +117,10 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-Name>Invoice-jpa-model</Bundle-Name>
-                        <Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
+                        <Bundle-Name>Company Management Module</Bundle-Name>
 
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Import-Package>*</Import-Package>
-                        <Export-Package>com.estafet.invoicesystem.jpa.model</Export-Package>
                     </instructions>
                 </configuration>
                 <executions>
@@ -88,27 +129,6 @@
                         <phase>package</phase>
                         <goals>
                             <goal>bundle</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.openjpa</groupId>
-                <artifactId>openjpa-maven-plugin</artifactId>
-                <version>2.3.0</version>
-                <configuration>
-                    <includes>**/jpa/model/*.class</includes>
-
-                    <addDefaultConstructor>true</addDefaultConstructor>
-                    <enforcePropertyRestrictions>true</enforcePropertyRestrictions>
-                </configuration>
-                <!--execution does not work in jboss, comment it to work-->
-                 <executions>
-                    <execution>
-                        <id>enhancer</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>enhance</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -128,6 +148,7 @@
                                         <include name="*.jar"/>
                                     </fileset>
                                 </copy>
+
                             </tasks>
                         </configuration>
                         <goals>
@@ -136,8 +157,6 @@
                     </execution>
                 </executions>
             </plugin>
-            
         </plugins>
-    
     </build>
 </project>

@@ -13,6 +13,7 @@
         <module>TaxServiceModule</module>
         <module>InvoiceServiceModule</module>
         <module>FraudDetectionModule</module>
+        <module>CompanyManagementModule</module>
     </modules>
     
 </project>

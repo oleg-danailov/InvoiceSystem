@@ -24,6 +24,6 @@ public class ObjectFactory {
     public Tax createTax() { return new Tax(); }
     public AdditionalTaxResponse createAdditionalTaxResponse(){return new AdditionalTaxResponse();}
 
-
+    public DeleteCompanyResponse createDeleteCompanyResponse(){return  new DeleteCompanyResponse();}
 
 }

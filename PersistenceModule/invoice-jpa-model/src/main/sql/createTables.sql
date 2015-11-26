@@ -19,4 +19,12 @@ CREATE TABLE tax
   invoice_type character varying(10),
   tax_percent numeric,
   CONSTRAINT tax_pk PRIMARY KEY (tax_id)
-)
+);
+
+CREATE TABLE company
+(
+  company_id serial NOT NULL,
+  company_name character varying(255),
+  company_address character varying(255),
+  CONSTRAINT company_id_pkey PRIMARY KEY (company_id)
+);
