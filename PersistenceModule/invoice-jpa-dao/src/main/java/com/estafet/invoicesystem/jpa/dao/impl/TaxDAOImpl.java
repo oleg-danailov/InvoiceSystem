@@ -14,14 +14,14 @@ import java.util.List;
  */
 public class TaxDAOImpl implements TaxDAO {
 
-    //private static final transient Log LOG = LogFactory.getLog(InvoiceDAOImpl.class);
 
+
+    //private static final transient Log LOG = LogFactory.getLog(InvoiceDAOImpl.class);
     private EntityManager entityManager;
 
     private static final String findTaxByName = "select tax from Tax as tax where tax.taxName = :tax_name";
     private static final String findTaxesByInvoiceName = "select tax from Tax as tax where tax.invoiceType = :invoice_type";
     private static final String findTax = "select tax from Tax as tax";
-
 
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;

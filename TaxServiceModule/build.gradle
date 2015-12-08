@@ -48,7 +48,7 @@ jar {
     }
 }
 
-task deployLocallyInFuse(type: Copy, dependsOn: jar) {
+task deployLocallyInFuse(type: Delete, dependsOn: jar) {
     from project.file("build/libs")
     into project.file('/u01/app/jboss-fuse-6.1.0.redhat-379/deploy/')
 }

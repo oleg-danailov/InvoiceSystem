@@ -15,5 +15,13 @@
         <module>FraudDetectionModule</module>
         <module>CompanyManagementModule</module>
     </modules>
-    
+
+    <distributionManagement>
+        <repository>
+            <id>snapshots</id>
+            <name>invoicesystem-releases</name>
+            <url>https://invoicesystem.artifactoryonline.com/invoicesystem/libs-release-local</url>
+        </repository>
+    </distributionManagement>
+
 </project>

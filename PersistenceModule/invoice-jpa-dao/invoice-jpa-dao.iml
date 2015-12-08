@@ -37,7 +37,6 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.slf4j:slf4j-api:1.6.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.postgresql:postgresql:9.2-1004-jdbc4" level="project" />
-    <orderEntry type="library" name="Maven: myGroup:invoice-jpa-model:1.0" level="project" />
     <orderEntry type="module" module-name="invoice-jpa-model" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.camel:camel-test:2.12.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.camel:camel-core:2.12.0" level="project" />

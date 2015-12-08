@@ -101,6 +101,13 @@
         <scope>test</scope>
     </dependency>
     </dependencies>
+    <distributionManagement>
+        <repository>
+            <id>snapshots</id>
+            <name>invoicesystem-releases</name>
+            <url>https://invoicesystem.artifactoryonline.com/invoicesystem/libs-release-local</url>
+        </repository>
+    </distributionManagement>
     <build>
         <plugins>
             <plugin>

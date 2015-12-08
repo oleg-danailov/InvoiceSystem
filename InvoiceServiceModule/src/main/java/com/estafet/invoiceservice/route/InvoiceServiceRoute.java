@@ -31,7 +31,7 @@ public class InvoiceServiceRoute extends RouteBuilder {
                 .transform().simple("Error reported: ${exception.message} - cannot process this message.");;//to("activemq:errorInvoices");
 
 
-        from("cxf:bean:invoiceRequest").log("Received: ${header.SOAPAction}")
+        from("cxf:bean:invoiceRequest").routeId("invoice_soap_route").log("Received: ${header.SOAPAction}")
                 .choice()
                 .when(header("SOAPAction").isEqualTo("http://invoiceservice.estafet.com/getInvoiceRequest"))
                     .to("direct:getInvoiceRoute")
@@ -41,7 +41,7 @@ public class InvoiceServiceRoute extends RouteBuilder {
 
         from("direct:invoiceRoute").multicast().parallelProcessing().to("direct:incomingInvoices", "direct:persist");
 
-        from("direct:incomingInvoices").id("invoice_service_route_activemq")
+        from("direct:incomingInvoices").routeId("invoice_service_route_activemq")
                 .streamCaching()
                 .log("Before activemq : ${body}")
                 .to(ExchangePattern.InOnly, "activemq:incomingInvoices").end();
@@ -72,13 +72,10 @@ public class InvoiceServiceRoute extends RouteBuilder {
                 .unmarshal(jxb)
                 .log("After Transformation: ${body}").marshal(jxb);
 
-
-
-
-        from("direct:call_tax").streamCaching()
+        from("direct:call_tax").routeId("tax_call").streamCaching()
                 .to("xslt:file:/u01/app/jboss-fuse-6.1.0.redhat-379/deploy/cfg/InvoiceRequestToTaxRequest.xsl")
                 .process(new TaxRequestConstructorProcessor())
-                .unmarshal(jxb).log("Before call to Tax Request: >>>>>>>>>> ${body} ").marshal(jxb).to("cxf:bean:taxRequest").end();
+                .unmarshal(jxb).log("Before call to Tax Request: >>>>>>>>>> ${body} ").marshal(jxb).to("{{tax.service.endpoint}}").end();
 
         JaxbDataFormat jaxb = new JaxbDataFormat("com.estafet.invoiceservice.model");
         from("direct:getConversionRates").streamCaching().process(new Processor() {
@@ -102,7 +99,7 @@ public class InvoiceServiceRoute extends RouteBuilder {
                 exchange.getOut().setHeader("operationNamespace", "http://tempuri.org/");
 
             }
-        }).marshal(jaxb).log("Body after marshal : ${body}").to("cxf:bean:getConversionAmount").log("Body after cxf : ${body}").unmarshal(jaxb).end();
+        }).marshal(jaxb).log("Body after marshal : ${body}").to("{{convert.amount.endpoint}}").log("Body after cxf : ${body}").unmarshal(jaxb).end();
         
         from("direct:getInvoiceRoute").streamCaching().unmarshal(jxb).beanRef("getInvoiceProcessor", "getInvoice")
                 .log("GetInvoice Request: ${body}").marshal(jxb).to("mock:result");

@@ -16,6 +16,14 @@
     <artifactId>TaxServiceModule</artifactId>
     <version>1.0</version>
 
+    <distributionManagement>
+        <repository>
+            <id>snapshots</id>
+            <name>invoicesystem-releases</name>
+            <url>https://invoicesystem.artifactoryonline.com/invoicesystem/libs-release-local</url>
+        </repository>
+    </distributionManagement>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -230,7 +238,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+           <!-- <plugin>
                 <groupId>eviware</groupId>
                 <artifactId>maven-soapui-plugin</artifactId>
                 <version>4.0.1</version>
@@ -242,14 +250,14 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <!--<projectFile>test/src/test/soapUI/CarMaintenance-soapui-project.xml</projectFile> TODO-->
-                    <projectFile>/home/estafet/SoapUI/Tax-Module-soapui-project.xml</projectFile>
-                    <outputFolder>./test/target/soapUI</outputFolder>
+                    <projectFile>/u01/learning/InvoiceSystem_new/InvoiceSystem/TaxServiceModule/src/test/resources/soapUI/Tax-Module-soapui-project.xml</projectFile>-->
+                    <!--<projectFile>/home/estafet/SoapUI/Tax-Module-soapui-project.xml</projectFile> -->
+                   <!-- <outputFolder>./test/target/soapUI</outputFolder>
                     <junitReport>true</junitReport>
                     <printReport>true</printReport>
                     <projectProperties>
-                        <value>getTax_invoiceType=DDS</value>
-                        <value>getTax_taxPercent=0.22</value>
+                        <value>getTax_invoiceType=VAT</value>
+                        <value>getTax_taxPercent=0.20</value>
                     </projectProperties>
                 </configuration>
                 <executions>
@@ -260,7 +268,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
 
 
         </plugins>

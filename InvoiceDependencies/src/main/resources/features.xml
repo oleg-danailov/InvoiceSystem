@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="chm">
+    <repository>mvn:org.apache.cxf.karaf/apache-cxf/2.7.0.redhat-610379/xml/features</repository>
+    <repository>mvn:io.fabric8/fabric8-karaf/1.0.0.redhat-379/xml/features</repository>
+
+    <feature name="invoice-dependencies" version="${version}">
+        <feature>camel-core</feature>
+        <feature>camel-spring</feature>
+        <feature>camel-cxf</feature>
+        <feature>camel-blueprint</feature>
+        <feature>camel-jaxb</feature>
+        <feature>camel-jackson</feature>
+        <feature>jpa</feature>
+        <feature>camel-jpa</feature>
+        <feature>jndi</feature>
+        <feature>transaction</feature>
+        <feature>mq-fabric-camel</feature>
+        <bundle dependency="true">mvn:org.osgi/org.osgi.enterprise/5.0.0</bundle>
+        <bundle dependency="true">wrap:mvn:org.postgresql/postgresql/9.2-1004-jdbc4</bundle>
+        <bundle dependency="true">wrap:mvn:org.apache.openjpa/openjpa/2.3.0</bundle>
+        <bundle dependency="true">wrap:mvn:org.apache.activemq/activemq-camel/5.9.0</bundle>
+        <bundle dependency="true">wrap:mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.serp/1.14.1_1</bundle>
+    </feature>
+    <!-- Invoice Service -->
+    <feature name="invoice-service" version="${version}">
+        <bundle>mvn:com.estafet.invoicesystem/InvoiceServiceModule/${version}</bundle>
+    </feature>
+
+    <!-- Inovice Persistence -->
+    <feature name="invoice-persistence" version="${version}">
+        <bundle>mvn:com.estafet.invoicesystem/invoice-jpa-model/${version}</bundle>
+        <bundle>mvn:com.estafet.invoicesystem/invoice-jpa-dao/${version}</bundle>
+    </feature>
+
+    <!-- Invoice Fraud Detection -->
+    <feature name="invoice-frauddetection" version="${version}">
+        <bundle>mvn:com.estafet.invoicesystem/FraudDetectionModule/${version}</bundle>
+    </feature>
+
+    <!-- Invoice Tax -->
+    <feature name="invoice-tax" version="${version}">
+        <bundle>mvn:com.estafet.invoicesystem/TaxServiceModule/${version}</bundle>
+    </feature>
+
+    <!-- Invoice Company -->
+    <feature name="invoice-company" version="${version}">
+        <bundle>mvn:com.estafet.invoicesystem/CompanyManagementModule/${version}</bundle>
+    </feature>
+
+    <!-- Core Components -->
+    <feature name="invoice-core" version="${version}">
+        <feature version="${version}">invoice-service</feature>
+        <feature version="${version}">invoice-dependencies</feature>
+        <feature version="${version}">invoice-persistence</feature>
+        <feature version="${version}">invoice-frauddetection</feature>
+        <feature version="${version}">invoice-tax</feature>
+     <!--   <feature version="${version}">invoice-company</feature>-->
+    </feature>
+
+</features>

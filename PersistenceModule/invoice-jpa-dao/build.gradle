@@ -21,7 +21,6 @@ dependencies {
     compile 'javax.validation:validation-api:1.1.0.Final'
     compile 'log4j:log4j:1.2.17'
     compile 'org.slf4j:slf4j-simple:1.6.1'
-
     testCompile group: 'org.apache.camel', name: 'camel-test', version: '2.12.0'
     testCompile "org.apache.openjpa:openjpa:2.3.0"
     testCompile 'org.dbunit:dbunit:2.4.9'

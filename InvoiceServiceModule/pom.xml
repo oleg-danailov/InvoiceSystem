@@ -7,6 +7,13 @@
     <groupId>com.estafet.invoicesystem</groupId>
     <artifactId>InvoiceServiceModule</artifactId>
     <version>1.0</version>
+    <distributionManagement>
+        <repository>
+            <id>snapshots</id>
+            <name>invoicesystem-releases</name>
+            <url>https://invoicesystem.artifactoryonline.com/invoicesystem/libs-release-local</url>
+        </repository>
+    </distributionManagement>
 
     <dependencyManagement>
         <dependencies>
@@ -19,18 +26,37 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <dependencies>
+        <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm-all</artifactId>
+            <version>4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test</artifactId>
+            <version>2.12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>slf4j-log4j12</artifactId>-->
+            <!--<version>1.6.1</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.estafet.invoicesystem</groupId>
             <artifactId>invoice-jpa-dao</artifactId>
             <version>1.0</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.estafet.invoicesystem</groupId>
             <artifactId>invoice-jpa-model</artifactId>
             <version>1.0</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.activemq</groupId>
@@ -41,12 +67,6 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-cxf</artifactId>
-            <version>2.12.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-test</artifactId>
             <version>2.12.0</version>
             <scope>compile</scope>
         </dependency>
@@ -99,13 +119,27 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>1.10.19</version>
-            <scope>test</scope>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-blueprint</artifactId>
+            <version>2.12.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http-jetty</artifactId>
+            <version>2.7.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.compendium</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+        </dependency>
+
         <dependency>
             <groupId>com.consol.citrus</groupId>
             <artifactId>citrus-core</artifactId>
@@ -172,7 +206,7 @@
                         <Bundle-Name>Invoice Module</Bundle-Name>
 
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Import-Package>*, com.estafet.invoicesystem.jpa.dao.api</Import-Package>
+                        <!--<Import-Package>*, com.estafet.invoicesystem.jpa.dao.api</Import-Package>-->
                     </instructions>
                 </configuration>
                 <executions>
@@ -214,35 +248,42 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>com.consol.citrus.mvn</groupId>
-                <artifactId>citrus-maven-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <author>Miroslava Stancheva</author>
-                    <targetPackage>com.estafet.taxservice</targetPackage>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.10</version>
-                <configuration>
-                    <skip>false</skip>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>citrus-tests</id>
-                        <phase>integration-test</phase>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                        <configuration>
-                            <skip>false</skip>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>com.consol.citrus.mvn</groupId>-->
+                <!--<artifactId>citrus-maven-plugin</artifactId>-->
+                <!--<version>2.4</version>-->
+                <!--<configuration>-->
+                    <!--<author>Miroslava Stancheva</author>-->
+                    <!--<targetPackage>com.estafet.taxservice</targetPackage>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-surefire-plugin</artifactId>-->
+                <!--<version>2.10</version>-->
+                <!--<configuration>-->
+                    <!--<skipTests>true</skipTests>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+            <!--<plugin>-->
+                <!--<artifactId>maven-surefire-plugin</artifactId>-->
+                <!--<version>2.10</version>-->
+                <!--<configuration>-->
+                    <!--<skip>false</skip>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>citrus-tests</id>-->
+                        <!--<phase>integration-test</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>test</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<skip>false</skip>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 </project>
