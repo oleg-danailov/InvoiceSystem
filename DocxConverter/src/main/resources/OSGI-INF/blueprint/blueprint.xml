@@ -2,21 +2,56 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xmlns:camel="http://camel.apache.org/schema/blueprint"
-           xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+           xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+           http://camel.apache.org/schema/blueprint/cxf http://camel.apache.org/schema/blueprint/cxf/camel-cxf.xsd">
 
+    <cxf:cxfEndpoint id="clientService"
+                     serviceClass="com.estafet.invoicesystem.webservice.ClientSoapServiceImpl"
+                        address="http://${cxf.host}:${cxf.client.service.port}${cxf.client.service.url}">
+        <cxf:properties>
+            <entry key="dataFormat" value="PAYLOAD"/>
+        </cxf:properties>
+    </cxf:cxfEndpoint>
+    <cxf:cxfEndpoint id="fileService"
+                     serviceClass="com.estafet.invoicesystem.webservice.FileSoapServiceImpl"
+                     address="http://${cxf.host}:${cxf.file.service.port}${cxf.file.service.url}">
+        <cxf:properties>
+            <entry key="dataFormat" value="PAYLOAD"/>
+        </cxf:properties>
+    </cxf:cxfEndpoint>
 
     <camel:camelContext >
         <camel:routeBuilder ref="docxConverterRoute"/>
+        <camel:routeBuilder ref="clientServiceRoute"/>
+        <camel:routeBuilder ref="fileSoapServiceRoute"/>
     </camel:camelContext>
 
-    <bean id="docxConverterRoute" class="com.estafet.invoicesystem.route.DocxConverterRoute"></bean>
+    <bean id="fileSoapServiceRoute" class="com.estafet.invoicesystem.route.FileSoapServiceRoute"/>
+
+    <bean id="clientServiceRoute" class="com.estafet.invoicesystem.route.ClientServiceRoute"/>
+
+    <bean id="docxConverterRoute" class="com.estafet.invoicesystem.route.DocxConverterRoute"/>
 
     <reference id="clientDao" interface="com.estafet.invoicesystem.jpa.dao.api.ClientDAO"/>
 
-    <bean id="persistenceProcessor" class="com.estafet.invoicesystem.processor.PersistenceProcessor">
-        <property name="dao" ref="clientDao"/>
-    </bean>
 
-    <bean id="docx2PojoProcessor" class="com.estafet.invoicesystem.processor.Docx2PojoProcessor"></bean>
+    <bean id="persistenceBean" class="com.estafet.invoicesystem.processor.PersistenceBean">
+        <property name="clientDao" ref="clientDao"/>
+    </bean>
+    <bean id="docx2PojoProcessor" class="com.estafet.invoicesystem.processor.Docx2PojoProcessor"/>
+
+
+    <cm:property-placeholder id="common-properties"
+                             persistent-id="com.estafet.invoicesystem.docxconverter" update-strategy="reload">
+        <cm:default-properties>
+            <cm:property name="cxf.host" value="localhost"/>
+            <cm:property name="cxf.client.service.port" value="19991"/>
+            <cm:property name="cxf.client.service.url" value="/client_service"/>
+            <cm:property name="cxf.file.service.port" value="19992"/>
+            <cm:property name="cxf.file.service.url" value="/file_service"/>
+        </cm:default-properties>
+    </cm:property-placeholder>
 
 </blueprint>

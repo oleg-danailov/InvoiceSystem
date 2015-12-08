@@ -19,4 +19,6 @@ public interface ClientDAO {
     public void saveAll(List<Client> list);
 
     public void saveClient(Client client);
+
+
 }

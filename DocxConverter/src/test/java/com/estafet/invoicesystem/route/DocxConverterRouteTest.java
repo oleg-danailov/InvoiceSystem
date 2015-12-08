@@ -2,8 +2,7 @@ package com.estafet.invoicesystem.route;
 
 import com.estafet.invoicesystem.jpa.model.Client;
 import com.estafet.invoicesystem.processor.Docx2PojoProcessor;
-import com.estafet.invoicesystem.processor.PersistenceProcessor;
-import org.apache.camel.Route;
+import com.estafet.invoicesystem.processor.PersistenceBean;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
@@ -11,8 +10,6 @@ import org.apache.camel.impl.JndiRegistry;
 import org.apache.camel.model.RouteDefinition;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.apache.camel.util.ObjectHelper;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
@@ -21,18 +18,15 @@ import org.mockito.stubbing.Answer;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipException;
-import java.util.zip.ZipFile;
 
 /**
  * Created by estafet on 19/11/15.
  */
 public class DocxConverterRouteTest extends CamelTestSupport{
 
-    private PersistenceProcessor persistenceProcessor;
+
+    private PersistenceBean persistenceBean;
 
     private Docx2PojoProcessor docx2PojoProcessor;
 
@@ -41,19 +35,13 @@ public class DocxConverterRouteTest extends CamelTestSupport{
         JndiRegistry jndiRegistry= super.createRegistry();
 
         docx2PojoProcessor = new Docx2PojoProcessor();
-        persistenceProcessor = Mockito.mock(PersistenceProcessor.class);
+        persistenceBean = Mockito.mock(PersistenceBean.class);
 
         jndiRegistry.bind("docx2PojoProcessor", docx2PojoProcessor);
-        jndiRegistry.bind("persistenceProcessor", persistenceProcessor);
+        jndiRegistry.bind("persistenceBean", persistenceBean);
         return jndiRegistry;
     }
 
-//    @Before
-//    public void setUp(){
-//        //docx2PojoProcessor = Mockito.mock(Docx2PojoProcessor.class);
-//        docx2PojoProcessor = new Docx2PojoProcessor();
-//        persistenceProcessor = Mockito.mock(PersistenceProcessor.class);
-//    }
 
     @Override
     protected RouteBuilder createRouteBuilder() throws Exception {
@@ -79,7 +67,7 @@ public class DocxConverterRouteTest extends CamelTestSupport{
                 }
                 return null;
             }
-        }).when(persistenceProcessor).saveClients(new ArrayList<Client>());
+        }).when(persistenceBean).saveClients(new ArrayList<Client>());
 
 
 
@@ -89,7 +77,7 @@ public class DocxConverterRouteTest extends CamelTestSupport{
             @Override
             public void configure() throws Exception {
                 replaceFromWith("direct:file");
-                weaveById("persistenceProcessor").after().to("mock:end");
+                weaveById("persistenceBean").after().to("mock:end");
             }
         });
 

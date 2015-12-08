@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by estafet on 19/11/15.
  */
-public class PersistenceProcessor {
+public class SavingProcessor {
 
     private ClientDAO dao;
 

@@ -1,12 +1,13 @@
 package com.estafet.invoicesystem.jpa.model;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Created by estafet on 19/11/15.
  */
 @Entity
-
+@XmlRootElement(namespace = "http://webservice.invoicesystem.estafet.com/")
 public class Client {
 
     @Id

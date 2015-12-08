@@ -9,6 +9,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,14 @@ public class Docx2PojoProcessor implements Processor {
 
         InputStream input = exchange.getIn().getBody(InputStream.class);
 
-        XWPFDocument docx = new XWPFDocument(input);
+        XWPFDocument docx = null;
+        try {
+            docx = new XWPFDocument(input);
+        } catch (NoClassDefFoundError e) {
+            e.printStackTrace();
+            exchange.getIn().setBody(result);
+            return;
+        }
         XWPFTable table = docx.getTables().get(0);
 
         for(XWPFTableRow row : table.getRows()){

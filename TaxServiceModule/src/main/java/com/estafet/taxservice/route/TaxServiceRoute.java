@@ -17,12 +17,6 @@ import java.util.List;
  */
 public class TaxServiceRoute  extends RouteBuilder {
 
-    private TaxDAO taxDao;
-
-    public void setTaxDao(TaxDAO taxDao) {
-        this.taxDao = taxDao;
-    }
-
     JaxbDataFormat jxb = new JaxbDataFormat("com.estafet.invoicesystem.jpa.model");
 
     @Override
@@ -41,35 +35,10 @@ public class TaxServiceRoute  extends RouteBuilder {
                 .log("Tax Response Inner: ${body}");
 
             from("direct:getTaxRequest")
-                    .streamCaching()
-                    .process(new Processor() {
-                                 @Override
-                                 public void process(Exchange exchange) throws Exception {
-                                     TaxRequest tax = exchange.getIn().getBody(TaxRequest.class);
-                                     //TODO if null ->
-                                     if (tax == null) {
-                                         throw new InvalidTaxRequestException("No tax found in the request.");
-                                     }
-
-                                     List<Tax> taxes = taxDao.findTaxesByInvoiceType(tax.getInvoiceType());
-                                     if (taxes == null || taxes.size() == 0) {
-                                         throw new InvalidTaxRequestException("No tax for this type: " + tax.getInvoiceType() + " found in DB.");
-                                     }
-                                     Tax temp = taxes.get(0);
-
-                                     TaxResponse taxResponse = new TaxResponse();
-
-                                     taxResponse.setTaxId(temp.getTaxId());
-                                     taxResponse.setInvoiceType(temp.getInvoiceType());
-                                     taxResponse.setTaxName(temp.getTaxName());
-                                     taxResponse.setTaxPercent(temp.getTaxPercent());
-
-                                     exchange.getOut().setBody(taxResponse);
-                                 }
-                             }
-                    ).marshal(jxb);
+                    .streamCaching().processRef("getTaxProcessor")
+                    .marshal(jxb);
 
             from("direct:createTaxRequest")
-                    .processRef("additionalTaxProcessor").marshal(jxb);
+                    .processRef("createTaxProcessor").marshal(jxb);
         }
     }

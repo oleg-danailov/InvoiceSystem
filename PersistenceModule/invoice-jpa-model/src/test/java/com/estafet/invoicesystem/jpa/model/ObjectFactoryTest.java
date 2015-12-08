@@ -21,16 +21,16 @@ public class ObjectFactoryTest extends TestCase {
         Invoice invoice = objectFactory.createRequest();
         InvoiceResponse invoiceResponse = objectFactory.createResponse();
         Tax tax = objectFactory.createTax();
-        TaxResponse taxResponse = objectFactory.createTaxResponse();
-        AdditionalTaxResponse additionalTaxResponse = objectFactory.createAdditionalTaxResponse();
+       // TaxResponse taxResponse = objectFactory.createTaxResponse();
+        //AdditionalTaxResponse additionalTaxResponse = objectFactory.createAdditionalTaxResponse();
 
         Assert.assertNotNull(getInvoiceRequest);
         Assert.assertNotNull(getInvoiceResponse);
         Assert.assertNotNull(invoice);
         Assert.assertNotNull(invoiceResponse);
         Assert.assertNotNull(tax);
-        Assert.assertNotNull(taxResponse);
-        Assert.assertNotNull(additionalTaxResponse);
+        //Assert.assertNotNull(taxResponse);
+       // Assert.assertNotNull(additionalTaxResponse);
 
     }
 }

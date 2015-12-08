@@ -26,17 +26,27 @@
 
     <bean id="taxOSGI" class="com.estafet.taxservice.impl.TaxOSGIServiceImpl" />
 
-    <bean id="taxServiceRoute" class="com.estafet.taxservice.route.TaxServiceRoute">
+    <bean id="taxServiceRoute" class="com.estafet.taxservice.route.TaxServiceRoute"/>
+
+    <bean id="createTaxProcessor" class="com.estafet.taxservice.processor.CreateTaxProcessor">
         <property name="taxDao" ref="taxDAOService"/>
     </bean>
-    <bean id="additionalTaxProcessor" class="com.estafet.taxservice.processor.AdditionalTaxProcessor">
+
+    <bean id="getTaxProcessor" class="com.estafet.taxservice.processor.GetTaxProcessor">
         <property name="taxDao" ref="taxDAOService"/>
     </bean>
 
     <camelContext id="taxServiceCamelRoute" xmlns="http://camel.apache.org/schema/blueprint">
         <routeBuilder ref="taxServiceRoute"/>
+        <routeBuilder ref="taxServiceRestRoute" />
     </camelContext>
 
+    <bean id="persistenceBean" class="com.estafet.taxservice.processor.PersistenceBean" >
+        <property name="taxDao" ref="taxDAOService"/>
+    </bean>
+
+    <bean id="taxServiceRestRoute" class="com.estafet.taxservice.route.TaxServiceRestRoute"/>
+    
     <reference id="taxDAOService" interface="com.estafet.invoicesystem.jpa.dao.api.TaxDAO" />
 
     <bean id="taxProcessor" class="com.estafet.taxservice.impl.TaxOSGIServiceImpl">

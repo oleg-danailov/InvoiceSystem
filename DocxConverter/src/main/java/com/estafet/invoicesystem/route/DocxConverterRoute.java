@@ -10,7 +10,7 @@ public class DocxConverterRoute extends RouteBuilder{
     @Override
     public void configure() throws Exception {
         from("file:///u01/tmp/").routeId("docx_converter_route")
-                .processRef("docx2PojoProcessor")/*.process(new Docx2PojoProcessor())*/
-                .beanRef("persistenceProcessor", "saveClients").id("persistenceProcessor");
+                .processRef("docx2PojoProcessor")
+                .beanRef("persistenceBean", "saveClients").id("persistenceBean");
     }
 }
