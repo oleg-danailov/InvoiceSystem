@@ -13,12 +13,13 @@ import org.apache.camel.impl.JndiRegistry;
 import org.apache.camel.model.RouteDefinition;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@Ignore
 public class InvoiceServiceRouteTest extends CamelTestSupport {
     InvoiceProcessor invoiceProcessor;
     GetInvoiceProcessor getInvoiceProcessor;

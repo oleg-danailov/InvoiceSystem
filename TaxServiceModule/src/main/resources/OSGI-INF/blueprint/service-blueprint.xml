@@ -27,7 +27,7 @@
     <bean id="taxOSGI" class="com.estafet.taxservice.impl.TaxOSGIServiceImpl" />
 
     <bean id="taxServiceRoute" class="com.estafet.taxservice.route.TaxServiceRoute">
-        <property name="taxDao" ref="taxDAOService"/>
+        <property name="taxDao"  ref="taxDAOService"/>
     </bean>
     <bean id="additionalTaxProcessor" class="com.estafet.taxservice.processor.AdditionalTaxProcessor">
         <property name="taxDao" ref="taxDAOService"/>

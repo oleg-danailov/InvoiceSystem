@@ -46,6 +46,23 @@
         </camelcxf:properties>
     </camelcxf:cxfEndpoint>
 
+    <camelcxf:rsServer id="rsServer" address="http://localhost:10360/CxfRsRouterTest/route"
+                  serviceClass="com.estafet.invoiceservice.model.InvoiceService"
+                  loggingFeatureEnabled="true" loggingSizeLimit="20">
+        <camelcxf:providers>
+            <bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
+                <property name="namespaceMap">
+                    <map>
+                        <entry key="http://invoiceservice.estafet.com/" value=""/>
+                    </map>
+                </property>
+                <property name="dropRootElement" value="false"/>
+                <property name="ignoreMixedContent" value="true"/>
+                <property name="serializeAsArray" value="true"/>
+            </bean>
+        </camelcxf:providers>
+    </camelcxf:rsServer>
+
     <bean id="invoiceServiceRoute" class="com.estafet.invoiceservice.route.InvoiceServiceRoute"/>
 
     <camelContext id="camelInvoiceService" xmlns="http://camel.apache.org/schema/blueprint">

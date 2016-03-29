@@ -9,6 +9,7 @@
     <cm:property-placeholder id="common-properties"
                              persistent-id="com.estafet.training" update-strategy="reload">
         <cm:default-properties>
+            <cm:property name="cxfrs.endpoint" value="cxfrs:bean:rsServer"/>
             <cm:property name="tax.service.endpoint" value="cxf:bean:taxRequest"/>
             <cm:property name="convert.amount.endpoint" value="cxf:bean:getConversionAmount"/>
             <cm:property name="jetty.host" value="localhost"/>

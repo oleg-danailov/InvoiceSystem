@@ -14,4 +14,5 @@ public class ObjectFactory {
     public GetConversionAmountResponse createGetConversionAmountResponse() {
         return new GetConversionAmountResponse();
     }
+    public InvoiceService createCustomerServiceResponse() {return new InvoiceService(); }
 }
